@@ -1,0 +1,54 @@
+title Kommentelés
+
+participant "**k: Koment kezelő**" as k
+participant "**f: Felhasználói adatkezelő**" as f
+participant "**c: CAFF kezelő**" as c
+
+note over f: Minden tevékenységről \nnapló bejegyzés készül.
+
+note over k: Minden tevékenységről \nnapló bejegyzés készül.
+
+note over c: Minden tevékenységről \nnapló bejegyzés készül.
+
+
+[->k: komment küldése(caff id, komment)
+activate k
+
+
+
+alt felhasználó azonosítása sikeres, caff id létező
+k->f: felhasználó azonosítása()
+activate f
+f-->>k: user id
+deactivate f
+k->c:caff id validálása(caff id)
+activate c
+c-->>k:valid
+deactivate c
+alt komment megfelelő formátumú
+k->k: komment validálása (komment)           
+activate k
+k<<--k: rendben
+deactivate k
+k->k: komment mentése az \nadatbázisba(caff id, user id, komment)
+activate k
+k<<--k:
+deactivate k
+[<<--k: sikeres komment
+else komment invalid
+k->k: komment validálása (komment)            
+activate k
+k<<--k: hibás
+deactivate k
+[<<--k: sikertelen komment
+end
+
+else felhasználó azonosítása sikertelen
+k->f: felhasználó azonosítása()
+activate f
+f-->>k: hiba
+deactivate f
+[<<--k: sikertelen kommentelés
+deactivate k
+end
+

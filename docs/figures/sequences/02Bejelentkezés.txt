@@ -1,0 +1,29 @@
+title Bejelentkezés
+
+participant "**f: Felhasználói adatkezelő**" as f
+
+note over f: Minden tevékenységről \nnapló bejegyzés készül.
+
+
+[->f: bejelentkezés megkezdése(\n   felhasználónév, jelszó\n)
+
+activate f
+
+alt a felhasználónév - jelszó páros helyes
+f->f : felhasználónév - jelszó páros ellenőrzése()
+activate f
+f-->>f: helyes
+deactivate f
+[<<--f: sikeres bejelentkezés
+
+else a felhasználónév-jelszó páros helytelen
+
+f->f : felhasználónév - jelszó páros ellenőrzése()
+activate f
+f-->>f: helytelen
+deactivate f
+[<<--f: sikertelen bejelentkezés
+
+deactivate f
+
+end

@@ -1,0 +1,60 @@
+title Megtekintés
+
+participant "**m:Megjelenítés kezelő**" as m
+participant "**f: Felhasználói adatkezelő**" as f
+participant "**c: CAFF kezelő**" as c
+participant "**p: CAFF parser**" as p
+participant "**k: komment kezelő**" as k
+
+note over m, f: Minden\ntevékenységről \nnapló bejegyzés\nkészül.
+
+note over c, p: Minden\ntevékenységről \nnapló bejegyzés\nkészül.
+
+note over k: Minden\ntevékenységről \nnapló bejegyzés\nkészül.
+
+
+
+[->m: caff megjelenítése(caff id)
+activate m
+
+
+
+alt felhasználó azonosítása sikeres, caff id létezik
+m->f: felhasználó azonosítása()
+activate f
+f-->>m: sikeres
+deactivate f
+m->c: CAFF adatainak lekérése(caff id)
+activate c
+c->p:CAFF parsolása()
+activate p
+c<<--p: parsolt CAFF
+deactivate p
+c-->>m: CAFF preview és egyéb adatok
+deactivate c
+m->k: CAFFhoz tartozó kommentek lekérése(caff id)
+activate k
+k-->>m: kommentek
+m-->>[:CAFF megjelenítéshez \nszükséges adatok
+deactivate k
+
+else felhasználó azonosítása sikertelen
+m->f: felhasználó azonosítása()
+activate f
+f-->>m: hiba
+deactivate f
+[<<--m: sikertelen hozzáférés
+
+else caff id nem létezik
+m->f: felhasználó azonosítása()
+activate f
+f-->>m: sikeres
+deactivate f
+m->c: caff adatainak lekérdezése(caff id)
+activate c
+c-->>m: hiba
+deactivate c
+[<<--m: sikertelen hozzáférés
+deactivate k
+end
+

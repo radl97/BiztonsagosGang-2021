@@ -1,0 +1,34 @@
+title CAFF törlése
+
+participant "**c: CAFF kezelő**" as c
+participant "**f: Felhasználói adatkezelő**" as f
+
+note over f: Minden tevékenységről \nnapló bejegyzés készül.
+
+note over c: Minden tevékenységről \nnapló bejegyzés készül.
+
+
+[->c: caff törlése(caff fájl id)
+activate c
+
+
+alt felhasználó azonosítása sikeres és admin
+c->f: felhasználó azonosítása()
+activate f
+f-->>c: admin
+deactivate f
+c->c: caff fájl törlése az \nadatbázisban(caff fájl id)
+activate c
+c<<--c:
+deactivate c
+[<<--c: sikeres törlés
+
+else felhasználó azonosítása sikertelen, vagy nem adminisztrátor
+c->f: felhasználó azonosítása()
+activate f
+f-->>c: nem admin vagy hiba
+deactivate f
+[<<--c: sikertelen törlés
+deactivate c
+end
+

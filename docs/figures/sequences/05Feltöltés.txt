@@ -1,0 +1,47 @@
+title CAFF feltöltés
+
+participant "**c: CAFF kezelő**" as c
+participant "**f: Felhasználói adatkezelő**" as f
+
+note over f: Minden tevékenységről \nnapló bejegyzés készül.
+
+note over c: Minden tevékenységről \nnapló bejegyzés készül.
+
+
+[->c: caff feltöltése(caff fájl)
+activate c
+
+
+
+alt felhasználó azonosítása sikeres
+c->f: felhasználó azonosítása()
+activate f
+f-->>c: user id
+deactivate f
+alt CAFF fájl megfelelő formátumú
+c->c: caff fájl validálása()      
+activate c
+c<<--c: rendben
+deactivate c
+c->c: caff fájl mentése az \nadatbázisba(caff fájl, user id)
+activate c
+c<<--c:
+deactivate c
+[<<--c: sikeres feltöltés
+else CAFF fájl invalid
+c->c: caff fájl validálása()      
+activate c
+c<<--c: hibás
+deactivate c
+[<<--c: sikertelen feltöltés
+end
+
+else felhasználó azonosítása sikertelen
+c->f: felhasználó azonosítása()
+activate f
+f-->>c: hiba
+deactivate f
+[<<--c: sikertelen feltöltés
+deactivate c
+end
+

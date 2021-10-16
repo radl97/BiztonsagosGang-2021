@@ -1,0 +1,48 @@
+title Komment módosítása
+
+participant "**k: Koment kezelő**" as k
+participant "**f: Felhasználói adatkezelő**" as f
+
+note over f: Minden tevékenységről \nnapló bejegyzés készül.
+
+note over k: Minden tevékenységről \nnapló bejegyzés készül.
+
+
+
+[->k: komment módosítás(komment id, komment)
+activate k
+
+
+
+alt felhasználó azonosítása sikeres, admin jogosultsággal rendelkezik
+k->f: felhasználó azonosítása ()
+activate f
+f-->>k: admin
+deactivate f
+alt komment megfelelő formátumú
+k->k: komment validálása (komment)           
+activate k
+k<<--k: rendben
+deactivate k
+k->k: komment módosítása az \nadatbázisban(komment id, komment)
+activate k
+k<<--k:
+deactivate k
+[<<--k: sikeres komment módosítás
+else komment invalid
+k->k: komment validálása (komment)            
+activate k
+k<<--k: hibás
+deactivate k
+[<<--k: sikertelen modosítás
+end
+
+else felhasználó azonosítása sikertelen vagy nem admin
+k->f: felhasználó azonosítása()
+activate f
+f-->>k: hiba vagy nem admin
+deactivate f
+[<<--k: sikertelen modosítás
+deactivate k
+end
+

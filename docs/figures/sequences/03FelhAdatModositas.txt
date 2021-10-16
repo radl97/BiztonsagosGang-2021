@@ -1,0 +1,31 @@
+title Felhasználói adat módosítása
+
+participant "**f: Felhasználói adatkezelő**" as f
+
+note over f: Minden tevékenységről \nnapló bejegyzés készül.
+
+
+[->f: felhasználói adat módosítása(\n   azonosító, új adat\n)
+
+activate f
+alt a user admin
+f->f : jogosultság lekérdezése()
+activate f
+f-->>f: admin
+deactivate f
+
+f->f : módosítás(azonosító, új adat)
+activate f
+f-->>f:
+deactivate f
+[<<--f: sikeres módosítás
+
+else a user nem admin
+f->f : jogosultság lekérdezése()
+activate f
+f-->>f: nem admin
+deactivate f
+
+[<<--f: sikertelen módosítás
+
+end

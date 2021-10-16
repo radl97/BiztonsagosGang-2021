@@ -1,0 +1,46 @@
+title CAFF módosítása
+
+participant "**c: CAFF kezelő**" as c
+participant "**f: Felhasználói adatkezelő**" as f
+
+note over f: Minden tevékenységről \nnapló bejegyzés készül.
+
+note over c: Minden tevékenységről \nnapló bejegyzés készül.
+
+
+[->c: caff módosítása(caff fájl id, caff fájl)
+activate c
+
+
+alt felhasználó azonosítása sikeres és admin
+c->f: felhasználó azonosítása()
+activate f
+f-->>c: admin
+deactivate f
+alt CAFF fájl megfelelő formátumú
+c->c: caff fájl validálása()      
+activate c
+c<<--c: rendben
+deactivate c
+c->c: caff fájl módosítása az \nadatbázisban(caff fájl, caff id)
+activate c
+c<<--c:
+deactivate c
+[<<--c: sikeres módosítás
+else CAFF fájl invalid
+c->c: caff fájl validálása()      
+activate c
+c<<--c: hibás
+deactivate c
+[<<--c: sikertelen módosítás
+end
+
+else felhasználó azonosítása sikertelen, vagy nem adminisztrátor
+c->f: felhasználó azonosítása()
+activate f
+f-->>c: nem admin vagy hiba
+deactivate f
+[<<--c: sikertelen módosítás
+deactivate c
+end
+

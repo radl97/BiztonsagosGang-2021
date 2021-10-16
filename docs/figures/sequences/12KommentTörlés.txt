@@ -1,0 +1,36 @@
+title Komment törlése
+
+participant "**k: Koment kezelő**" as k
+participant "**f: Felhasználói adatkezelő**" as f
+
+note right of f: Minden tevékenységről \nnapló bejegyzés készül.
+
+note right of k: Minden tevékenységről \nnapló bejegyzés készül.
+
+
+
+[->k: komment törlése(komment id)
+activate k
+
+
+
+alt felhasználó azonosítása sikeres, admin jogosultsággal rendelkezik
+k->f: felhasználó azonosítása()
+activate f
+f-->>k: admin
+deactivate f
+k->k: komment törlése az \nadatbázisból(komment id)
+activate k
+k<<--k:
+deactivate k
+[<<--k: sikeres komment törlés
+
+else felhasználó azonosítása sikertelen vagy nem admin
+k->f: felhasználó azonosítása()
+activate f
+f-->>k: hiba vagy nem admin
+deactivate f
+[<<--k: sikertelen törlés
+deactivate k
+end
+

@@ -1,0 +1,34 @@
+title Keresés
+
+participant "**c: CAFF kezelő**" as c
+participant "**f: Felhasználói adatkezelő**" as f
+
+note over f: Minden tevékenységről \nnapló bejegyzés készül.
+
+note over c: Minden tevékenységről \nnapló bejegyzés készül.
+
+
+[->c: caff keresés(kereső szó)
+activate c
+
+
+alt felhasználó azonosítása sikeres
+c->f: felhasználó azonosítása ()
+activate f
+f-->>c: sikeres
+deactivate f
+c->c: caff fájlok keresése\naz adatbázisban (kereső szó)
+activate c
+c<<--c:
+deactivate c
+[<<--c: CAFF fájl id-k
+
+else felhasználó azonosítása sikertelen
+c->f: felhasználó azonosítása()
+activate f
+f-->>c: hiba
+deactivate f
+[<<--c: sikertelen keresés
+deactivate c
+end
+

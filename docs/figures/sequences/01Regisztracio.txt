@@ -1,0 +1,32 @@
+title Fiók létrehozása
+
+participant "**f: Felhasználói adatkezelő**" as f
+
+note over f: Minden tevékenységről \nnapló bejegyzés készül.
+
+
+[->f: regisztráció megkezdése(\n   felhasználónév, e-mail, \n   jelszó, jelszó megerősítése\n)
+
+activate f
+
+alt a regisztrációs kritériumok teljesülnek
+note right of f: Regisztrációs kritériumok:\n - e-mail nem regisztrált még\n - e-mailt megerősíti a felhasználó\n - felhasználónév nem regisztált még \n - jelszó megfelel az elvárásoknak \n - a két jelszó azonos
+f->f : regisztrációs feltételek ellenőrzése()
+activate f
+f-->>f: teljesül
+deactivate f
+f->f : új fiók létrehozása és mentése()
+activate f
+f-->>f: 
+deactivate f
+[<<--f: sikeres regisztráció
+
+else a a regisztrációs kritériumok nem teljesülnek
+f->f : regisztrációs feltételek ellenőrzése()
+activate f
+f-->>f: nem teljesül
+deactivate f
+[<<--f: sikertlen regisztráció
+deactivate f
+
+end

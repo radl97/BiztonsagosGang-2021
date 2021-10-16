@@ -1,0 +1,34 @@
+title CAFF letöltés
+
+participant "**c: CAFF kezelő**" as c
+participant "**f: Felhasználói adatkezelő**" as f
+
+note over f: Minden tevékenységről \nnapló bejegyzés készül.
+
+note over c: Minden tevékenységről \nnapló bejegyzés készül.
+
+
+[->c: caff letöltés(caff fájl id)
+activate c
+
+
+alt felhasználó azonosítása sikeres
+c->f: felhasználó azonosítása()
+activate f
+f-->>c: sikeres
+deactivate f
+c->c: caff fájl letöltése az \nadatbázisból(caff fájl id)
+activate c
+c<<--c:
+deactivate c
+[<<--c: CAFF fájl
+
+else felhasználó azonosítása sikertelen
+c->f: felhasználó azonosítása()
+activate f
+f-->>c: hiba
+deactivate f
+[<<--c: sikertelen letöltés
+deactivate c
+end
+
