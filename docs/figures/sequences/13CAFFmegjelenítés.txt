@@ -21,18 +21,21 @@ f-->>m: sikeres
 deactivate f
 m->c: CAFF adatainak lekérése(caff id)
 activate c
-c->p:CAFF parsolása()
+c->p:CAFF animáció parsolása(caff data)
 activate p
+p->p: validálás(caff data)
+activate p
+p-->>p:valid
+deactivate p
 c<<--p: parsolt CAFF
 deactivate p
-c-->>m: CAFF preview és egyéb adatok
+c-->>m: CAFF animáció és egyéb adatok
 deactivate c
 m->k: CAFFhoz tartozó kommentek lekérése(caff id)
 activate k
 k-->>m: kommentek
 deactivate k
 m-->>[:CAFF megjelenítéshez \nszükséges adatok
-deactivate k
 
 else felhasználó azonosítása sikertelen
 m->f: felhasználó azonosítása(access token)
@@ -51,6 +54,24 @@ activate c
 c-->>m: hiba
 deactivate c
 [<<--m: sikertelen hozzáférés
-deactivate k
+else invalid az adatbázisból származó CAFF adat
+m->f: felhasználó azonosítása(access token)
+activate f
+f-->>m: sikeres
+deactivate f
+m->c: CAFF adatainak lekérése(caff id)
+activate c
+c->p:CAFF animáció parsolása(caff data)
+activate p
+p->p: validálás(caff data)
+activate p
+p-->>p:invalid
+deactivate p
+c<<--p: hiba
+deactivate p
+c-->>m: hiba
+deactivate c
+m-->>[:sikertelen hozzáférés
+deactivate m
 end
 

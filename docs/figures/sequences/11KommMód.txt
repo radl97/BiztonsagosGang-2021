@@ -5,7 +5,7 @@ participant "**f: Felhasználói adatkezelő**" as f
 
 note over f,k: Minden tevékenységről \nnaplóbejegyzés készül.
 
-[->k: komment módosítás(komment id, komment)
+[->k: komment módosítás(access token, komment id, komment)
 activate k
 
 
@@ -15,23 +15,15 @@ k->f: felhasználó azonosítása (access token)
 activate f
 f-->>k: admin
 deactivate f
-alt komment megfelelő formátumú
-k->k: komment validálása (komment)           
+k->k: komment szanitizálása (komment)           
 activate k
-k<<--k: rendben
+k<<--k: szanitizált komment
 deactivate k
-k->k: komment módosítása az \nadatbázisban(komment id, komment)
+k->k: komment módosítása az \nadatbázisban(komment id, szanitizált komment)
 activate k
 k<<--k:
 deactivate k
-[<<--k: sikeres komment módosítás
-else komment invalid
-k->k: komment validálása (komment)            
-activate k
-k<<--k: hibás
-deactivate k
-[<<--k: sikertelen modosítás
-end
+[<<--k: sikeres komment módosítás, \nszanitizált komment
 
 else felhasználó azonosítása sikertelen vagy nem admin
 k->f: felhasználó azonosítása(access token)

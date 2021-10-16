@@ -4,7 +4,7 @@ participant "**k: Koment kezelő**" as k
 participant "**f: Felhasználói adatkezelő**" as f
 participant "**c: CAFF kezelő**" as c
 
-note over f,c: Minden tevékenységről \nnaplóbejegyzés készül.
+note over k,c: Minden tevékenységről \nnaplóbejegyzés készül.
 
 
 [->k: komment küldése(\n   access token, caff id, komment\n)
@@ -21,29 +21,33 @@ k->c:caff id validálása(caff id)
 activate c
 c-->>k:valid
 deactivate c
-alt komment megfelelő formátumú
-k->k: komment validálása (komment)           
+k->k: komment szanitizálása (komment)           
 activate k
-k<<--k: rendben
+k<<--k: szanitizált komment
 deactivate k
-k->k: komment mentése az \nadatbázisba(caff id, user id, komment)
+k->k: komment mentése az \nadatbázisba(caff id, user id, szanitizált komment)
 activate k
 k<<--k:
 deactivate k
-[<<--k: sikeres komment
-else komment invalid
-k->k: komment validálása (komment)            
-activate k
-k<<--k: hibás
-deactivate k
-[<<--k: sikertelen komment
-end
+k-->>[:sikeres kommentelés,\n szanitizált komment
 
 else felhasználó azonosítása sikertelen
 k->f: felhasználó azonosítása(access token)
 activate f
 f-->>k: hiba
 deactivate f
+[<<--k: sikertelen kommentelés
+
+else caff id nem létezik
+k->f: felhasználó azonosítása(access token)
+activate f
+f-->>k: user id
+deactivate f
+k->c:caff id validálása(caff id)
+
+activate c
+c-->>k:invalid
+deactivate c
 [<<--k: sikertelen kommentelés
 deactivate k
 end

@@ -1,6 +1,7 @@
 title Keresés
 
 participant "**c: CAFF kezelő**" as c
+participant "**p: CAFF parser**" as p
 participant "**f: Felhasználói adatkezelő**" as f
 
 note over f,c: Minden tevékenységről \nnaplóbejegyzés készül.
@@ -17,9 +18,17 @@ f-->>c: sikeres
 deactivate f
 c->c: caff fájlok keresése\naz adatbázisban (kereső szó)
 activate c
-c<<--c:
+c<<--c: CAFF fájlok listája
 deactivate c
-[<<--c: CAFF fájl id-k
+
+
+loop CAFF fájl: CAFF fájlok listája
+c->p: caff fájl képi előnézet\nparsolása(CAFF fájl)
+activate p
+c<<--p: CAFF fájl képi előnézete
+deactivate p
+end
+[<<--c: CAFF név és png előnézet lista
 
 else felhasználó azonosítása sikertelen
 c->f: felhasználó azonosítása(access token)
