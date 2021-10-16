@@ -4,20 +4,16 @@ participant "**k: Koment kezelő**" as k
 participant "**f: Felhasználói adatkezelő**" as f
 participant "**c: CAFF kezelő**" as c
 
-note over f: Minden tevékenységről \nnapló bejegyzés készül.
-
-note over k: Minden tevékenységről \nnapló bejegyzés készül.
-
-note over c: Minden tevékenységről \nnapló bejegyzés készül.
+note over f,c: Minden tevékenységről \nnaplóbejegyzés készül.
 
 
-[->k: komment küldése(caff id, komment)
+[->k: komment küldése(\n   access token, caff id, komment\n)
 activate k
 
 
 
 alt felhasználó azonosítása sikeres, caff id létező
-k->f: felhasználó azonosítása()
+k->f: felhasználó azonosítása(access token)
 activate f
 f-->>k: user id
 deactivate f
@@ -44,7 +40,7 @@ deactivate k
 end
 
 else felhasználó azonosítása sikertelen
-k->f: felhasználó azonosítása()
+k->f: felhasználó azonosítása(access token)
 activate f
 f-->>k: hiba
 deactivate f

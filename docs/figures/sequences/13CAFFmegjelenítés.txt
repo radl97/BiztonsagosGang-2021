@@ -6,21 +6,16 @@ participant "**c: CAFF kezelő**" as c
 participant "**p: CAFF parser**" as p
 participant "**k: komment kezelő**" as k
 
-note over m, f: Minden\ntevékenységről \nnapló bejegyzés\nkészül.
-
-note over c, p: Minden\ntevékenységről \nnapló bejegyzés\nkészül.
-
-note over k: Minden\ntevékenységről \nnapló bejegyzés\nkészül.
+note over m, k: Minden tevékenységről naplóbejegyzés készül.
 
 
-
-[->m: caff megjelenítése(caff id)
+[->m: caff megjelenítése(access token, caff id)
 activate m
 
 
 
 alt felhasználó azonosítása sikeres, caff id létezik
-m->f: felhasználó azonosítása()
+m->f: felhasználó azonosítása(access token)
 activate f
 f-->>m: sikeres
 deactivate f
@@ -35,18 +30,19 @@ deactivate c
 m->k: CAFFhoz tartozó kommentek lekérése(caff id)
 activate k
 k-->>m: kommentek
+deactivate k
 m-->>[:CAFF megjelenítéshez \nszükséges adatok
 deactivate k
 
 else felhasználó azonosítása sikertelen
-m->f: felhasználó azonosítása()
+m->f: felhasználó azonosítása(access token)
 activate f
 f-->>m: hiba
 deactivate f
 [<<--m: sikertelen hozzáférés
 
 else caff id nem létezik
-m->f: felhasználó azonosítása()
+m->f: felhasználó azonosítása(access token)
 activate f
 f-->>m: sikeres
 deactivate f

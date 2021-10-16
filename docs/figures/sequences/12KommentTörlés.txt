@@ -3,19 +3,17 @@ title Komment törlése
 participant "**k: Koment kezelő**" as k
 participant "**f: Felhasználói adatkezelő**" as f
 
-note right of f: Minden tevékenységről \nnapló bejegyzés készül.
-
-note right of k: Minden tevékenységről \nnapló bejegyzés készül.
+note over k,f: Minden tevékenységről \nnaplóbejegyzés készül.
 
 
 
-[->k: komment törlése(komment id)
+[->k: komment törlése(\n   access token, komment id\n)
 activate k
 
 
 
 alt felhasználó azonosítása sikeres, admin jogosultsággal rendelkezik
-k->f: felhasználó azonosítása()
+k->f: felhasználó azonosítása(access token)
 activate f
 f-->>k: admin
 deactivate f
@@ -26,7 +24,7 @@ deactivate k
 [<<--k: sikeres komment törlés
 
 else felhasználó azonosítása sikertelen vagy nem admin
-k->f: felhasználó azonosítása()
+k->f: felhasználó azonosítása(access token)
 activate f
 f-->>k: hiba vagy nem admin
 deactivate f

@@ -3,17 +3,15 @@ title Keresés
 participant "**c: CAFF kezelő**" as c
 participant "**f: Felhasználói adatkezelő**" as f
 
-note over f: Minden tevékenységről \nnapló bejegyzés készül.
-
-note over c: Minden tevékenységről \nnapló bejegyzés készül.
+note over f,c: Minden tevékenységről \nnaplóbejegyzés készül.
 
 
-[->c: caff keresés(kereső szó)
+[->c: caff keresés(access token, kereső szó)
 activate c
 
 
 alt felhasználó azonosítása sikeres
-c->f: felhasználó azonosítása ()
+c->f: felhasználó azonosítása (access token)
 activate f
 f-->>c: sikeres
 deactivate f
@@ -24,7 +22,7 @@ deactivate c
 [<<--c: CAFF fájl id-k
 
 else felhasználó azonosítása sikertelen
-c->f: felhasználó azonosítása()
+c->f: felhasználó azonosítása(access token)
 activate f
 f-->>c: hiba
 deactivate f

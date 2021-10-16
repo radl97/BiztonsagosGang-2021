@@ -1,0 +1,18 @@
+title CAFF törlése támadó által
+
+participant "**c: CAFF kezelő**" as c
+participant "**f: Felhasználói adatkezelő**" as f
+
+[->c: caff törlése(access token, caff fájl id)
+activate c
+
+c->f: felhasználó azonosítása(access token)
+activate f
+f-->>c: hiba
+deactivate f
+c->c: caff fájl törlése az \nadatbázisban(caff fájl id)
+activate c
+c<<--c:
+deactivate c
+[<<--c: sikeres törlés
+deactivate c

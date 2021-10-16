@@ -2,7 +2,7 @@ title Fiók létrehozása
 
 participant "**f: Felhasználói adatkezelő**" as f
 
-note over f: Minden tevékenységről \nnapló bejegyzés készül.
+note over f: Minden tevékenységről \nnaplóbejegyzés készül.
 
 
 [->f: regisztráció megkezdése(\n   felhasználónév, e-mail, \n   jelszó, jelszó megerősítése\n)
@@ -26,7 +26,7 @@ f->f : regisztrációs feltételek ellenőrzése()
 activate f
 f-->>f: nem teljesül
 deactivate f
-[<<--f: sikertlen regisztráció
+[<<--f: sikertelen regisztráció
 deactivate f
 
 end

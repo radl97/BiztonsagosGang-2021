@@ -3,11 +3,7 @@ title Komment módosítása
 participant "**k: Koment kezelő**" as k
 participant "**f: Felhasználói adatkezelő**" as f
 
-note over f: Minden tevékenységről \nnapló bejegyzés készül.
-
-note over k: Minden tevékenységről \nnapló bejegyzés készül.
-
-
+note over f,k: Minden tevékenységről \nnaplóbejegyzés készül.
 
 [->k: komment módosítás(komment id, komment)
 activate k
@@ -15,7 +11,7 @@ activate k
 
 
 alt felhasználó azonosítása sikeres, admin jogosultsággal rendelkezik
-k->f: felhasználó azonosítása ()
+k->f: felhasználó azonosítása (access token)
 activate f
 f-->>k: admin
 deactivate f
@@ -38,7 +34,7 @@ deactivate k
 end
 
 else felhasználó azonosítása sikertelen vagy nem admin
-k->f: felhasználó azonosítása()
+k->f: felhasználó azonosítása(access token)
 activate f
 f-->>k: hiba vagy nem admin
 deactivate f

@@ -2,14 +2,14 @@ title Felhasználói adat módosítása
 
 participant "**f: Felhasználói adatkezelő**" as f
 
-note over f: Minden tevékenységről \nnapló bejegyzés készül.
+note over f: Minden tevékenységről \nnaplóbejegyzés készül.
 
 
-[->f: felhasználói adat módosítása(\n   azonosító, új adat\n)
+[->f: felhasználói adat módosítása(\n    access token, \n    felhasználó id, új adat\n)
 
 activate f
 alt a user admin
-f->f : jogosultság lekérdezése()
+f->f : jogosultság lekérdezése(access token)
 activate f
 f-->>f: admin
 deactivate f
@@ -21,7 +21,7 @@ deactivate f
 [<<--f: sikeres módosítás
 
 else a user nem admin
-f->f : jogosultság lekérdezése()
+f->f : jogosultság lekérdezése(access token)
 activate f
 f-->>f: nem admin
 deactivate f

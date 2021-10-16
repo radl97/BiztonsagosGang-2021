@@ -1,0 +1,33 @@
+title Megtekintés közben felhasználók hashelt jelszavának megszerzése
+
+participant "**m:Megjelenítés kezelő**" as m
+participant "**f: Felhasználói adatkezelő**" as f
+participant "**c: CAFF kezelő**" as c
+participant "**p: CAFF parser**" as p
+participant "**k: komment kezelő**" as k
+
+
+[->m: caff megjelenítése(access token, caff id)
+activate m
+
+
+
+m->f: felhasználó azonosítása(access token)
+activate f
+f-->>m: sikeres, jogosultság: felhasználó, <color:#red>\nfelhasználók hashelt jelszava
+deactivate f
+m->c: CAFF adatainak lekérése(caff id)
+activate c
+c->p:CAFF parsolása()
+activate p
+c<<--p: parsolt CAFF
+deactivate p
+c-->>m: CAFF preview és egyéb adatok
+deactivate c
+m->k: CAFFhoz tartozó kommentek lekérése(caff id)
+activate k
+k-->>m: kommentek
+deactivate k
+m-->>[:CAFF megjelenítéshez \nszükséges adatok,\n <color:#red>felhasználók hashelt jelszava
+deactivate m
+

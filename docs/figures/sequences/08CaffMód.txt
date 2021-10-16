@@ -3,17 +3,14 @@ title CAFF módosítása
 participant "**c: CAFF kezelő**" as c
 participant "**f: Felhasználói adatkezelő**" as f
 
-note over f: Minden tevékenységről \nnapló bejegyzés készül.
+note over f,c: Minden tevékenységről \nnaplóbejegyzés készül.
 
-note over c: Minden tevékenységről \nnapló bejegyzés készül.
-
-
-[->c: caff módosítása(caff fájl id, caff fájl)
+[->c: caff módosítása(access token, \n    caff fájl id, caff fájl\n)
 activate c
 
 
 alt felhasználó azonosítása sikeres és admin
-c->f: felhasználó azonosítása()
+c->f: felhasználó azonosítása(access token)
 activate f
 f-->>c: admin
 deactivate f
@@ -36,7 +33,7 @@ deactivate c
 end
 
 else felhasználó azonosítása sikertelen, vagy nem adminisztrátor
-c->f: felhasználó azonosítása()
+c->f: felhasználó azonosítása(access token)
 activate f
 f-->>c: nem admin vagy hiba
 deactivate f

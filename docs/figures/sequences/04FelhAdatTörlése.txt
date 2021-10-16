@@ -2,14 +2,14 @@ title Felhasználói adat törlése
 
 participant "**f: Felhasználói adatkezelő**" as f
 
-note right of f: Minden tevékenységről \nnapló bejegyzés készül.
+note over f: Minden tevékenységről \nnaplóbejegyzés készül.
 
 
-[->f: felhasználói adat törlése(\n   azonosító\n)
+[->f: felhasználói adat törlése(\n   access token, felhasználó id\n)
 
 activate f
 alt a user admin
-f->f : jogosultság lekérdezése()
+f->f : jogosultság lekérdezése(access token)
 activate f
 f-->>f: admin
 deactivate f
@@ -21,7 +21,7 @@ deactivate f
 [<<--f: sikeres törlés
 
 else a user nem admin
-f->f : jogosultság lekérdezése()
+f->f : jogosultság lekérdezése(access token)
 activate f
 f-->>f: nem admin
 deactivate f
