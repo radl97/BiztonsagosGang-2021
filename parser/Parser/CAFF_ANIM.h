@@ -4,7 +4,7 @@
 class CAFF_ANIM :
     public Block
 {
-    unsigned int duration;
+    uint64_t duration;
     CIFF image;
 };
 

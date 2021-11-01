@@ -2,10 +2,44 @@
 //
 
 #include <iostream>
+#include <fstream>
+#include "CAFF_HEADER.h"
+#include "CAFF_CREDITS.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    /*    FILE* f;
+    errno_t err = fopen_s(&f, "C:\\Users\\denes\\Git\\BiztonsagosGang\\parser\\caff_files\\2.CAFF", "r");
+    if (f == 0) {
+        return 1;
+    }
+
+    // Determine file size
+    fseek(f, 0, SEEK_END);
+    size_t size = ftell(f);
+
+    char* where = new char[size];
+
+    rewind(f);
+    fread(where, sizeof(char), size, f);
+    std::cout << where <<"\n" << size;
+
+    delete[] where;*/
+    FILE* f;
+
+    errno_t err = fopen_s(&f, "C:\\Users\\denes\\Git\\BiztonsagosGang\\parser\\caff_files\\2.CAFF", "r");
+    if (f == 0) {
+        return 1;
+    }
+
+    CAFF_HEADER h;
+    fread((char*)&h, 1, sizeof(h),f);
+    std::cout << h.ID <<std::endl<< h.lengthOfBlock << std::endl << h.m << std::endl << h.headerSize << std::endl << h.animationNumber << std::endl;
+    std::cout << "end header\n";
+    CAFF_CREDITS cred;
+    fread((char*)&cred, 1, sizeof(cred), f);
+    std::cout << cred.ID << std::endl << cred.lengthOfBlock << std::endl << cred.creatorNameLen << std::endl << cred.year;
+    std::cout << "end credits\n";
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

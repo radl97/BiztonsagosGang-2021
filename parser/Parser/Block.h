@@ -1,8 +1,11 @@
 #pragma once
+#include <cstdint>
+
 class Block
 {
+public:
 	char ID;
-	unsigned int lengthOfBlock;
+	uint64_t lengthOfBlock;
 
 };
 

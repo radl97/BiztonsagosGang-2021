@@ -1,9 +1,11 @@
 
 #pragma once
 #include "Block.h"
+#include <cstdint>
 class CAFF
 {
+public:
 	Block* blocks;
-	unsigned int blockNum;
+	uint64_t blockNum;
 };
 

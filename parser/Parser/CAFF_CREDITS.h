@@ -3,12 +3,13 @@
 class CAFF_CREDITS :
     public Block
 {
-    unsigned int year;
-    unsigned int month;
-    unsigned int day;
-    unsigned int hour;
-    unsigned int minute;
-    unsigned int creatorNameLen;
+public:
+    uint16_t year;
+    uint8_t month;
+    uint8_t day;
+    uint8_t hour;
+    uint8_t minute;
+    uint64_t creatorNameLen;
     char* creatorName;
 };
 
