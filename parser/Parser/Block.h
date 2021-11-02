@@ -3,7 +3,7 @@
 #include "Reader.h"
 
 // not virtual! This might be counter-intuitive
-struct Block
+class Block
 {
 public:
 	char ID;

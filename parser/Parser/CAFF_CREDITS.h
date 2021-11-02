@@ -26,7 +26,9 @@ public:
         r.readPrimitive(creatorNameLen);
         char *tmp_creatorName = new char[creatorNameLen + 1];
         r.readArray(tmp_creatorName, creatorNameLen);
+        tmp_creatorName[creatorNameLen] = '\0';
         creatorName.assign(tmp_creatorName);
+        delete[] tmp_creatorName;
     }
 };
 

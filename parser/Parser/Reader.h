@@ -14,7 +14,7 @@ public:
 
     std::string readUntilChar(char end) {
         bool found = false;
-        std::string result = std::string();
+        std::string result;
         do
         {
             char tmp;
