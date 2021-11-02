@@ -5,6 +5,8 @@
 class CAFF_ANIM :
     public Block
 {
+public:
+
     uint64_t duration;
     CIFF image;
 

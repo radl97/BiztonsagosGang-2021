@@ -5,6 +5,8 @@
 #include <fstream>
 #include "CAFF_HEADER.h"
 #include "CAFF_CREDITS.h"
+#include "CAFF_ANIM.h"
+
 
 int main()
 {
@@ -25,6 +27,11 @@ int main()
     cred.read(r);
     std::cout << cred.ID << std::endl << cred.lengthOfBlock << std::endl << cred.creatorNameLen << std::endl << cred.year <<std::endl << cred.creatorName;
     std::cout << "\nend credits\n";
+
+    CAFF_ANIM anim;
+    anim.read(r);
+    std::cout << anim.ID << std::endl << anim.lengthOfBlock << std::endl << anim.duration << std::endl << anim.image.caption << std::endl << anim.image.width << std::endl << anim.image.tags << std::endl;
+    std::cout << "end anim1\n";
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
