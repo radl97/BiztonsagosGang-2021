@@ -1,4 +1,7 @@
 #pragma once
+
+#include "Reader.h"
+
 class CIFF {
 	char magic[4];
 	uint64_t header_size;
