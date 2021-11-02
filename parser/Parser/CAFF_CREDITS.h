@@ -11,5 +11,23 @@ public:
     uint8_t minute;
     uint64_t creatorNameLen;
     char* creatorName;
+
+    ~CAFF_CREDITS() {
+        delete[] creatorName;
+    }
+
+    void read(Reader& r) {
+        r.readPrimitive(ID);
+        r.readPrimitive(lengthOfBlock);
+        r.readPrimitive(year);
+        r.readPrimitive(month);
+        r.readPrimitive(day);
+        r.readPrimitive(hour);
+        r.readPrimitive(minute);
+        r.readPrimitive(creatorNameLen);
+        creatorName = new char[creatorNameLen + 1];
+        r.readArray(creatorName, creatorNameLen);
+        creatorName[creatorNameLen] = '\0';
+    }
 };
 

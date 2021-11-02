@@ -154,6 +154,7 @@
     <ClInclude Include="CAFF_CREDITS.h" />
     <ClInclude Include="CAFF_HEADER.h" />
     <ClInclude Include="CIFF.h" />
+    <ClInclude Include="Reader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

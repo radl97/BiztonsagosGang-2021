@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <string>
 
 /// C++ wrapper for reading files
 class Reader {
@@ -8,6 +9,23 @@ public:
     Reader(FILE* f) : f(f) {}
     ~Reader() {
         fclose(f);
+    }
+
+    std::string readUntilChar(char end) {
+        bool found = false;
+        std::string result = std::string();
+        do
+        {
+            char tmp;
+            fread(&tmp, 1, 1, f);
+            if (tmp != end) {
+                result += tmp;
+            }
+            else {
+                found = true;
+            }
+        } while (!found);
+        return result;
     }
 
     template<typename T>
