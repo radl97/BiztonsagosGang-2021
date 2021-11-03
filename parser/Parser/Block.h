@@ -2,7 +2,6 @@
 #include <cstdint>
 #include "Reader.h"
 
-// not virtual! This might be counter-intuitive
 class Block
 {
 public:

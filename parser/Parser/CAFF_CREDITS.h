@@ -16,8 +16,7 @@ public:
     }
 
     void read(Reader& r) {
-        r.readPrimitive(ID);
-        r.readPrimitive(lengthOfBlock);
+        Block::read(r);
         r.readPrimitive(year);
         r.readPrimitive(month);
         r.readPrimitive(day);

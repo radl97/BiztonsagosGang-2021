@@ -11,8 +11,7 @@ public:
     CIFF image;
 
     void read(Reader& r) {
-        r.readPrimitive(ID);
-        r.readPrimitive(lengthOfBlock);
+        Block::read(r);
         r.readPrimitive(duration);
         std::cout << "\nanimstart";
         image.read(r); 

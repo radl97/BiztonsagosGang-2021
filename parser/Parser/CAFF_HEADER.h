@@ -10,8 +10,7 @@ public:
     uint64_t animationNumber;
 
     void read(Reader& r) {
-        r.readPrimitive(ID);
-        r.readPrimitive(lengthOfBlock);
+        Block::read(r);
         r.readArray(magic, 4);
         r.readPrimitive(headerSize);
         r.readPrimitive(animationNumber);
