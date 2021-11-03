@@ -2,6 +2,10 @@
 #include <cstdio>
 #include <string>
 
+class ParsingException : public std::exception {
+
+};
+
 /// C++ wrapper for reading files
 class Reader {
     FILE* f;
