@@ -11,11 +11,16 @@ class ParsingException : public std::exception {
 //    Although they did not say that it is little-endian...
 class Reader {
     FILE* f;
+    uint64_t bytes_read_counter=0;
 public:
     /// takes ownership of FILE* resource(!)
     Reader(FILE* f) : f(f) {}
     ~Reader() {
         fclose(f);
+    }
+
+    uint64_t getBytesRead() const {
+        return bytes_read_counter;
     }
 
     std::string readStringOfLength(uint64_t length) {
@@ -43,6 +48,7 @@ public:
         {
             char tmp;
             fread(&tmp, 1, 1, f);
+            bytes_read_counter++;
             if (tmp != end) {
                 result += tmp;
             }
@@ -56,11 +62,13 @@ public:
     template<typename T>
     void readPrimitive(T& data) {
         fread(&data, sizeof(T), 1, f);
+        bytes_read_counter += sizeof(T);
     }
 
     // The array needs to be allocated beforehand!
     template<typename T>
     void readArray(T* array, int len) {
         fread(array, sizeof(T), len, f);
+        bytes_read_counter += sizeof(T)*len;
     }
 };

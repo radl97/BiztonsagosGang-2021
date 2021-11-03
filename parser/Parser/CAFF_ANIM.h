@@ -12,9 +12,19 @@ public:
 
     void read(Reader& r) {
         Block::read(r);
+        uint64_t characters_read_counter = r.getBytesRead();
+
         r.readPrimitive(duration);
         std::cout << "\nanimstart";
-        image.read(r); 
+
+        image.read(r);
+
+        uint64_t characters_read_counter_after = r.getBytesRead();
+
+        if (lengthOfBlock != characters_read_counter_after - characters_read_counter) {
+            throw ParsingException();
+        }
+
     }
 };
 
