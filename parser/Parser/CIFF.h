@@ -41,8 +41,10 @@ public:
 			throw ParsingException();
 		}
 		caption = r.readUntilChar('\n');
+		// TODO this might be unexpected from a parser. Check that it cannot be misused (due to e.g. overflow)
 		uint64_t tags_size = header_size - sizeof(magic) - sizeof(header_size) - sizeof(content_size) - sizeof(width) - sizeof(height) - sizeof(caption);
 		tags = r.readStringOfLength(tags_size);
+		// TODO split tags, check whether it contains newline character.
 		for (uint64_t i = 0; i < height; i++) {
 			for (uint64_t j = 0; j < width; j++) {
 				Pixel tmp_pixel;
