@@ -2,6 +2,8 @@
 
 #include "Reader.h"
 #include <iostream>
+#include <vector>
+#include "Pixel.h"
 
 class CIFF {
 
@@ -13,7 +15,7 @@ public:
 	uint64_t height;
 	std::string caption;
 	std::string tags;
-	std::string content;
+	std::vector<Pixel> pixels;
 
 	void read(Reader& r) {
 		r.readArray(magic, 4);
@@ -28,11 +30,12 @@ public:
 		tmp_tags[header_size] = '\0';
 		tags.assign(tmp_tags);
 		delete[] tmp_tags;
-		char* tmp_content = new char[content_size+1];
-		r.readArray(tmp_content, content_size);
-		tmp_content[content_size] = '\0';
-		content.assign(tmp_content);
-		delete[] tmp_content;
-
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				Pixel tmp_pixel;
+				tmp_pixel.read(r);
+				pixels.push_back(tmp_pixel);
+			}
+		}
 	}
 };

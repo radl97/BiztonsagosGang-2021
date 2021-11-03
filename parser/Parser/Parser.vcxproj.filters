@@ -36,6 +36,9 @@
     <ClCompile Include="CAFF_ANIM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Pixel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CIFF.h">
@@ -57,6 +60,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Reader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pixel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

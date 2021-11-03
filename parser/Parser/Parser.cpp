@@ -1,37 +1,23 @@
 // Parser.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
+#define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
 #include <fstream>
-#include "CAFF_HEADER.h"
-#include "CAFF_CREDITS.h"
-#include "CAFF_ANIM.h"
+#include "CAFF.h"
 
 
 int main()
 {
-    FILE* f;
-
-    errno_t err = fopen_s(&f, "C:\\Users\\denes\\Git\\BiztonsagosGang\\parser\\caff_files\\2.CAFF", "r");
+    FILE* f = fopen("C:\\Users\\denes\\Git\\BiztonsagosGang\\parser\\caff_files\\2.CAFF", "r");
     if (f == 0) {
         return 1;
     }
-
-    CAFF_HEADER h;
+    CAFF caff;
     Reader r = Reader(f);
-    h.read(r);
-    std::cout << h.ID <<std::endl<< h.lengthOfBlock << std::endl << h.magic << std::endl << h.headerSize << std::endl << h.animationNumber << std::endl;
-    std::cout << "end header\n";
-
-    CAFF_CREDITS cred;
-    cred.read(r);
-    std::cout << cred.ID << std::endl << cred.lengthOfBlock << std::endl << cred.creatorNameLen << std::endl << cred.year <<std::endl << cred.creatorName;
-    std::cout << "\nend credits\n";
-
-    CAFF_ANIM anim;
-    anim.read(r);
-    std::cout << anim.ID << std::endl << anim.lengthOfBlock << std::endl << anim.duration << std::endl << anim.image.caption << std::endl << anim.image.width << std::endl << anim.image.tags << std::endl;
-    std::cout << "end anim1\n";
+    caff.read(r);
+   
+    std::cout << caff.blockNum << caff.blocks[0].lengthOfBlock;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

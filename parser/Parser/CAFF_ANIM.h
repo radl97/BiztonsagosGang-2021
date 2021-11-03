@@ -14,7 +14,7 @@ public:
         r.readPrimitive(ID);
         r.readPrimitive(lengthOfBlock);
         r.readPrimitive(duration);
-        image = CIFF();
+        std::cout << "\nanimstart";
         image.read(r); 
     }
 };
