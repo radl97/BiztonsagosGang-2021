@@ -42,11 +42,7 @@ public:
 		}
 		caption = r.readUntilChar('\n');
 		uint64_t tags_size = header_size - sizeof(magic) - sizeof(header_size) - sizeof(content_size) - sizeof(width) - sizeof(height) - sizeof(caption);
-		char* tmp_tags = new char[header_size+1];
-		r.readArray(tmp_tags, header_size);
-		tmp_tags[header_size] = '\0';
-		tags.assign(tmp_tags);
-		delete[] tmp_tags;
+		tags = r.readStringOfLength(tags_size);
 		for (uint64_t i = 0; i < height; i++) {
 			for (uint64_t j = 0; j < width; j++) {
 				Pixel tmp_pixel;
