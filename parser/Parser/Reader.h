@@ -16,6 +16,24 @@ public:
         fclose(f);
     }
 
+    std::string readStringOfLength(uint64_t length) {
+        static char* buffer = new char[100];
+        static int bufferSize = 100;
+
+        if (length+1 > bufferSize) {
+            bufferSize = length;
+            delete[] buffer;
+            buffer = new char[bufferSize];
+        }
+
+        // No need for null-termination
+        // Based on https://stackoverflow.com/a/8438709
+        readArray(buffer, length);
+        std::string result;
+        result.assign(buffer, buffer+length);
+        return result;
+    }
+
     std::string readUntilChar(char end) {
         bool found = false;
         std::string result;
