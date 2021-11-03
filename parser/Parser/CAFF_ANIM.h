@@ -1,6 +1,6 @@
 #pragma once
 #include "Block.h"
-#include "ciff.h"
+#include "CIFF.h"
 
 class CAFF_ANIM :
     public Block
