@@ -41,6 +41,13 @@ public:
             throw ParsingException();
         }
         r.readPrimitive(creatorNameLen);
+
+        // The earliest point to cross-check lengthOfBlock with the should-be size
+        if (lengthOfBlock != sizeof(year) + sizeof(month) + sizeof(day) +
+                sizeof(hour) + sizeof(minute) + sizeof(creatorNameLen) + creatorNameLen) {
+            throw ParsingException();
+        }
+
         creatorName = r.readStringOfLength(creatorNameLen);
     }
 };

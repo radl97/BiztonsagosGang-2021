@@ -11,6 +11,9 @@ public:
 
     void read(Reader& r) {
         Block::read(r);
+        if (lengthOfBlock != sizeof(magic) + sizeof(headerSize) + sizeof(animationNumber)) {
+            throw ParsingException();
+        }
         r.readArray(magic, 4);
 		if (magic[0] != 'C' || magic[1] != 'A' || magic[2] != 'F' || magic[3] != 'F') {
 			throw ParsingException();
