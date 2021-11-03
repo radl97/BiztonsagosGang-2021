@@ -10,6 +10,7 @@ class CAFF
 {
 	
 public:
+    // TODO!
 	std::vector<Block> blocks;
 	uint64_t blockNum;
 
@@ -17,6 +18,7 @@ public:
         CAFF_HEADER h;
         h.read(r);
         blockNum = h.animationNumber + 2;
+        // TODO Credits are not specified too well: 1) is it optional 2) when can it be placed? (end of file? middle of animation?)
         CAFF_CREDITS cred;
         cred.read(r);
         blocks.push_back(h);
