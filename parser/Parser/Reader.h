@@ -67,7 +67,7 @@ public:
 
     // The array needs to be allocated beforehand!
     template<typename T>
-    void readArray(T* array, int len) {
+    void readArray(T* array, uint64_t len) {
         fread(array, sizeof(T), len, f);
         bytes_read_counter += sizeof(T)*len;
     }
