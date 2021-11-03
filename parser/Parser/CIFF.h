@@ -29,27 +29,24 @@ public:
 private:
 	void readTags(Reader& r, uint64_t supposed_tags_size) {
 		std::string tmp_tags = r.readStringOfLength(supposed_tags_size);
+		uint64_t newline = tmp_tags.find('\n');
+		if (newline != std::string::npos) {
+			// newline found in tags
+			throw ParsingException();
+		}
 		uint64_t offset = 0;
-		while (offset < 0) {
+		while (offset < tmp_tags.size()) {
 			uint64_t end = tmp_tags.find('\0', offset);
 			if (end == std::string::npos) {
-				// missing ending (empty) tag
+				// probably missing NUL char after the last tag
 				throw ParsingException();
 			}
-			if (end == offset) {
-				// empty string -> end of tags
-				// must be end of the whole data
-				if (end != tmp_tags.size()-1) {
-					throw ParsingException();
-				}
-				return;
-			} else {
-				std::string tmp_tag;
-				tmp_tag.assign(tmp_tags, offset, end-offset);
-				tags.push_back(tmp_tag);
-				offset = end+1;
-			}
+			std::string tmp_tag;
+			tmp_tag.assign(tmp_tags, offset, end-offset);
+			tags.push_back(tmp_tag);
+			offset = end+1;
 		}
+		// everything in order
 	}
 
 public:
@@ -74,11 +71,10 @@ public:
 
 		caption = r.readUntilChar('\n');
 
-		// TODO this might be unexpected from a parser. Check that it cannot be misused (due to e.g. overflow)
 		// -1 because "\n" is dropped from caption (readUntilChar). That one character is still part of the file, however.
 		uint64_t tags_size = header_size - sizeof(magic) - sizeof(header_size) - sizeof(content_size) - sizeof(width) - sizeof(height) - caption.size() - 1;
 		readTags(r, tags_size);
-		// TODO split tags, check whether it contains newline character.
+
 		for (uint64_t i = 0; i < height; i++) {
 			for (uint64_t j = 0; j < width; j++) {
 				Pixel tmp_pixel;
