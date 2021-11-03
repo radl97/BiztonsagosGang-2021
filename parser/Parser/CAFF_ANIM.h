@@ -11,7 +11,7 @@ public:
     CIFF image;
 
     void read(Reader& r) {
-        Block::read(r);
+        Block::readBlockHeader(r, 0x3);
         uint64_t characters_read_counter = r.getBytesRead();
 
         r.readPrimitive(duration);

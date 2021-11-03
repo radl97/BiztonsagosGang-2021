@@ -5,10 +5,13 @@
 class Block
 {
 public:
-	char ID;
+	uint8_t ID;
 	uint64_t lengthOfBlock;
-	void read(Reader& r) {
+	void readBlockHeader(Reader& r, uint8_t expected_ID) {
 		r.readPrimitive(ID);
+		if (ID != expected_ID) {
+			throw ParsingException();
+		}
 		r.readPrimitive(lengthOfBlock);
 	}
 };

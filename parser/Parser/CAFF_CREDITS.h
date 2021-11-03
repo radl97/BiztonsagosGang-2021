@@ -16,7 +16,7 @@ public:
     }
 
     void read(Reader& r) {
-        Block::read(r);
+        Block::readBlockHeader(r, 0x2);
         r.readPrimitive(year);
         // The year in the link: https://www.crysys.hu/downloads/vihima06/2020/CAFF.txt
         // Probably the first CAFF file's *creation date* does not precede this date...
