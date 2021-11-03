@@ -17,20 +17,20 @@ public:
     }
 
     std::string readStringOfLength(uint64_t length) {
-        static char* buffer = new char[100];
-        static int bufferSize = 100;
+        static char buffer[4096];
 
-        if (length+1 > bufferSize) {
-            bufferSize = length;
-            delete[] buffer;
-            buffer = new char[bufferSize];
+        // read in chunks so that a too big a read does not waste memory
+        std::string result;
+        for (uint64_t chunk_start = 0; chunk_start < length; chunk_start += 4096) {
+            uint64_t to_read = length-chunk_start;
+            if (to_read > 4096) {
+                to_read = 4096;
+            }
+            readArray(buffer, length);
+            result.append(buffer, length);
         }
-
         // No need for null-termination
         // Based on https://stackoverflow.com/a/8438709
-        readArray(buffer, length);
-        std::string result;
-        result.assign(buffer, buffer+length);
         return result;
     }
 
