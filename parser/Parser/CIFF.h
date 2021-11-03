@@ -42,7 +42,8 @@ public:
 		}
 		caption = r.readUntilChar('\n');
 		// TODO this might be unexpected from a parser. Check that it cannot be misused (due to e.g. overflow)
-		uint64_t tags_size = header_size - sizeof(magic) - sizeof(header_size) - sizeof(content_size) - sizeof(width) - sizeof(height) - caption.size();
+		// -1 because "\n" is dropped from caption (readUntilChar). That one character is still part of the file, however
+		uint64_t tags_size = header_size - sizeof(magic) - sizeof(header_size) - sizeof(content_size) - sizeof(width) - sizeof(height) - caption.size() - 1;
 		tags = r.readStringOfLength(tags_size);
 		// TODO split tags, check whether it contains newline character.
 		for (uint64_t i = 0; i < height; i++) {
