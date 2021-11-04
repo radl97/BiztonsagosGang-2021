@@ -27,13 +27,13 @@ public:
             Block containingBlock;
             containingBlock.readBlockHeader(r);
             if (containingBlock.ID == 0x2) {
-                CAFF_CREDITS cred;
-                cred.readContent(r, containingBlock); 
+                CAFF_CREDITS cred(containingBlock);
+                cred.read(r); 
                 credits.push_back(cred);
             }
             else if (containingBlock.ID == 0x3){
-                CAFF_ANIM anim;
-                anim.readContent(r, containingBlock);
+                CAFF_ANIM anim(containingBlock);
+                anim.read(r);
                 animations.push_back(anim);
             }
             else {

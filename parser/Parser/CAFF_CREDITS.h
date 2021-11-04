@@ -1,5 +1,8 @@
 #pragma once
 #include "Block.h"
+
+const uint8_t BLOCK_CREDITS_ID = 0x2;
+
 class CAFF_CREDITS :
     public Block
 {
@@ -12,21 +15,16 @@ public:
     uint64_t creatorNameLen;
     std::string creatorName;
 
+    CAFF_CREDITS(Block& block) : Block(block) {
+        if(block.ID != BLOCK_CREDITS_ID) {
+            throw ParsingException();
+        }
+    }
+
     ~CAFF_CREDITS() {
     }
 
     void read(Reader& r) {
-        Block::readBlockHeaderWithCheck(r, 0x2);
-        readCommon(r);
-    }
-
-    void readContent(Reader& r, Block containing) {
-        ID = containing.ID;
-        lengthOfBlock = containing.lengthOfBlock;
-        readCommon(r);
-    }
-
-    void readCommon(Reader& r) {
         r.readPrimitive(year);
         // The year in the link: https://www.crysys.hu/downloads/vihima06/2020/CAFF.txt
         // Probably the first CAFF file's *creation date* does not precede this date...

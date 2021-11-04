@@ -2,6 +2,9 @@
 #include "Block.h"
 #include "CIFF.h"
 
+const uint8_t BLOCK_HEADER_ID = 0x1;
+const uint8_t BLOCK_ANIM_ID = 0x3;
+
 class CAFF_ANIM :
     public Block
 {
@@ -10,18 +13,13 @@ public:
     uint64_t duration;
     CIFF image;
 
+    CAFF_ANIM(Block& block) : Block(block) {
+        if(block.ID != BLOCK_ANIM_ID) {
+            throw ParsingException();
+        }
+    }
+
     void read(Reader& r) {
-        Block::readBlockHeaderWithCheck(r, 0x3);
-        readCommon(r);
-    }
-
-    void readContent(Reader& r, Block containing) {
-        ID = containing.ID;
-        lengthOfBlock = containing.lengthOfBlock;
-        readCommon(r);
-    }
-
-    void readCommon(Reader& r) {
         uint64_t characters_read_counter = r.getBytesRead();
 
         r.readPrimitive(duration);
