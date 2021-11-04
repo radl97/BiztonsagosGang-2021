@@ -9,7 +9,7 @@
 
 int main()
 {
-    FILE* f = fopen("../caff_files/2.caff", "r");
+    FILE* f = fopen("../caff_files/2.caff", "rb");
     if (f == 0) {
         return 1;
     }
