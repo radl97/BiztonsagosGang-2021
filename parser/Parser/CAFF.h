@@ -31,10 +31,13 @@ public:
                 cred.readContent(r, containingBlock); 
                 credits.push_back(cred);
             }
-            else {
+            else if (containingBlock.ID == 0x3){
                 CAFF_ANIM anim;
                 anim.readContent(r, containingBlock);
                 animations.push_back(anim);
+            }
+            else {
+                throw ParsingException();
             }
         }
     }
