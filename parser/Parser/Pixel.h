@@ -9,6 +9,6 @@ struct Pixel
 };
 #pragma pack(pop)
 
-std::ostream& operator<<(std::ostream& os, const Pixel& pixel) {
+static std::ostream& operator<<(std::ostream& os, const Pixel& pixel) {
     return os << "R" << pixel.R << " G" << pixel.G << " B" << pixel.B;
 }

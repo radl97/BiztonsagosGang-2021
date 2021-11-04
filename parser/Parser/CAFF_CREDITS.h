@@ -16,7 +16,17 @@ public:
     }
 
     void read(Reader& r) {
-        Block::readBlockHeader(r, 0x2);
+        Block::readBlockHeaderWithCheck(r, 0x2);
+        readCommon(r);
+    }
+
+    void readContent(Reader& r, Block containing) {
+        ID = containing.ID;
+        lengthOfBlock = containing.lengthOfBlock;
+        readCommon(r);
+    }
+
+    void readCommon(Reader& r) {
         r.readPrimitive(year);
         // The year in the link: https://www.crysys.hu/downloads/vihima06/2020/CAFF.txt
         // Probably the first CAFF file's *creation date* does not precede this date...
@@ -44,7 +54,7 @@ public:
 
         // The earliest point to cross-check lengthOfBlock with the should-be size
         if (lengthOfBlock != sizeof(year) + sizeof(month) + sizeof(day) +
-                sizeof(hour) + sizeof(minute) + sizeof(creatorNameLen) + creatorNameLen) {
+            sizeof(hour) + sizeof(minute) + sizeof(creatorNameLen) + creatorNameLen) {
             throw ParsingException();
         }
 

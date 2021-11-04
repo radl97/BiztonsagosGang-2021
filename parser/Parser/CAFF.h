@@ -10,25 +10,32 @@ class CAFF
 {
 	
 public:
-    // TODO!
-	std::vector<Block> blocks;
+	std::vector<CAFF_HEADER> headers;
+    std::vector<CAFF_CREDITS> credits;
+    std::vector<CAFF_ANIM> animations;
+
 	uint64_t blockNum;
 
     void read(Reader& r) { 
         CAFF_HEADER h;
         h.read(r);
+        headers.push_back(h);
+
         blockNum = h.animationNumber + 2;
         // TODO Credits are not specified too well: 1) is it optional 2) when can it be placed? (end of file? middle of animation?)
-        CAFF_CREDITS cred;
-        cred.read(r);
-        blocks.push_back(h);
-        blocks.push_back(cred);
-        std::cout << blockNum;
-        for (int i = 2; i < blockNum; i++) {
-            std::cout << i;
-            CAFF_ANIM anim;
-            anim.read(r);
-            blocks.push_back(anim);
+        for (int i = 1; i < blockNum; i++) {
+            Block containingBlock;
+            containingBlock.readBlockHeader(r);
+            if (containingBlock.ID == 0x2) {
+                CAFF_CREDITS cred;
+                cred.readContent(r, containingBlock); 
+                credits.push_back(cred);
+            }
+            else {
+                CAFF_ANIM anim;
+                anim.readContent(r, containingBlock);
+                animations.push_back(anim);
+            }
         }
     }
 };

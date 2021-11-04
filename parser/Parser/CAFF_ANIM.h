@@ -11,11 +11,20 @@ public:
     CIFF image;
 
     void read(Reader& r) {
-        Block::readBlockHeader(r, 0x3);
+        Block::readBlockHeaderWithCheck(r, 0x3);
+        readCommon(r);
+    }
+
+    void readContent(Reader& r, Block containing) {
+        ID = containing.ID;
+        lengthOfBlock = containing.lengthOfBlock;
+        readCommon(r);
+    }
+
+    void readCommon(Reader& r) {
         uint64_t characters_read_counter = r.getBytesRead();
 
         r.readPrimitive(duration);
-        std::cout << "\nanimstart";
 
         image.read(r);
 
@@ -24,7 +33,6 @@ public:
         if (lengthOfBlock != characters_read_counter_after - characters_read_counter) {
             throw ParsingException();
         }
-
     }
 };
 

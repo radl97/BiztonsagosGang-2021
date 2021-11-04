@@ -10,7 +10,7 @@ public:
     uint64_t animationNumber;
 
     void read(Reader& r) {
-        Block::readBlockHeader(r, 0x1);
+        Block::readBlockHeaderWithCheck(r, 0x1);
         if (lengthOfBlock != sizeof(magic) + sizeof(headerSize) + sizeof(animationNumber)) {
             throw ParsingException();
         }

@@ -17,7 +17,7 @@ int main()
     Reader r = Reader(f);
     caff.read(r);
    
-    std::cout << caff.blockNum << caff.blocks[0].lengthOfBlock;
+    std::cout << caff.blockNum << caff.credits[0].creatorName;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
