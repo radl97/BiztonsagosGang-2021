@@ -2,6 +2,12 @@
 #include <cstdio>
 #include <string>
 
+#define READER_DEBUG
+
+#ifdef READER_DEBUG
+#include <iostream>
+#endif
+
 class ParsingException : public std::exception {
 
 };
@@ -38,6 +44,9 @@ public:
             readArray(buffer, length);
             result.append(buffer, length);
         }
+#ifdef READER_DEBUG
+        std::cerr << "String (of length " << length << ") read, result [" << result << "]" << std::endl;
+#endif
         return result;
     }
 
@@ -56,6 +65,9 @@ public:
                 found = true;
             }
         } while (!found);
+#ifdef READER_DEBUG
+        std::cerr << "String (terminator " << end << ") read, result [" << result << "]" << std::endl;
+#endif
         return result;
     }
 
@@ -63,6 +75,9 @@ public:
     void readPrimitive(T& data) {
         fread(&data, sizeof(T), 1, f);
         bytes_read_counter += sizeof(T);
+#ifdef READER_DEBUG
+        std::cerr << "Primitive (size " << sizeof(T) << ") read: " << (uint64_t)data << std::endl;
+#endif
     }
 
     // The array needs to be allocated beforehand!
@@ -70,5 +85,12 @@ public:
     void readArray(T* array, uint64_t len) {
         fread(array, sizeof(T), len, f);
         bytes_read_counter += sizeof(T)*len;
+#ifdef READER_DEBUG
+        std::cerr << "Primitive (size " << sizeof(T) << ", length " << len << ") read";
+        if (len != 0) {
+            std::cerr << "; first data is: " << (uint64_t)array[0];
+        }
+        std::cerr << std::endl;
+#endif
     }
 };
