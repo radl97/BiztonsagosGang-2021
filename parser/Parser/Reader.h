@@ -33,11 +33,11 @@ public:
             if (to_read > 4096) {
                 to_read = 4096;
             }
+            // No need for null-termination
+            // Based on https://stackoverflow.com/a/8438709
             readArray(buffer, length);
             result.append(buffer, length);
         }
-        // No need for null-termination
-        // Based on https://stackoverflow.com/a/8438709
         return result;
     }
 
