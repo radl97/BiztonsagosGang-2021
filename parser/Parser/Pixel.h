@@ -2,15 +2,13 @@
 #include <cstdint>
 #include "Reader.h"
 
-class Pixel
+#pragma pack(push, 1)
+struct Pixel
 {
-public:
 	uint8_t R, G, B;
-
-    void read(Reader& r) {
-        r.readPrimitive(R);
-        r.readPrimitive(G);
-        r.readPrimitive(B);
-    }
 };
+#pragma pack(pop)
 
+std::ostream& operator<<(std::ostream& os, const Pixel& pixel) {
+    return os << "R" << pixel.R << " G" << pixel.G << " B" << pixel.B;
+}

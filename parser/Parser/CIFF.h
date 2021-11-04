@@ -75,12 +75,8 @@ public:
 		uint64_t tags_size = header_size - sizeof(magic) - sizeof(header_size) - sizeof(content_size) - sizeof(width) - sizeof(height) - caption.size() - 1;
 		readTags(r, tags_size);
 
-		for (uint64_t i = 0; i < height; i++) {
-			for (uint64_t j = 0; j < width; j++) {
-				Pixel tmp_pixel;
-				tmp_pixel.read(r);
-				pixels.push_back(tmp_pixel);
-			}
-		}
+		pixels.reserve(width*height);
+		Pixel* firstElem = &(pixels[0]);
+		r.readArray(firstElem, width*height);
 	}
 };

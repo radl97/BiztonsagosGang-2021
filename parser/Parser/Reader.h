@@ -88,7 +88,7 @@ public:
 #ifdef READER_DEBUG
         std::cerr << "Primitive (size " << sizeof(T) << ", length " << len << ") read";
         if (len != 0) {
-            std::cerr << "; first data is: " << (uint64_t)array[0];
+            std::cerr << "; first data is: " << array[0];
         }
         std::cerr << std::endl;
 #endif
