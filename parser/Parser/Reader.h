@@ -8,6 +8,9 @@
 #include <iostream>
 #endif
 
+/// Handling exceptions is forbidden by Google's C/C++ Style Guide
+/// Because this is a small project, and it will remain a small project
+/// We believe that this rule can be overriden.
 class ParsingException : public std::exception {
 
 };
