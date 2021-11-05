@@ -22,7 +22,12 @@ int main(int argc, char** argv)
     }
     CAFF caff;
     Reader r = Reader(f);
-    caff.read(r);
+    try {
+        caff.read(r);
+    } catch (ParsingException&) {
+        std::cerr << "Failed to parse CAFF!" << std::endl;
+        return 1;
+    }
    
     std::cout << caff.blockNum << caff.credits[0].creatorName;
 }

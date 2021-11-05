@@ -56,7 +56,10 @@ public:
         do
         {
             char tmp;
-            fread(&tmp, 1, 1, f);
+            if (fread(&tmp, 1, 1, f) != 1) {
+                // not enough data
+                throw ParsingException();
+            }
             bytes_read_counter++;
             if (tmp != end) {
                 result += tmp;
@@ -73,7 +76,11 @@ public:
 
     template<typename T>
     void readPrimitive(T& data) {
-        fread(&data, sizeof(T), 1, f);
+        if (fread(&data, sizeof(T), 1, f) != 1) {
+            // not enough data
+            throw ParsingException();
+        }
+
         bytes_read_counter += sizeof(T);
 #ifdef READER_DEBUG
         std::cerr << "Primitive (size " << sizeof(T) << ") read: " << (uint64_t)data << std::endl;
@@ -83,7 +90,9 @@ public:
     // The array needs to be allocated beforehand!
     template<typename T>
     void readArray(T* array, uint64_t len) {
-        fread(array, sizeof(T), len, f);
+        if (fread(array, sizeof(T), len, f) != len) {
+            throw ParsingException();
+        }
         bytes_read_counter += sizeof(T)*len;
 #ifdef READER_DEBUG
         std::cerr << "Primitive (size " << sizeof(T) << ", length " << len << ") read";
