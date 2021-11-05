@@ -7,10 +7,17 @@
 #include "CAFF.h"
 
 
-int main()
+int main(int argc, char** argv)
 {
-    FILE* f = fopen("../caff_files/2.caff", "rb");
+    const char* input_file;
+    if (argc <= 1) {
+        input_file = "../caff_files/2.caff";
+    } else {
+        input_file = argv[1];
+    }
+    FILE* f = fopen(input_file, "rb");
     if (f == 0) {
+        std::cerr << "Failed to open file [" << input_file << "] for reading" << std::endl;
         return 1;
     }
     CAFF caff;
