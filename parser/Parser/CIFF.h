@@ -75,8 +75,19 @@ public:
 		uint64_t tags_size = header_size - sizeof(magic) - sizeof(header_size) - sizeof(content_size) - sizeof(width) - sizeof(height) - caption.size() - 1;
 		readTags(r, tags_size);
 
+
+		if (header_size != tags_size + sizeof(magic) + sizeof(header_size) + sizeof(content_size) +
+			sizeof(width) + sizeof(height) + caption.length() + 1) {
+			throw ParsingException();
+		}
+		uint64_t characters_read_counter = r.getBytesRead();
 		pixels.resize(width*height);
 		Pixel* firstElem = &(pixels[0]);
 		r.readArray(firstElem, width*height);
+		uint64_t characters_read_counter_after = r.getBytesRead();
+
+		if (content_size != characters_read_counter_after - characters_read_counter) {
+			throw ParsingException();
+		}
 	}
 };
