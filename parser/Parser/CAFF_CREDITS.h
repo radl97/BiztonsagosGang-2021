@@ -71,7 +71,7 @@ public:
         date2.tm_year = year - 1900;
         date2.tm_mon = month - 1;
         date2.tm_mday = day;
-        //sets fileds to valid values, any difference in the two dates indicates that the original was invalid
+        //sets fields to valid values, any difference in the two dates indicates that the original was invalid
         mktime(&date2);
         if(date.tm_mday != date2.tm_mday || date.tm_mon != date2.tm_mon || date.tm_year != date2.tm_year) {
             return false;
