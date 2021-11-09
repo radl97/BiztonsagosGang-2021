@@ -29,7 +29,7 @@ int main(int argc, char** argv)
         return 1;
     }
    
-    std::cout << caff.blockNum << caff.credits[0].creatorName;
+    //std::cout << caff.blockNum << caff.credits[0].creatorName;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
