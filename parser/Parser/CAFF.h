@@ -47,6 +47,10 @@ public:
                 throw ParsingException();
             }
         }
+        //No previev can be produced if there are no animations in the Caff file
+        if (animations.empty()) {
+            throw ParsingException();
+        }
     }
 };
 
