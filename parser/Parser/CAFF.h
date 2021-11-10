@@ -8,6 +8,7 @@
 #include <vector>
 class CAFF
 {
+    bool isCreditPresent = false;
 	
 public:
 	std::vector<CAFF_HEADER> headers;
@@ -21,15 +22,21 @@ public:
         h.read(r);
         headers.push_back(h);
 
-        blockNum = h.animationNumber + 2;
-        // TODO Credits are not specified too well: 1) is it optional 2) when can it be placed? (end of file? middle of animation?)
-        for (int i = 1; i < blockNum; i++) {
+        blockNum = h.animationNumber;
+        for (int i = 0; i < blockNum; i++) {
             Block containingBlock;
             containingBlock.readBlockHeader(r);
             if (containingBlock.ID == 0x2) {
+                if (isCreditPresent) {
+                    throw ParsingException();
+                }
+                isCreditPresent = true;
                 CAFF_CREDITS cred(containingBlock);
                 cred.read(r); 
                 credits.push_back(cred);
+                // blockNum is incremented, to allow animationnumber + 1(credits) blocks to be read
+                // since credits block is optional
+                blockNum++;
             }
             else if (containingBlock.ID == 0x3){
                 CAFF_ANIM anim(containingBlock);
@@ -39,6 +46,10 @@ public:
             else {
                 throw ParsingException();
             }
+        }
+        //No preview can be produced if there are no animations in the Caff file
+        if (animations.empty()) {
+            throw ParsingException();
         }
     }
 };

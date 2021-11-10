@@ -7,7 +7,6 @@
 
 class CIFF {
 
-	// TODO (fuzz-)test this
 	static uint64_t checkedMultiplication(uint64_t a, uint64_t b) {
 		// Based on: https://stackoverflow.com/a/1815391
 		if (b > 0 && a > UINT64_MAX / b) {

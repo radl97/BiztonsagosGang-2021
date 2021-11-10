@@ -1,4 +1,5 @@
 #pragma once
+#include <time.h>
 #include "Block.h"
 
 const uint8_t BLOCK_CREDITS_ID = 0x2;
@@ -36,16 +37,18 @@ public:
             throw ParsingException();
         }
         r.readPrimitive(day);
-        // TODO we should cross-check this with some time library
         if (day < 1 || day > 31) {
             throw ParsingException();
         }
         r.readPrimitive(hour);
-        if (hour < 0 || hour >= 60) {
+        if (hour < 0 || hour >= 24) {
             throw ParsingException();
         }
         r.readPrimitive(minute);
         if (minute < 0 || minute >= 60) {
+            throw ParsingException();
+        }
+        if (!isDateValid()) {
             throw ParsingException();
         }
         r.readPrimitive(creatorNameLen);
@@ -57,6 +60,23 @@ public:
         }
 
         creatorName = r.readStringOfLength(creatorNameLen);
+    }
+
+    bool isDateValid() {
+        struct tm date;
+        date.tm_year = year - 1900;
+        date.tm_mon = month - 1;
+        date.tm_mday = day;
+        struct tm date2;
+        date2.tm_year = year - 1900;
+        date2.tm_mon = month - 1;
+        date2.tm_mday = day;
+        //sets fields to valid values, any difference in the two dates indicates that the original was invalid
+        mktime(&date2);
+        if(date.tm_mday != date2.tm_mday || date.tm_mon != date2.tm_mon || date.tm_year != date2.tm_year) {
+            return false;
+        }
+        return true;
     }
 };
 
