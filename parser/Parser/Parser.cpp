@@ -5,15 +5,19 @@
 #include <iostream>
 #include <fstream>
 #include "CAFF.h"
-
+#include <unistd.h>
 
 int main(int argc, char** argv)
 {
     const char* input_file;
+    const char* output_file = "output.raw";
     if (argc <= 1) {
         input_file = "../caff_files/2.caff";
     } else {
         input_file = argv[1];
+        if (argc <= 2) {
+            output_file = argv[2];
+        }
     }
     FILE* f = fopen(input_file, "rb");
     if (f == 0) {
@@ -28,17 +32,11 @@ int main(int argc, char** argv)
         std::cerr << "Failed to parse CAFF!" << std::endl;
         return 1;
     }
-   
-    //std::cout << caff.blockNum << caff.credits[0].creatorName;
+
+    CIFF& ciff = caff.animations[0].image;
+
+    std::ofstream basic_output(output_file, std::ios::binary);
+    basic_output.write((char*)&ciff.width, sizeof(ciff.width));
+    basic_output.write((char*)&ciff.height, sizeof(ciff.height));
+    basic_output.write((char*)&ciff.pixels[0], ciff.content_size);
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
