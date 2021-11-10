@@ -1,0 +1,5 @@
+# Ignore generated model and editor folders
+x64
+# Taken from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore#L36
+.vs
+build
