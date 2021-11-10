@@ -2,6 +2,8 @@
 #include "Block.h"
 #include <cstdint>
 
+const uint8_t BLOCK_HEADER_ID = 0x1;
+
 class CAFF_HEADER : public Block
 {
 public:

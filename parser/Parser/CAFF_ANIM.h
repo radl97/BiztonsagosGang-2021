@@ -2,7 +2,6 @@
 #include "Block.h"
 #include "CIFF.h"
 
-const uint8_t BLOCK_HEADER_ID = 0x1;
 const uint8_t BLOCK_ANIM_ID = 0x3;
 
 class CAFF_ANIM :
