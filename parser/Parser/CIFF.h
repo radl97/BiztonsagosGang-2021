@@ -71,7 +71,11 @@ public:
 		caption = r.readUntilChar('\n');
 
 		// -1 because "\n" is dropped from caption (readUntilChar). That one character is still part of the file, however.
-		uint64_t tags_size = header_size - sizeof(magic) - sizeof(header_size) - sizeof(content_size) - sizeof(width) - sizeof(height) - caption.size() - 1;
+		uint64_t header_size_without_tags = sizeof(magic) + sizeof(header_size) + sizeof(content_size) + sizeof(width) + sizeof(height) + caption.size() + 1;
+		if (header_size < header_size_without_tags) {
+			throw ParsingException();
+		}
+		uint64_t tags_size = header_size - header_size_without_tags;
 		readTags(r, tags_size);
 
 		pixels.resize(width*height);
