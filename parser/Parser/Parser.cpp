@@ -5,7 +5,6 @@
 #include <iostream>
 #include <fstream>
 #include "CAFF.h"
-#include <unistd.h>
 
 int main(int argc, char** argv)
 {
