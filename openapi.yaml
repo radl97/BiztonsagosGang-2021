@@ -1,0 +1,374 @@
+openapi: 3.0.0
+info:
+  title: Caffka
+  version: 0.1.
+
+servers:
+- url: https://caff.ka/api/v1/
+- url: http://localhost:5000/
+  description: For testing on localhost
+
+paths:
+  /login:
+    post:
+      summary: Authenticate to the server and get a JWT token
+      requestBody:
+        description: Login credentials
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        '200':
+          description: "OK. Sends a Set-Cookie header"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginResponse"
+        '400':
+          description: "Bad request"
+        '403':
+          description: "Forbidden"
+  /signup:
+    post:
+      security:
+        - cookieAuth: []
+      requestBody:
+        description: "Registration data"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignupRequest"
+      responses:
+        '200':
+          description: "OK"
+        '403':
+          description: "Forbidden"
+  /logout:
+    get:
+      description: "Log out"
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: "OK"
+        '403':
+          description: "Forbidden"
+  /caffs:
+    get:
+      description: "List caffs"
+      security:
+        - cookieAuth: []
+      parameters:
+        - in: query
+          name: filter
+          schema:
+            type: string
+          required: false
+          description: Search filter
+          example: "asdf"
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CaffListResponse"
+        '403':
+          description: "Forbidden"
+    post:
+      security:
+        - cookieAuth: []
+      requestBody:
+        description: "Registration data"
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/CaffUploadRequest"
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CaffDetailResponse"
+        '403':
+          description: "Forbidden"
+        '404':
+          description: "No such caff_id"
+  /caffs/{caff_id}:
+    parameters:
+      - in: path
+        name: caff_id
+        schema:
+          type: integer
+        required: true
+        description: "Numeric ID of the CAFF"
+    get:
+      description: "Get details of a CAFF"
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CaffDetailResponse"
+        '403':
+          description: "Forbidden"
+        '404':
+          description: "No such caff_id"
+    delete:
+      description: "(Admin) Delete caff"
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CaffDetailResponse"
+        '403':
+          description: "Forbidden"
+        '404':
+          description: "No such caff_id"
+  /caffs/{caff_id}/comments:
+    parameters:
+      - in: path
+        name: caff_id
+        schema:
+          type: integer
+        required: true
+        description: "Numeric ID of the CAFF"
+    post:
+      description: Post a comment
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CaffNewCommentRequest"
+      responses:
+        '200':
+          description: "OK"
+        '403':
+          description: "Forbidden"
+        '404':
+          description: "No such caff_id"
+  /caffs/{caff_id}/comments/{comment_id}:
+    parameters:
+      - in: path
+        name: caff_id
+        schema:
+          type: integer
+        required: true
+        description: Numeric ID of the CAFF
+      - in: path
+        name: comment_id
+        schema:
+          type: integer
+        required: true
+        description: Numeric ID of the comment
+    delete:
+      security:
+        - cookieAuth: []
+      description: "(Admin) Delete comment"
+      responses:
+        '200':
+          description: "OK"
+        '403':
+          description: "Forbidden"
+        '404':
+          description: "No such caff_id or comment_id"
+  /download/{randomtoken}.png:
+    parameters:
+      - in: path
+        name: randomtoken
+        schema:
+          type: integer
+        required: true
+        description: Numeric ID of the CAFF
+      - in: path
+        name: randomtoken
+        schema:
+          type: string
+        required: true
+        description: random-generated value (due to security)
+    get:
+      #security:
+      #  - cookieAuth: []
+      responses:
+        '200':
+          description: "OK"
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        '403':
+          description: "Forbidden"
+        '404':
+          description: "No such caff_id"
+  /caffs/{caff_id}/download:
+    parameters:
+      - in: path
+        name: caff_id
+        schema:
+          type: integer
+        required: true
+        description: Numeric ID of the CAFF
+    get:
+      #security:
+      #  - cookieAuth: []
+      responses:
+        '200':
+          description: "OK"
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/CaffDownloadResponse"
+        '403':
+          description: "Forbidden"
+        '404':
+          description: "No such caff_id"
+    # req: id
+    # res: (ez megvan valahogy csinálva...? :D)
+security:
+  - cookieAuth: []
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: session
+  schemas:
+    LoginRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        password:
+          type: string
+      required:
+        - name
+        - password
+      example:
+        {
+          "username": "idooori@gmail.com",
+          "password": "1234",
+        }
+    LoginResponse:
+      type: object
+      properties:
+        role:
+          type: string
+      example:
+        {
+          "role": "admin",
+        }
+    SignupRequest:
+      type: object
+      properties:
+    # req: email, password1, password2, name
+        email:
+          type: string
+        password1:
+          type: string
+        password2:
+          type: string
+        name:
+          type: string
+      required:
+        - email
+        - password1
+        - password2
+        - name
+      example:
+        {
+          "email": "idooori@gmail.com",
+          "password1": "1234",
+          "password2": "1234",
+          "name": "Dori"
+        }
+    CaffListResponse:
+      type: object
+      properties:
+        id:
+          type: number
+          description: "Caff ID"
+        name:
+          type: string
+          description: "Name of CAFF"
+        number_of_comments:
+          type: string
+          description: "Number of comments"
+      example:
+        {
+          "id": "Some search thing",
+          "name": "Some search thing",
+          "number_of_comments": "Some search thing",
+        }
+    CaffDetailResponse:
+      type: object
+      properties:
+        id:
+          type: number
+          description: "Caff ID"
+        name:
+          type: string
+          description: "Name of CAFF"
+        number_of_comments:
+          type: string
+          description: "Number of comments"
+        comments:
+          type: array
+          description: "Comments"
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              text:
+                type: string
+      example:
+        {
+          "id": 1,
+          "preview_url": "https://http.cat/305",
+          "name": "string",
+          "comments": [{"id": 1, "text":""}],
+          "number_of_comments": 1,
+          "uploader": {"id":3, "name":"asd"}
+        }
+    CaffNewCommentRequest:
+      type: object
+      properties:
+        text:
+          type: string
+          description: "Comment text"
+    CaffUploadRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "Name of the CAFF (searchable)"
+        file:
+          type: string
+          format: binary
+          description: "CAFF file to upload"
+    CaffDownloadResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "Name of the CAFF (searchable)"
+        file:
+          type: string
+          format: binary
+          description: "CAFF file to download"
