@@ -331,12 +331,24 @@ components:
                 type: integer
               text:
                 type: string
+              author:
+                type: object
+                properties:
+                   id:
+                     type: int
+                   name:
+                     type: string
       example:
         {
           "id": 1,
           "preview_url": "https://http.cat/305",
           "name": "string",
-          "comments": [{"id": 1, "text":""}],
+          "comments": [
+            {
+              "id": 1, "text":"Nice", "author": {
+                {"id": 1, "name": "Laci"}
+            }
+          ],
           "number_of_comments": 1,
           "uploader": {"id":3, "name":"asd"}
         }
