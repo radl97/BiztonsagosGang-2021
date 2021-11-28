@@ -15,3 +15,4 @@ data class DeleteCaff(val caffId: Int): UIAction
 data class Comment(val caffId: Int, val text: String): UIAction
 data class ModifyComment(val caffId: Int, val commentId: Int, val text: String): UIAction
 data class DeleteComment(val caffId: Int, val commentId: Int): UIAction
+class Logout(): UIAction

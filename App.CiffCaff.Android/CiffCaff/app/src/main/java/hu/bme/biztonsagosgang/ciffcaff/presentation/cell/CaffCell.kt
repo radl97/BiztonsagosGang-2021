@@ -5,8 +5,8 @@ import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import hu.bitraptors.recyclerview.genericlist.GenericListItem
 import hu.bme.biztonsagosgang.ciffcaff.logic.models.CaffItem
 import hu.bme.biztonsagosgang.ciffcaff.presentation.baseclasses.actions.UIAction
-import hu.bme.spacedumpling.worktimemanager.R
-import hu.bme.spacedumpling.worktimemanager.databinding.CellCaffBinding
+import hu.bme.biztonsagosgang.ciffcaff.R
+import hu.bme.biztonsagosgang.ciffcaff.databinding.CellCaffBinding
 import kotlinx.coroutines.flow.MutableSharedFlow
 
 class CaffCell(
@@ -29,7 +29,10 @@ class CaffCell(
                 block = {
                     bind {
                         binding.caffTitle.text = item.model.name
-                        binding.numOfComments.text = context.getString(R.string.caff_num_of_comments, item.model.comment.toString())
+                        binding.numOfComments.text = context.getString(R.string.caff_num_of_comments, item.model.numberOfComments.toString())
+                        binding.root.setOnClickListener {
+                            callback.tryEmit(CaffClickedAction(item.model.id))
+                        }
                     }
                 }
             )

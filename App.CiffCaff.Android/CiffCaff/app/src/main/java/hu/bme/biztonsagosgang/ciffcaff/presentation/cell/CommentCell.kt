@@ -2,17 +2,14 @@ package hu.bme.biztonsagosgang.ciffcaff.presentation.cell
 
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import hu.bitraptors.recyclerview.genericlist.GenericListItem
-import hu.bme.biztonsagosgang.ciffcaff.logic.models.CaffItem
 import hu.bme.biztonsagosgang.ciffcaff.logic.models.Comment
 import hu.bme.biztonsagosgang.ciffcaff.presentation.baseclasses.actions.UIAction
 import hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.DeleteComment
 import hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.ModifyComment
+import hu.bme.biztonsagosgang.ciffcaff.databinding.CellCommentBinding
 import hu.bme.biztonsagosgang.ciffcaff.util.gone
 import hu.bme.biztonsagosgang.ciffcaff.util.invisible
 import hu.bme.biztonsagosgang.ciffcaff.util.visible
-import hu.bme.spacedumpling.worktimemanager.R
-import hu.bme.spacedumpling.worktimemanager.databinding.CellCaffBinding
-import hu.bme.spacedumpling.worktimemanager.databinding.CellCommentBinding
 import kotlinx.android.synthetic.main.cell_comment.view.*
 import kotlinx.coroutines.flow.MutableSharedFlow
 
@@ -38,6 +35,7 @@ class CommentCell(
                 block = {
                     bind {
                         binding.commentText.setText(item.model.text)
+                        binding.author.text = item.model.author.name
                         if(item.isAdmin){
                             binding.deleteButton.apply {
                                 visible()

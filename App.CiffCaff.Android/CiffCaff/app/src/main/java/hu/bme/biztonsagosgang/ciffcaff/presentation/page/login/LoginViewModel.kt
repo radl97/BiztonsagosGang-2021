@@ -21,10 +21,15 @@ class LoginViewModel(
             UIActionFlow.collect{
                 when (it) {
                     is Login -> {
-
+                        loginRepository.login(email = it.email, password = it.password)
                     }
                     is Register -> {
-
+                        loginRepository.register(
+                            name = it.name,
+                            email = it.email,
+                            password1 = it.password1,
+                            password2 = it.password2
+                        )
                     }
                 }
             }

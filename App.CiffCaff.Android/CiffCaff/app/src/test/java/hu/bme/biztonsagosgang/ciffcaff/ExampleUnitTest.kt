@@ -1,4 +1,4 @@
-package hu.bme.spacedumpling.worktimemanager
+package hu.bme.biztonsagosgang.ciffcaff
 
 import org.junit.Test
 

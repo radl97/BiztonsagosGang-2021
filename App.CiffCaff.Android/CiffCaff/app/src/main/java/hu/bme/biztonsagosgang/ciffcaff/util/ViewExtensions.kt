@@ -3,11 +3,11 @@ package hu.bme.biztonsagosgang.ciffcaff.util
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.ArrayAdapter
-import android.widget.Filter
-import androidx.annotation.LayoutRes
-import androidx.appcompat.widget.ListPopupWindow
-import hu.bme.spacedumpling.worktimemanager.R
+import android.widget.ImageView
+import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import hu.bme.biztonsagosgang.ciffcaff.R
+
 
 fun View.visible(){
     this.visibility = View.VISIBLE
@@ -34,4 +34,14 @@ fun View.hideKeyboard(): Boolean {
     } catch (ignored: RuntimeException) {
     }
     return false
+}
+
+fun ImageView.loadUrl(url: String, fragment: Fragment){
+    Glide
+        .with(fragment)
+        .load(url)
+        .centerCrop()
+        .placeholder(R.drawable.nothing_pic)
+        .into(this);
+
 }

@@ -44,6 +44,7 @@ class LoginRepositoryImpl (
             }
         }
         appSettingsRepository.saveCredentials("lol") //todo
+        appSettingsRepository.changeIsAdmin(true)
     }
 
     override fun onLogout() {

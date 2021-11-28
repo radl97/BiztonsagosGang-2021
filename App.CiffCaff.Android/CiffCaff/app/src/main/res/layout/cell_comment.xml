@@ -26,11 +26,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/card_background"
-            android:padding="@dimen/spacing_default">
+            android:paddingHorizontal="@dimen/spacing_default"
+            android:paddingVertical="@dimen/spacing_default">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearanceBody3.Bold"
+                tools:text="Mr.smith"
+                android:textColor="@color/color_green"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
 
             <EditText
-                android:padding="@dimen/spacing_default"
                 android:textColor="@color/primary_text60"
                 android:textAppearance="@style/TextAppearanceBody1"
                 android:id="@+id/comment_text"
@@ -39,9 +49,8 @@
                 android:enabled="false"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/author"
                 app:layout_constraintEnd_toStartOf="@id/delete_button"
-                app:layout_constraintBottom_toBottomOf="parent"
                 tools:text= "Coca-Cola, or Coke, is a carbonated soft drink manufactured by The Coca-Cola Company. "
                 />
 

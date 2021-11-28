@@ -17,6 +17,7 @@
         <entry key="app/src/main/res/drawable/ic_delete.xml" value="0.4197916666666667" />
         <entry key="app/src/main/res/drawable/ic_edit.xml" value="0.4197916666666667" />
         <entry key="app/src/main/res/drawable/ic_end.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/ic_exit.xml" value="0.41333333333333333" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.4197916666666667" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.4197916666666667" />
         <entry key="app/src/main/res/drawable/ic_logout.xml" value="0.24635416666666668" />
@@ -56,6 +57,7 @@
         <entry key="app/src/main/res/layout/view_tag.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/view_task.xml" value="0.24947916666666667" />
         <entry key="app/src/main/res/layout/view_unclickable_tag.xml" value="0.3026041666666667" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3151041666666667" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.38958333333333334" />
       </map>
     </option>

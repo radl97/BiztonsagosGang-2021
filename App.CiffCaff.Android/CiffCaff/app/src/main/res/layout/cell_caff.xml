@@ -12,7 +12,7 @@
         android:backgroundTint="@color/card_background"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/default_corner_size"
-        android:foreground="?android:attr/selectableItemBackground"
+        android:background="?android:attr/selectableItemBackground"
         style="@style/CardView.Light"
         app:cardUseCompatPadding="true"
         android:elevation="@dimen/elevation_default"
@@ -26,7 +26,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/caff_card_bg"
+            android:background="@color/card_background"
+            android:foreground="?selectableItemBackground"
             android:padding="@dimen/spacing_default">
 
             <androidx.appcompat.widget.AppCompatTextView

@@ -39,7 +39,7 @@ class AppSettingsRepositoryImpl(
     }
 
     override fun logout() {
-        localDataSource.saveData(getData().copy(credentials = null))
+        localDataSource.saveData(getData().copy(credentials = null, isAdmin = false))
     }
 
     override fun emitNetworkErrorMessage(message: String) {

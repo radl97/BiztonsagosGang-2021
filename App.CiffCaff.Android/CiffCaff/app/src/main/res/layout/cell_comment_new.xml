@@ -26,20 +26,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/card_background"
-            android:padding="@dimen/spacing_default">
+            android:paddingHorizontal="@dimen/spacing_default"
+            android:paddingVertical="@dimen/spacing_default">
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/add_comment_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearanceHeadline6.Bold"
+                tools:text="Add comment"
+                android:textColor="@color/secondary_text"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <EditText
-                android:padding="@dimen/spacing_default"
                 android:textColor="@color/primary_text60"
                 android:textAppearance="@style/TextAppearanceBody1"
                 android:id="@+id/comment_text"
                 android:layout_width="0dp"
-                android:background="@null"
-                android:enabled="false"
+                android:minHeight="80dp"
+                android:background="@drawable/bg_circular_10rad_80trp"
+                android:backgroundTint="@color/light_gray"
+                android:padding="@dimen/spacing_tightest"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/add_comment_header"
                 app:layout_constraintEnd_toStartOf="@id/send_button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:text= "Coca-Cola, or Coke, is a carbonated soft drink manufactured by The Coca-Cola Company. "
@@ -50,13 +61,11 @@
                 android:layout_height="48dp"
                 android:layout_width="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:background="?selectableItemBackgroundBorderless"
                 android:padding="@dimen/spacing_tight"
                 android:tint="@color/primary_icon"
                 android:src="@drawable/ic_tick"
-                android:visibility="gone"
-                tools:visibility="visible"
                 app:iconTint="@color/primary_icon"
                 />
 

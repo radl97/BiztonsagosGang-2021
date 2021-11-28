@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import hu.bme.spacedumpling.worktimemanager.R
+import hu.bme.biztonsagosgang.ciffcaff.R
 import hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.MakeToast
 import hu.bme.biztonsagosgang.ciffcaff.util.gone
 import hu.bme.biztonsagosgang.ciffcaff.util.visible

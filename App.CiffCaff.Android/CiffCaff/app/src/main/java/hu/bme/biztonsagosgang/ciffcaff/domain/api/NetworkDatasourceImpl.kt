@@ -23,21 +23,21 @@ class NetworkDatasourceImpl (
     override suspend fun fetchCaffsList(filter: String?) : List<CaffItem>{
         //api
         return if(filter == null)listOf(
-            CaffItem(id = 1, name = "CiffCaff1", comment = 5),
-            CaffItem(id = 2, name = "CiffCaff2", comment = 5),
-            CaffItem(id = 3, name = "CiffCaff3", comment = 5),
-            CaffItem(id = 4, name = "CiffCaff4", comment = 5),
-            CaffItem(id = 5, name = "CiffCaff5", comment = 5),
+            CaffItem.getDefault("CiffCaff1"),
+            CaffItem.getDefault("CiffCaff2"),
+            CaffItem.getDefault("CiffCaff3"),
+            CaffItem.getDefault("CiffCaff4"),
+            CaffItem.getDefault("CiffCaff5"),
         ) else listOf(
-            CaffItem(id = 3, name = "CiffCaff3", comment = 5),
-            CaffItem(id = 4, name = "CiffCaff4", comment = 5),
-            CaffItem(id = 5, name = "CiffCaff5", comment = 5),
+            CaffItem.getDefault("CiffCaff3"),
+            CaffItem.getDefault("CiffCaff4"),
+            CaffItem.getDefault("CiffCaff5"),
         )
     }
 
     override suspend fun fetchCaffDetails(id: Int): CaffItem {
        //api
-        return CaffItem(id = 3, name = "CiffCaff3", comment = 5)
+        return CaffItem.getDefault("CiffCaff3")
     }
 
     override suspend fun deleteCaff(id: Int) {

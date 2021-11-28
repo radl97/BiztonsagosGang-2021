@@ -22,7 +22,7 @@ import hu.bme.biztonsagosgang.ciffcaff.logic.repository.projects.CaffsRepository
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.projects.CaffsRepositoryImpl
 import hu.bme.biztonsagosgang.ciffcaff.presentation.page.login.LoginViewModel
 import hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.CaffDetailsViewModel
-import hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.ProjectViewModel
+import hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.CaffsViewModel
 import hu.bme.biztonsagosgang.ciffcaff.util.CustomDateAdapter
 import hu.uni.corvinus.my.app.data.datasources.base.DataSource
 import hu.uni.corvinus.my.app.data.datasources.base.createDataSourceForListBasedObjects
@@ -147,9 +147,10 @@ val ciffCaffModule = module{
 
 //PRESENTATION
     viewModel{
-        ProjectViewModel(
+        CaffsViewModel(
             caffsRepository = get(),
-            appSettingsRepository = get()
+            appSettingsRepository = get(),
+            logoutHandler = get()
         )
     }
     viewModel{ (caffId: Int) ->
