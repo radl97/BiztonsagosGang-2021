@@ -9,6 +9,8 @@ import hu.bme.biztonsagosgang.ciffcaff.android.sharedData
 import hu.bme.biztonsagosgang.ciffcaff.domain.api.APIService
 import hu.bme.biztonsagosgang.ciffcaff.domain.api.NetworkDatasource
 import hu.bme.biztonsagosgang.ciffcaff.domain.api.NetworkDatasourceImpl
+import hu.bme.biztonsagosgang.ciffcaff.domain.filedownloadupload.FileLoader
+import hu.bme.biztonsagosgang.ciffcaff.domain.filedownloadupload.FileLoaderImpl
 import hu.bme.biztonsagosgang.ciffcaff.logic.login.CallInterceptor
 import hu.bme.biztonsagosgang.ciffcaff.logic.login.LogoutHandler
 import hu.bme.biztonsagosgang.ciffcaff.logic.login.LogoutHandlerImpl
@@ -16,10 +18,10 @@ import hu.bme.biztonsagosgang.ciffcaff.logic.models.CaffItem
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.appsettings.AppSettingsModel
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.appsettings.AppSettingsRepository
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.appsettings.AppSettingsRepositoryImpl
-import hu.bme.biztonsagosgang.ciffcaff.logic.repository.home.LoginRepository
-import hu.bme.biztonsagosgang.ciffcaff.logic.repository.home.LoginRepositoryImpl
-import hu.bme.biztonsagosgang.ciffcaff.logic.repository.projects.CaffsRepository
-import hu.bme.biztonsagosgang.ciffcaff.logic.repository.projects.CaffsRepositoryImpl
+import hu.bme.biztonsagosgang.ciffcaff.logic.repository.login.LoginRepository
+import hu.bme.biztonsagosgang.ciffcaff.logic.repository.login.LoginRepositoryImpl
+import hu.bme.biztonsagosgang.ciffcaff.logic.repository.caffs.CaffsRepository
+import hu.bme.biztonsagosgang.ciffcaff.logic.repository.caffs.CaffsRepositoryImpl
 import hu.bme.biztonsagosgang.ciffcaff.presentation.page.login.LoginViewModel
 import hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.CaffDetailsViewModel
 import hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.CaffsViewModel
@@ -144,12 +146,20 @@ val ciffCaffModule = module{
         )
     }
 
+    single<FileLoader>{
+        FileLoaderImpl(
+            api = get(),
+            appSettingsRepository = get()
+        )
+    }
+
 
 //PRESENTATION
     viewModel{
         CaffsViewModel(
             caffsRepository = get(),
             appSettingsRepository = get(),
+            fileLoader = get(),
             logoutHandler = get()
         )
     }
@@ -157,6 +167,7 @@ val ciffCaffModule = module{
         CaffDetailsViewModel(
             caffId = caffId,
             caffsRepository = get(),
+            fileLoader = get(),
             appSettingsRepository = get()
         )
     }

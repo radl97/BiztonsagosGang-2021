@@ -1,4 +1,4 @@
-package hu.bme.biztonsagosgang.ciffcaff.logic.repository.projects
+package hu.bme.biztonsagosgang.ciffcaff.logic.repository.caffs
 
 import hu.bme.biztonsagosgang.ciffcaff.logic.models.CaffItem
 import kotlinx.coroutines.flow.Flow

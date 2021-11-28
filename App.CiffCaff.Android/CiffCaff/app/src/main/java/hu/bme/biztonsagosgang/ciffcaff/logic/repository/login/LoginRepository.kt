@@ -1,4 +1,4 @@
-package hu.bme.biztonsagosgang.ciffcaff.logic.repository.home
+package hu.bme.biztonsagosgang.ciffcaff.logic.repository.login
 
 import kotlinx.coroutines.flow.Flow
 

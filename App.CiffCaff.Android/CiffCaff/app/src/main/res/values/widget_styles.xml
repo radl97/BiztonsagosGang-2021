@@ -61,6 +61,7 @@
         <item name="editTextStyle">@style/EditTextStyleOutlined</item>
     </style>
 
+
     <style name="EditTextStyleOutlined" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
         <item name="backgroundColor">@color/color_white90</item>
         <item name="android:paddingTop">@dimen/spacing_tighter</item>

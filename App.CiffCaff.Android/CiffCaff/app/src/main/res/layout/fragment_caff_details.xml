@@ -58,12 +58,12 @@
             android:layout_height="48dp"
             android:layout_width="48dp"
             app:layout_constraintEnd_toStartOf="@id/download_button"
-            android:layout_marginHorizontal="@dimen/spacing_loose"
+            android:layout_marginHorizontal="@dimen/spacing_default"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:background="?selectableItemBackgroundBorderless"
             android:padding="@dimen/spacing_tight"
-            android:tint="@color/primary_icon"
+            android:tint="@color/color_burgundy"
             android:src="@drawable/ic_delete"
             android:visibility="gone"
             tools:visibility="visible"
@@ -99,10 +99,10 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
-                app:layout_constraintDimensionRatio="H,204:150"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintVertical_chainStyle="spread_inside"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -115,14 +115,16 @@
         app:layout_constraintTop_toBottomOf="@id/image_container"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="Comments"
+        android:visibility="gone"
         android:textColor="@color/secondary_text"
         android:textAppearance="@style/TextAppearanceHeadline6.Bold"
         android:padding="@dimen/spacing_default"
-        android:background="@color/color_white"
+        android:background="@color/color_blue_green_30"
         android:elevation="@dimen/elevation_default"
 
         />
     <androidx.recyclerview.widget.RecyclerView
+        android:paddingTop="@dimen/spacing_tightest"
         android:id="@+id/comment_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"

@@ -3,57 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:paddingHorizontal="@dimen/spacing_tight"
+    android:padding="@dimen/spacing_tight"
+    android:layout_marginVertical="@dimen/spacing_tightest"
+    android:layout_marginHorizontal="@dimen/spacing_tighter"
+    android:background="@drawable/bg_quare_outlined"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:backgroundTint="@color/card_background"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/default_corner_size"
-        android:foreground="?android:attr/selectableItemBackground"
-        style="@style/CardView.Light"
-        app:cardUseCompatPadding="true"
-        android:elevation="@dimen/elevation_default"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:cardPreventCornerOverlap="true"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/card_background"
-            android:paddingHorizontal="@dimen/spacing_default"
-            android:paddingVertical="@dimen/spacing_default">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/add_comment_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearanceHeadline6.Bold"
-                tools:text="Add comment"
-                android:textColor="@color/secondary_text"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
 
             <EditText
                 android:textColor="@color/primary_text60"
                 android:textAppearance="@style/TextAppearanceBody1"
                 android:id="@+id/comment_text"
                 android:layout_width="0dp"
-                android:minHeight="80dp"
                 android:background="@drawable/bg_circular_10rad_80trp"
                 android:backgroundTint="@color/light_gray"
-                android:padding="@dimen/spacing_tightest"
+                android:padding="@dimen/spacing_tight"
+                android:textAlignment="textStart"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/add_comment_header"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/send_button"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:text= "Coca-Cola, or Coke, is a carbonated soft drink manufactured by The Coca-Cola Company. "
+                tools:text= "Add comment"
                 />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -69,6 +39,4 @@
                 app:iconTint="@color/primary_icon"
                 />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

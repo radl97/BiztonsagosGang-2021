@@ -5,9 +5,10 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import hu.bitraptors.recyclerview.genericlist.GenericListItem
+import hu.bme.biztonsagosgang.ciffcaff.domain.filedownloadupload.FileLoader
 import hu.bme.biztonsagosgang.ciffcaff.logic.models.CaffItem
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.appsettings.AppSettingsRepository
-import hu.bme.biztonsagosgang.ciffcaff.logic.repository.projects.CaffsRepository
+import hu.bme.biztonsagosgang.ciffcaff.logic.repository.caffs.CaffsRepository
 import hu.bme.biztonsagosgang.ciffcaff.presentation.baseclasses.viewmodels.BaseViewModel
 import hu.bme.biztonsagosgang.ciffcaff.presentation.cell.CommentCell
 import hu.bme.biztonsagosgang.ciffcaff.presentation.cell.NewCommentCell
@@ -20,6 +21,7 @@ import kotlinx.coroutines.launch
 class CaffDetailsViewModel(
     caffId: Int,
     private val caffsRepository: CaffsRepository,
+    private val fileLoader: FileLoader,
     appSettingsRepository: AppSettingsRepository,
 ) : BaseViewModel(appSettingsRepository) {
 

@@ -1,6 +1,5 @@
-package hu.bme.biztonsagosgang.ciffcaff.logic.repository.projects
+package hu.bme.biztonsagosgang.ciffcaff.logic.repository.caffs
 
-import hu.bme.biztonsagosgang.ciffcaff.android.noConnectionErrorMessage
 import hu.bme.biztonsagosgang.ciffcaff.domain.api.NetworkDatasource
 import hu.bme.biztonsagosgang.ciffcaff.logic.models.CaffItem
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.appsettings.AppSettingsRepository

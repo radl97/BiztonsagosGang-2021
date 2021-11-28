@@ -27,7 +27,7 @@ data class NewCommentCell(
                 },
                 block = {
                     bind {
-                        binding.addCommentHeader.text = context.getString(R.string.new_comment_header_text)
+                        binding.commentText.hint = context.getString(R.string.new_comment_header_text)
                         binding.sendButton.setOnClickListener {
                             if(!binding.commentText.text.isNullOrBlank()){
                                 callback.tryEmit(Comment(caffId = item.caffId, text = binding.commentText.text.toString()))

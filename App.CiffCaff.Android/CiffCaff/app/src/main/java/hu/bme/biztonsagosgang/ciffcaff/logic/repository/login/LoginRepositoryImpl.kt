@@ -1,10 +1,9 @@
-package hu.bme.biztonsagosgang.ciffcaff.logic.repository.home
+package hu.bme.biztonsagosgang.ciffcaff.logic.repository.login
 
 import hu.bme.biztonsagosgang.ciffcaff.domain.api.NetworkDatasource
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.appsettings.AppSettingsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import java.lang.Exception
