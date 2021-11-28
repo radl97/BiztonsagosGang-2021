@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingVertical="@dimen/spacing_tighter"
+    android:paddingHorizontal="@dimen/spacing_default"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:backgroundTint="@color/card_background"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/default_corner_size"
+        android:foreground="?android:attr/selectableItemBackground"
+        style="@style/CardView.Light"
+        app:cardUseCompatPadding="true"
+        android:elevation="@dimen/elevation_default"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:cardPreventCornerOverlap="true"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/caff_card_bg"
+            android:padding="@dimen/spacing_default">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/caff_title"
+                style="@style/TextAppearanceHeadline5.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/spacing_tightest"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:textColor="@color/caff_text"
+                app:layout_constraintBottom_toTopOf="@id/num_of_comments"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="This week" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/num_of_comments"
+                style="@style/TextAppearanceHeadline6.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textAlignment="textEnd"
+                android:ellipsize="end"
+                android:layout_margin="@dimen/spacing_tightest"
+                android:maxLines="3"
+                android:textColor="@color/secondary_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/caff_title"
+                tools:text="4 comments" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

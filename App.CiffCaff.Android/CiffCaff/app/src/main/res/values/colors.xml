@@ -1,10 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- TRASH -->
+
+    <!-- Text -->
+    <color name="primary_text">@color/color_black</color>
+    <color name="primary_text40">@color/color_black40</color>
+    <color name="primary_text60">@color/color_black60</color>
+    <color name="secondary_text">@color/color_blue_green</color>
+    <color name="negative_text">@color/color_white</color>
+    <color name="light_text">@color/color_white</color>
+
+    <!-- Background -->
+    <color name="default_background">@color/light_gray</color>
+    <color name="default_background_light">@color/color_white</color>
+    <color name="header_background">@color/color_blue_green</color>
+    <color name="accent_background">@color/color_blue_green</color>
+    <color name="card_background">@color/color_white</color>
+    <color name="card_trp80_background">@color/color_white80</color>
+
+    <!-- Icon -->
+    <color name="primary_icon">@color/color_blue_green</color>
+    <color name="positive_icon">@color/color_black</color>
+    <color name="negative_icon">@color/color_white</color>
+    <color name="ripple_default">@color/color_white</color>
+
+
+<!-- Specific -->
+    <!-- main theme -->
+    <color name="status_bar_bg">@color/header_background</color>
+    <color name="primary_accent">@color/color_blue_green</color>
+
+    <!-- Caff -->
+    <color name="caff_card_bg">@color/color_yellow_50</color>
+    <color name="caff_text">@color/color_green</color>
+
+    <!-- Login -->
+    <color name="login_text_bg">@color/color_green_60</color>
+
+
+
+
+    <color name="color_black">#FF000000</color>
+    <color name="color_black5">#08000000</color>
+    <color name="color_black10">#1A000000</color>
+    <color name="color_black15">#0F000000</color>
+    <color name="color_black20">#33000000</color>
+    <color name="color_black30">#4D000000</color>
+    <color name="color_black40">#66000000</color>
+    <color name="color_black60">#99000000</color>
+    <color name="color_black80">#cc000000</color>
+
+    <color name="color_white">#FFFFFFFF</color>
+    <color name="color_white5">#08FFFFFF</color>
+    <color name="color_white10">#1Affffff</color>
+    <color name="color_white15">#0fffffff</color>
+    <color name="color_white20">#33ffffff</color>
+    <color name="color_white30">#4Dffffff</color>
+    <color name="color_white40">#66ffffff</color>
+    <color name="color_white60">#99ffffff</color>
+    <color name="color_white80">#ccffffff</color>
+    <color name="color_white90">#e6ffffff</color>
+
+    <color name="light_gray">#EFEFEF</color>
+    
+    <color name="color_yellow">#EEC643</color>
+    <color name="color_yellow_50">#80EEC643</color>
+    <color name="color_burgundy">#890620</color>
+    <color name="color_blue_green">#0F4C5C</color>
+    <color name="color_orange">#E07A5F</color>
+    <color name="color_orange_60">#99E07A5F</color>
+    <color name="color_orange_30">#4dE07A5F</color>
+    <color name="color_green">#5C7457</color>
+    <color name="color_green_60">#995C7457</color>
 </resources>

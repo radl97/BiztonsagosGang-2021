@@ -1,5 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../../../layout/custom_preview.xml" value="0.43020833333333336" />
+        <entry key="app/src/main/res/drawable-v24/bg_circular_80.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/bg_circular_10rad_80trp.xml" value="0.31875" />
+        <entry key="app/src/main/res/drawable/bg_circular_20rad_80trp.xml" value="0.31875" />
+        <entry key="app/src/main/res/drawable/bg_circular_rad20.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/bg_sheet_with_top_corners.xml" value="0.31875" />
+        <entry key="app/src/main/res/drawable/bg_tag_circular_10rad_80tp.xml" value="0.31875" />
+        <entry key="app/src/main/res/drawable/cell_caff.xml" value="0.3151041666666667" />
+        <entry key="app/src/main/res/drawable/cell_nothing.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/ic_bevasarlokocsi.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/ic_chevron.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/ic_delete.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/ic_edit.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/ic_end.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/ic_home.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/ic_logout.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/drawable/ic_plus.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/ic_project.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/ic_save.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/ic_search.xml" value="0.3151041666666667" />
+        <entry key="app/src/main/res/drawable/ic_statistics.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/ic_strat.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/ic_task.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/ic_tick.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/ic_time.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/cell_caff.xml" value="0.2989583333333333" />
+        <entry key="app/src/main/res/layout/cell_comment.xml" value="0.2989583333333333" />
+        <entry key="app/src/main/res/layout/cell_comment_new.xml" value="0.2989583333333333" />
+        <entry key="app/src/main/res/layout/cell_dropdown_item.xml" value="0.19479166666666667" />
+        <entry key="app/src/main/res/layout/cell_fallback.xml" value="0.2989583333333333" />
+        <entry key="app/src/main/res/layout/cell_header.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/cell_nothing.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/cell_project.xml" value="0.38958333333333334" />
+        <entry key="app/src/main/res/layout/cell_statistics.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/cell_test.xml" value="0.286231884057971" />
+        <entry key="app/src/main/res/layout/cell_time_interval.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_caff_details.xml" value="0.28489583333333335" />
+        <entry key="app/src/main/res/layout/fragment_caffs.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1911231884057971" />
+        <entry key="app/src/main/res/layout/fragment_project_details.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_projects.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_statistics.xml" value="0.2630208333333333" />
+        <entry key="app/src/main/res/layout/fragmnet_login.xml" value="0.1953125" />
+        <entry key="app/src/main/res/layout/layout_banner_tag.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/layout_fragment_recyclerview_title.xml" value="0.23541666666666666" />
+        <entry key="app/src/main/res/layout/layout_task_tag.xml" value="0.3026041666666667" />
+        <entry key="app/src/main/res/layout/list_item.xml" value="0.3026041666666667" />
+        <entry key="app/src/main/res/layout/view_tag.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/view_task.xml" value="0.24947916666666667" />
+        <entry key="app/src/main/res/layout/view_unclickable_tag.xml" value="0.3026041666666667" />
+        <entry key="app/src/main/res/xml/network_security_config.xml" value="0.38958333333333334" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

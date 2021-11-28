@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="hu.bme.biztonsagosgang.ciffcaff.presentation.page.login.LoginFragment"
+        app:popUpToInclusive="true">
+
+        <action
+            android:id="@+id/to_caffsFragment"
+            app:destination="@id/caffsFragment"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/caffsFragment"
+        android:name="hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.CaffsFragment"
+        app:popUpToInclusive="true">
+
+        <action
+            android:id="@+id/to_caffDetailsFragment"
+            app:destination="@id/caffDetailsFragment"
+            app:popUpTo="@id/caffsFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/caffDetailsFragment"
+        android:name="hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.CaffDetailsFragment">
+        <argument
+            android:name="caffId"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
+
+
+</navigation>

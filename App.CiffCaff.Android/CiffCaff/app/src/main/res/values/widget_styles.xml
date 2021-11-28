@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="DefaultIconButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="iconPadding">0dp</item>
+        <item name="iconEndPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="iconSize">15dp</item>
+        <item name="android:textColor">@color/light_text</item>
+        <item name="iconTint">@color/light_text</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <style name="DefaultTagStyle" parent="DefaultIconButtonStyle">
+        <item name="android:minWidth">20dp</item>
+        <item name="android:minHeight">20dp</item>
+    </style>
+
+    <style name="IconOnlyButton" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:layout_height">@dimen/ctaButtonHeight</item>
+        <item name="iconPadding">0dp</item>
+        <item name="cornerRadius">@dimen/default_corner_size</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="rippleColor">@color/ripple_default</item>
+        <item name="iconGravity">textStart</item>
+    </style>
+
+    <dimen name="ctaButtonHeight">64dp</dimen>
+    <dimen name="turn_off_0dp">0dp</dimen>
+
+    <style name="EditTextStyleFilled" parent="Widget.MaterialComponents.TextInputEditText.FilledBox"
+        xmlns:ns2="http://schemas.android.com/tools" >
+        <item name="android:theme">@style/EditTextStyleFilled</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="android:paddingStart" ns2:ignore="NewApi">@dimen/turn_off_0dp</item>
+        <item name="android:paddingEnd" ns2:ignore="NewApi">@dimen/turn_off_0dp</item>
+        <item name="android:paddingLeft">@dimen/turn_off_0dp</item>
+        <item name="android:paddingRight">@dimen/turn_off_0dp</item>
+    </style>
+
+    <style name="TextInput.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:theme">@style/TextInput.OutlinedBox</item>
+
+        <item name="boxStrokeColor">@color/color_white</item>
+        <item name="boxBackgroundColor">@color/login_text_bg</item>
+        <item name="android:background">@null</item>
+
+        <item name="android:textColorHint">@color/negative_text</item>
+        <item name="hintTextColor">@color/negative_text</item>
+        <item name="hintTextAppearance">@style/TextAppearanceCaption.Bold</item>
+
+        <item name="helperTextTextColor">@color/negative_text</item>
+
+        <item name="materialThemeOverlay">@style/TextInputOutlinedOverlay</item>
+        <item name="editTextStyle">@style/EditTextStyleOutlined</item>
+    </style>
+
+    <style name="EditTextStyleOutlined" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="backgroundColor">@color/color_white90</item>
+        <item name="android:paddingTop">@dimen/spacing_tighter</item>
+        <item name="android:paddingBottom">@dimen/spacing_tighter</item>
+        <item name="android:textColor">@color/negative_text</item>
+    </style>
+
+    <style name="TextInputOutlinedOverlay" parent="">
+        <item name="colorError">@color/color_orange</item>
+    </style>
+
+    <style name="ThemeOverlay.App.DatePicker" parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/accent_background</item>
+        <item name="colorOnPrimary">@color/color_white</item>
+        <!-- Customize text field of the text input mode. -->
+    </style>
+</resources>
