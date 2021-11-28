@@ -192,12 +192,6 @@ paths:
       - in: path
         name: randomtoken
         schema:
-          type: integer
-        required: true
-        description: Numeric ID of the CAFF
-      - in: path
-        name: randomtoken
-        schema:
           type: string
         required: true
         description: random-generated value (due to security)
