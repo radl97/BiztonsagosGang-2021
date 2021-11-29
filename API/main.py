@@ -38,7 +38,7 @@ def upload():
     file.save(upload_folder+"\\"+file.filename)
     return Response(response="Upload succesful", status=200)
 
-@main.route('/caffs/<caff_id>', methods=['GET'])
+@main.route('/caffs/<int:caff_id>', methods=['GET'])
 @login_required
 def CAFFdetail(caff_id):
     caff = db.session.query(CAFF).get(caff_id)
@@ -62,7 +62,7 @@ def CAFFdetail(caff_id):
     }
     return json_data
 
-@main.route('/caffs/<caff_id>', methods=['DELETE'])
+@main.route('/caffs/<int:caff_id>', methods=['DELETE'])
 @login_required
 def deleteCAFF(caff_id):
     #TODO admin role
@@ -75,7 +75,7 @@ def deleteCAFF(caff_id):
     db.session.commit()
     return Response(status=200)
 
-@main.route('/caffs/<caff_id>/comments', methods=['POST'])
+@main.route('/caffs/<int:caff_id>/comments', methods=['POST'])
 @login_required
 def addComment(caff_id):
     comment_text = request.json["text"]
@@ -86,7 +86,7 @@ def addComment(caff_id):
     db.session.commit()
     return Response(status=200)
 
-@main.route('/caffs/<caff_id>/comments/<comment_id>', methods=['DELETE'])
+@main.route('/caffs/<int:caff_id>/comments/<int:comment_id>', methods=['DELETE'])
 @login_required
 def deleteComment(caff_id, comment_id):
     caff = db.session.query(CAFF).get(caff_id)
@@ -96,7 +96,7 @@ def deleteComment(caff_id, comment_id):
     db.session.commit()
     return Response(status=200)
 
-@main.route('/caffs/<caff_id>/download', methods=['GET'])
+@main.route('/caffs/<int:caff_id>/download', methods=['GET'])
 @login_required
 def download():
     caff_id = request.args.get("id")
