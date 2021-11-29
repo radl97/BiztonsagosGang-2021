@@ -294,15 +294,18 @@ components:
     CaffListResponse:
       type: object
       properties:
-        id:
-          type: number
-          description: "Caff ID"
-        name:
-          type: string
-          description: "Name of CAFF"
-        number_of_comments:
-          type: string
-          description: "Number of comments"
+        caffs:
+          type: object
+          properties:
+            id:
+              type: number
+              description: "Caff ID"
+            name:
+              type: string
+              description: "Name of CAFF"
+            number_of_comments:
+              type: string
+              description: "Number of comments"
       example:
         {
           "caffs":
