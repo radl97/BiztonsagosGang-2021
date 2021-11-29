@@ -305,9 +305,19 @@ components:
           description: "Number of comments"
       example:
         {
-          "id": "Some search thing",
-          "name": "Some search thing",
-          "number_of_comments": "Some search thing",
+          "caffs":
+          [
+            {
+              "id": 1,
+              "name": "Some search thing",
+              "number_of_comments": 1,
+            },
+            {
+              "id": 2,
+              "name": "Some search thing",
+              "number_of_comments": 3,
+            }
+          ]
         }
     CaffDetailResponse:
       type: object
