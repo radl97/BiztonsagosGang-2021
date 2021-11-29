@@ -33,7 +33,6 @@ class CaffDetailsFragment : Fragment(
         setText()
         reloadPage()
         subscribeFragmentActions()
-        setupBackButton()
         subscribeToCaffData()
         setUpCommentList()
         setAdminSettings()
@@ -73,12 +72,6 @@ class CaffDetailsFragment : Fragment(
 
     private fun setText() {
         comment_header.text=getString(R.string.cafff_details_comment)
-    }
-
-    private fun setupBackButton(){
-        back_button.setOnClickListener {
-            findNavController().navigate(CaffDetailsFragmentDirections.toCaffsFragment())
-        }
     }
 
     private fun reloadPage() {
