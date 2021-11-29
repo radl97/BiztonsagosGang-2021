@@ -139,14 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Block.cpp" />
-    <ClCompile Include="CAFF.cpp" />
-    <ClCompile Include="CAFF_ANIM.cpp" />
-    <ClCompile Include="CAFF_CREDITS.cpp" />
-    <ClCompile Include="CAFF_HEADER.cpp" />
-    <ClCompile Include="CIFF.cpp" />
     <ClCompile Include="Parser.cpp" />
-    <ClCompile Include="Pixel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Block.h" />

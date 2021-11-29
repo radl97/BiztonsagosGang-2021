@@ -14,7 +14,7 @@ int main(int argc, char** argv)
         input_file = "../caff_files/2.caff";
     } else {
         input_file = argv[1];
-        if (argc <= 2) {
+        if (argc >= 3) {
             output_file = argv[2];
         }
     }
