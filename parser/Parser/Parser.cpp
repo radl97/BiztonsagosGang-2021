@@ -14,17 +14,17 @@ int main(int argc, char** argv)
         input_file = "../caff_files/2.caff";
     } else {
         input_file = argv[1];
-        if (argc <= 2) {
+        if (argc >= 3) {
             output_file = argv[2];
         }
     }
     FILE* f = fopen(input_file, "rb");
-    if (f == 0) {
+    if (f == nullptr) {
         std::cerr << "Failed to open file [" << input_file << "] for reading" << std::endl;
         return 1;
     }
     CAFF caff;
-    Reader r = Reader(f);
+    Reader r(f);
     try {
         caff.read(r);
     } catch (ParsingException&) {

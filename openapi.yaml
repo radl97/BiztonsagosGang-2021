@@ -294,20 +294,33 @@ components:
     CaffListResponse:
       type: object
       properties:
-        id:
-          type: number
-          description: "Caff ID"
-        name:
-          type: string
-          description: "Name of CAFF"
-        number_of_comments:
-          type: string
-          description: "Number of comments"
+        caffs:
+          type: object
+          properties:
+            id:
+              type: number
+              description: "Caff ID"
+            name:
+              type: string
+              description: "Name of CAFF"
+            number_of_comments:
+              type: string
+              description: "Number of comments"
       example:
         {
-          "id": "Some search thing",
-          "name": "Some search thing",
-          "number_of_comments": "Some search thing",
+          "caffs":
+          [
+            {
+              "id": 1,
+              "name": "Some search thing",
+              "number_of_comments": 1,
+            },
+            {
+              "id": 2,
+              "name": "Some search thing",
+              "number_of_comments": 3,
+            }
+          ]
         }
     CaffDetailResponse:
       type: object
@@ -331,12 +344,25 @@ components:
                 type: integer
               text:
                 type: string
+              author:
+                type: object
+                properties:
+                   id:
+                     type: integer
+                   name:
+                     type: string
       example:
         {
           "id": 1,
           "preview_url": "https://http.cat/305",
           "name": "string",
-          "comments": [{"id": 1, "text":""}],
+          "comments": [
+            {
+              "id": 1, "text":"Nice", "author": {
+                {"id": 1, "name": "Laci"}
+              }
+            }
+          ],
           "number_of_comments": 1,
           "uploader": {"id":3, "name":"asd"}
         }
