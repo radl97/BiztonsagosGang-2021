@@ -5,8 +5,10 @@ from flask import Blueprint, render_template, Response, app
 from flask.globals import request, session
 from flask.helpers import flash, send_file
 from flask_login import login_required, current_user
-from . import db, upload_folder, authorize
+from werkzeug.utils import send_from_directory
+from . import db, upload_folder, authorize, parser_wrapper
 from .models import User, CAFF, Comment
+import uuid
 
 main = Blueprint('main', __name__)
 
@@ -33,10 +35,26 @@ def upload():
     caff = CAFF.query.filter_by(name=file.filename, uploader=current_user.id).first()
     if caff is not None:
         return Response(response='File already uploaded', status=400)
-    new_caff = CAFF(url=upload_folder+os.sep+file.filename, name=file.filename, comments =0, uploader=current_user.id)
+    if file.filename.split('.')[-1] != "caff":
+        return Response(response='Not a CAFF file', status=400)
+
+    # Uses slash, as this is an URL
+    filename = str(uuid.uuid4()) + '.png'
+    preview_url = '/previews/{filename}'.format(filename = filename)
+    # Uses native separator (/ or \)
+    preview_filename = os.path.join('previews', filename)
+
+    new_caff = CAFF(url=preview_url, name=file.filename, comments =0, uploader=current_user.id)
     db.session.add(new_caff)
     db.session.commit()
-    file.save(upload_folder+os.sep+file.filename)
+
+    caff_place = os.path.join(upload_folder, file.filename)
+    file.save(caff_place)
+
+    preview_filename = os.path.join('previews', str(uuid.uuid4())+'.png')
+
+    parser_wrapper.save_preview(caff_place, preview_filename)
+
     return Response(response="Upload succesful", status=200)
 
 @main.route('/caffs/<int:caff_id>', methods=['GET'])
@@ -56,7 +74,6 @@ def CAFFdetail(caff_id):
             }
             comments_list.append(tmp.copy())
     uploader = db.session.query(User).get(caff_id)
-    subprocess.run(['Parser.exe'])
     json_data = {
         "id" : caff.id,
         "preview_url" : caff.url, #wtf?
@@ -115,9 +132,13 @@ def download():
     caff = CAFF.query.filter_by(id=caff_id).first()
     if caff is None:
         return Response("CAFF file not found", status=404)
-    return send_file(upload_folder+os.sep+caff.name, as_attachment=True)
+    return send_file(os.path.join(upload_folder, caff.name), as_attachment=True)
 
-@main.route('/download/<randomtoken>.png')
+@main.route('/download/<path:path>')
 @login_required
 def downloadpreview():
+    caff = CAFF.query.filter_by().first()
+    if caff is None:
+        return Response("CAFF file not found", status=404)
+    send_from_directory('previews/', request.args.get("path"))
     return
