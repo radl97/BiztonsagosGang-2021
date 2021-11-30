@@ -11,7 +11,7 @@ int main(int argc, char** argv)
     const char* input_file;
     const char* output_file = "output.raw";
     if (argc <= 1) {
-        input_file = "../caff_files/2.caff";
+        input_file = "../caff_files/1.caff";
     } else {
         input_file = argv[1];
         if (argc >= 3) {
