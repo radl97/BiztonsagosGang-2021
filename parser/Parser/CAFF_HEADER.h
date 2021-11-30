@@ -17,11 +17,11 @@ public:
             throw ParsingException();
         }
         magic = r.readStringOfLength(4);
-		if (magic[0] != 'C' || magic[1] != 'A' || magic[2] != 'F' || magic[3] != 'F') {
+		if (magic != "CAFF") {
 			throw ParsingException();
 		}
         r.readPrimitive(headerSize);
-        if (headerSize != magic.size() + sizeof(headerSize) + sizeof(animationNumber)) {
+        if (headerSize != 4 + sizeof(headerSize) + sizeof(animationNumber)) {
             throw ParsingException();
         }
         r.readPrimitive(animationNumber);
