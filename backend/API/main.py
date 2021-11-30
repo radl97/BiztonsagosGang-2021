@@ -9,6 +9,8 @@ from . import db, upload_folder, authorize, parser_wrapper
 from .models import User, CAFF, Comment
 import uuid
 
+from secrets import token_hex
+
 main = Blueprint('main', __name__)
 
 @main.route('/caffs', methods=['GET'])
@@ -37,7 +39,7 @@ def upload():
     if file.filename.split('.')[-1] != "caff":
         return Response(response='Not a CAFF file', status=400)
 
-    filename = str(uuid.uuid4()) + '.png'
+    filename = token_hex(16) + '.png'
     # Uses slash, as this is an URL
     preview_url = '/download/{filename}'.format(filename = filename)
     # Uses native separator (/ or \)
@@ -136,8 +138,10 @@ def download():
         return Response("CAFF file not found", status=404)
     return send_file(os.path.join(upload_folder, caff.name), as_attachment=True)
 
+# Unauthorized endpoint: it could be uploaded & served in S3, or unrelated file server.
+# Many production tools use authorized endpoints with unauthorized resources (with generated filenames).
 @main.route('/download/<path:path>')
-@login_required
+#@login_required
 def downloadpreview(path):
     caff = CAFF.query.filter_by().first()
     if caff is None:
