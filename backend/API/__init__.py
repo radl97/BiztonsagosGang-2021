@@ -8,7 +8,7 @@ from flask_authorize import Authorize
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
 authorize = Authorize()
-upload_folder ="uploads\\"
+upload_folder = "uploads"
 
 def create_app():
     app = Flask(__name__)

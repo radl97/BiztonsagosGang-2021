@@ -33,10 +33,10 @@ def upload():
     caff = CAFF.query.filter_by(name=file.filename, uploader=current_user.id).first()
     if caff or file.filename.split('.')[-1] != "caff":
         return Response(response='File already uploaded', status=400)
-    new_caff = CAFF(url=upload_folder+"\\"+file.filename, name=file.filename, comments =0, uploader=current_user.id)
+    new_caff = CAFF(url=upload_folder+os.sep+file.filename, name=file.filename, comments =0, uploader=current_user.id)
     db.session.add(new_caff)
     db.session.commit()
-    file.save(upload_folder+"\\"+file.filename)
+    file.save(upload_folder+os.sep+file.filename)
     return Response(response="Upload succesful", status=200)
 
 @main.route('/caffs/<int:caff_id>', methods=['GET'])
@@ -105,7 +105,7 @@ def deleteComment(caff_id, comment_id):
 def download():
     caff_id = request.args.get("id")
     caff = CAFF.query.filter_by(id=caff_id).first()
-    return send_file(upload_folder+caff.name, as_attachment=True)
+    return send_file(upload_folder+os.sep+caff.name, as_attachment=True)
 
 @main.route('/download/<randomtoken>.png')
 @login_required
