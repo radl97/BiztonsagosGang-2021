@@ -1,7 +1,7 @@
 import os
 from typing import Any
 import subprocess
-from flask import Blueprint, render_template, Response
+from flask import Blueprint, render_template, Response, app
 from flask.globals import request, session
 from flask.helpers import flash, send_file
 from flask_login import login_required, current_user
