@@ -348,7 +348,7 @@ components:
                 type: object
                 properties:
                    id:
-                     type: int
+                     type: integer
                    name:
                      type: string
       example:
@@ -360,6 +360,7 @@ components:
             {
               "id": 1, "text":"Nice", "author": {
                 {"id": 1, "name": "Laci"}
+              }
             }
           ],
           "number_of_comments": 1,
