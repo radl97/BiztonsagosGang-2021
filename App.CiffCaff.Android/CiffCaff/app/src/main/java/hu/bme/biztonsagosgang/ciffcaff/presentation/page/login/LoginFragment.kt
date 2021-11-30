@@ -53,11 +53,13 @@ class LoginFragment: Fragment(
                 password1_register.text != null &&
                 password2_register.text != null
                     ) {
-                Register(
-                    name = name_register.text.toString(),
-                    email = email_register.text.toString(),
-                    password1 = password1_register.text.toString(),
-                    password2 = password2_register.text.toString())
+                viewModel.UIActionFlow.tryEmit(
+                    Register(
+                        name = name_register.text.toString(),
+                        email = email_register.text.toString(),
+                        password1 = password1_register.text.toString(),
+                        password2 = password2_register.text.toString())
+                    )
             }else{
                 Toast.makeText(context, getString(R.string.login_field_is_empty), Toast.LENGTH_SHORT).show()
             }

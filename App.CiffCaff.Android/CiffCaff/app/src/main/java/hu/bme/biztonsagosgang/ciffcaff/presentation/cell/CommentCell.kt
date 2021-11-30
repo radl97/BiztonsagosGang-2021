@@ -2,7 +2,7 @@ package hu.bme.biztonsagosgang.ciffcaff.presentation.cell
 
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import hu.bitraptors.recyclerview.genericlist.GenericListItem
-import hu.bme.biztonsagosgang.ciffcaff.logic.models.Comment
+import hu.bme.biztonsagosgang.ciffcaff.logic.models.CommentItem
 import hu.bme.biztonsagosgang.ciffcaff.presentation.baseclasses.actions.UIAction
 import hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.DeleteComment
 import hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.ModifyComment
@@ -10,11 +10,10 @@ import hu.bme.biztonsagosgang.ciffcaff.databinding.CellCommentBinding
 import hu.bme.biztonsagosgang.ciffcaff.util.gone
 import hu.bme.biztonsagosgang.ciffcaff.util.invisible
 import hu.bme.biztonsagosgang.ciffcaff.util.visible
-import kotlinx.android.synthetic.main.cell_comment.view.*
 import kotlinx.coroutines.flow.MutableSharedFlow
 
 class CommentCell(
-    val model: Comment,
+    val model: CommentItem,
     val caffId: Int,
     val isAdmin: Boolean
 ) : GenericListItem {

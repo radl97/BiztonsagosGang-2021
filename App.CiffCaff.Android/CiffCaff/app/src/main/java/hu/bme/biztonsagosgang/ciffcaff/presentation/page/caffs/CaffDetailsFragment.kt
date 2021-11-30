@@ -54,7 +54,7 @@ class CaffDetailsFragment : Fragment(
             viewModel.caff.observe(viewLifecycleOwner){
                 caff_title.text = it.name
                 caff_image.loadUrl(it.imageUrl, this@CaffDetailsFragment)
-                caff_author.text = it.author.name
+                caff_author.text = it.author?.name
             }
         }
     }

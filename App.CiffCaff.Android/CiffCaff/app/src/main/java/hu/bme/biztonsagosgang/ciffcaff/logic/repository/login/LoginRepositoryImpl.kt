@@ -1,6 +1,8 @@
 package hu.bme.biztonsagosgang.ciffcaff.logic.repository.login
 
+import hu.bme.biztonsagosgang.ciffcaff.android.admin
 import hu.bme.biztonsagosgang.ciffcaff.domain.api.NetworkDatasource
+import hu.bme.biztonsagosgang.ciffcaff.logic.models.isAdmin
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.appsettings.AppSettingsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,16 +36,15 @@ class LoginRepositoryImpl (
     override fun login(email: String, password: String) {
         launch(coroutineContext) {
             try{
-                networkSource.login(
+                val loginResponse = networkSource.login(
                     password = password,
                     email = email,
                 )
+                appSettingsRepository.changeIsAdmin(loginResponse.isAdmin())
             }catch (e: Exception){
-                //todo
+                throw e
             }
         }
-        appSettingsRepository.saveCredentials("lol") //todo
-        appSettingsRepository.changeIsAdmin(true)
     }
 
     override fun onLogout() {

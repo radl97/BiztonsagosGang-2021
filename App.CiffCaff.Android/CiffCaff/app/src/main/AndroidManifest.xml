@@ -5,7 +5,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+
+    <!-- todo remove usesCleartextTraffic in production -->
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"

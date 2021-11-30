@@ -4,9 +4,9 @@ data class CaffItem (
     val id: Int,
     val name: String,
     val numberOfComments: Int,
-    val imageUrl: String,
-    val author: Author,
-    val comments: List<Comment> = emptyList(),
+    val imageUrl: String? = null,
+    val author: Author? = null,
+    val comments: List<CommentItem> = emptyList(),
 ){
     //todo
     companion object{
@@ -19,11 +19,11 @@ data class CaffItem (
                 imageUrl = "https://http.cat/200.jpg",
                 author = uth.copy(),
                 comments = listOf(
-                    Comment(1, author = uth.copy(), text = "Lol vicces"),
-                    Comment(1, author = uth.copy(), text = "Lol vicces"),
-                    Comment(1, author = uth.copy(), text = "Lol vicces"),
-                    Comment(1, author = uth.copy(), text = "Lol vicces"),
-                    Comment(1, author = uth.copy(), text = "Lol vicces")
+                    CommentItem(1, author = uth.copy(), text = "Lol vicces"),
+                    CommentItem(1, author = uth.copy(), text = "Lol vicces"),
+                    CommentItem(1, author = uth.copy(), text = "Lol vicces"),
+                    CommentItem(1, author = uth.copy(), text = "Lol vicces"),
+                    CommentItem(1, author = uth.copy(), text = "Lol vicces")
                 )
             )
         }

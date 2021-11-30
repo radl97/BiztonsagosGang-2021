@@ -30,7 +30,7 @@ class CaffCell(
                     bind {
                         binding.caffTitle.text = item.model.name
                         binding.numOfComments.text = context.getString(R.string.caff_num_of_comments, item.model.numberOfComments.toString())
-                        binding.caffAuthor.text = item.model.author.name
+                        binding.caffAuthor.text = item.model.author?.name
                         binding.root.setOnClickListener {
                             callback.tryEmit(CaffClickedAction(item.model.id))
                         }

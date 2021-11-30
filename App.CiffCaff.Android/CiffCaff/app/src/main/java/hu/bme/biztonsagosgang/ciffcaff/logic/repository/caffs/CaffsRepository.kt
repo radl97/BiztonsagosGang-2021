@@ -9,7 +9,6 @@ interface CaffsRepository {
     fun fetchCaffDetails(id: Int)
 
     fun deleteCaff(id: Int)
-    fun updateCaffDetails(caffItem: CaffItem)
 
     fun deleteComment(caffId: Int, commentId: Int)
     fun updateComment(caffId: Int, commentId: Int, text: String)

@@ -1,6 +1,6 @@
 package hu.bme.biztonsagosgang.ciffcaff.logic.models
 
-data class Comment (
+data class CommentItem (
     val id: Int,
     val text: String,
     val author: Author

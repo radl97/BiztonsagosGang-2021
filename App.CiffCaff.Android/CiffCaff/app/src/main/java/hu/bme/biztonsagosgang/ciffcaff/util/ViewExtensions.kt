@@ -36,12 +36,14 @@ fun View.hideKeyboard(): Boolean {
     return false
 }
 
-fun ImageView.loadUrl(url: String, fragment: Fragment){
-    Glide
-        .with(fragment)
-        .load(url)
-        .centerCrop()
-        .placeholder(R.drawable.nothing_pic)
-        .into(this);
+fun ImageView.loadUrl(url: String?, fragment: Fragment){
+    url?.let{
+        Glide
+            .with(fragment)
+            .load(url)
+            .centerCrop()
+            .placeholder(R.drawable.nothing_pic)
+            .into(this)
+    }
 
 }

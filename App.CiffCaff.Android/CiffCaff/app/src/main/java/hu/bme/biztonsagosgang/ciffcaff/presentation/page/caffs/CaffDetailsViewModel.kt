@@ -32,9 +32,6 @@ class CaffDetailsViewModel(
                     is PageReloadRequest -> {
                         caffsRepository.fetchCaffDetails(caffId)
                     }
-                    is UpdateCaff -> {
-                        caffsRepository.updateCaffDetails(it.caff)
-                    }
                     is DeleteCaff -> {
                         caffsRepository.deleteCaff(it.caffId)
                     }

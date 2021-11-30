@@ -51,17 +51,6 @@ class CaffsRepositoryImpl(
         }
     }
 
-    override fun updateCaffDetails(caffItem: CaffItem) {
-        launch(coroutineContext) {
-            try{
-                networkSource.updateCaffDetails(caffItem)
-                networkSource.fetchCaffsList()
-            }catch (e: Exception){
-                //todo
-            }
-        }
-    }
-
     override fun deleteComment(caffId: Int, commentId: Int) {
         launch(coroutineContext) {
             try{

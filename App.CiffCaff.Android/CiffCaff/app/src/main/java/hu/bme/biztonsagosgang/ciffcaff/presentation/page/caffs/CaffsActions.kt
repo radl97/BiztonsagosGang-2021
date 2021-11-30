@@ -10,7 +10,6 @@ data class NavigateToCaffDetails(val caffId: Int): FragmentAction
 
 class PageReloadRequest(): UIAction
 data class SearchRequest(val term: String): UIAction
-data class UpdateCaff(val caff: CaffItem): UIAction
 data class DeleteCaff(val caffId: Int): UIAction
 data class Comment(val caffId: Int, val text: String): UIAction
 data class ModifyComment(val caffId: Int, val commentId: Int, val text: String): UIAction
