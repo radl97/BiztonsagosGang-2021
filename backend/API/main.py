@@ -31,7 +31,7 @@ def upload():
     #prolly works
     file= request.files['file']
     caff = CAFF.query.filter_by(name=file.filename, uploader=current_user.id).first()
-    if caff or file.filename.split('.')[-1] != "caff":
+    if caff is not None:
         return Response(response='File already uploaded', status=400)
     new_caff = CAFF(url=upload_folder+os.sep+file.filename, name=file.filename, comments =0, uploader=current_user.id)
     db.session.add(new_caff)
@@ -43,6 +43,8 @@ def upload():
 @login_required
 def CAFFdetail(caff_id):
     caff = db.session.query(CAFF).get(caff_id)
+    if caff is None:
+        return Response("CAFF file not found", status=404)
     comments_list = []
     comments = db.session.query(Comment).all()
     for comment in comments:
@@ -70,6 +72,8 @@ def CAFFdetail(caff_id):
 def deleteCAFF(caff_id):
     #TODO admin role
     caff = db.session.query(CAFF).get(caff_id)
+    if caff is None:
+        return Response("CAFF file not found", status=404)
     db.session.delete(caff)
     comments = db.session.query(Comment).all()
     for comment in comments:
@@ -82,10 +86,12 @@ def deleteCAFF(caff_id):
 @login_required
 def addComment(caff_id):
     comment_text = request.json["text"]
-    comment = Comment(caff_id= caff_id, user_id=current_user.id, text=comment_text )
-    db.session.add(comment)
     caff = db.session.query(CAFF).get(caff_id)
+    if caff is None:
+        return Response("CAFF file not found", status=404)
     caff.comments += 1
+    comment = Comment(caff_id = caff_id, user_id=current_user.id, text=comment_text )
+    db.session.add(comment)
     db.session.commit()
     return Response(status=200)
 
@@ -94,6 +100,8 @@ def addComment(caff_id):
 @authorize.has_role('admin')
 def deleteComment(caff_id, comment_id):
     caff = db.session.query(CAFF).get(caff_id)
+    if caff is None:
+        return Response("CAFF file not found", status=404)
     comment = db.session.query(Comment).get(comment_id)
     db.session.delete(comment)
     caff.comments -= 1
@@ -105,6 +113,8 @@ def deleteComment(caff_id, comment_id):
 def download():
     caff_id = request.args.get("id")
     caff = CAFF.query.filter_by(id=caff_id).first()
+    if caff is None:
+        return Response("CAFF file not found", status=404)
     return send_file(upload_folder+os.sep+caff.name, as_attachment=True)
 
 @main.route('/download/<randomtoken>.png')
