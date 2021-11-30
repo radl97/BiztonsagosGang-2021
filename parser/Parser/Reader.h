@@ -16,14 +16,21 @@ class ParsingException : public std::exception {
 };
 
 /// C++ wrapper for reading files
-/// TODO This is only working well with little-endian machines!
-//    Although they did not say that it is little-endian...
+/// This is only working well with little-endian machines!
+//  Although they did not say that it is little-endian...
 class Reader {
     FILE* f;
     uint64_t bytes_read_counter=0;
 public:
+    //The Rule-Of-Five is followed
     /// takes ownership of FILE* resource(!)
-    Reader(FILE* f) : f(f) {}
+    explicit Reader(FILE* f) : f(f) {}
+    //Unused constructors are deleted so they are not misused at a later point
+    Reader(Reader& other) = delete;
+    Reader& operator=(const Reader& other) = delete;
+    Reader(Reader&& fp) noexcept = delete;
+    Reader const& operator=(Reader&& fp) = delete;
+    //The handling of the file is ensured here
     ~Reader() {
         fclose(f);
     }
@@ -33,6 +40,7 @@ public:
     }
 
     std::string readStringOfLength(uint64_t length) {
+        //used as array for readArray function
         static char buffer[4096];
 
         // read in chunks so that a too big a read does not waste memory

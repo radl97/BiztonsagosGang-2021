@@ -16,14 +16,19 @@ public:
     uint64_t creatorNameLen;
     std::string creatorName;
 
-    CAFF_CREDITS(Block& block) : Block(block) {
+    explicit CAFF_CREDITS(const Block& block) : Block(block) {
         if(block.ID != BLOCK_CREDITS_ID) {
             throw ParsingException();
         }
+        year = 0;
+        month = 0;
+        day = 0;
+        hour = 0;
+        minute = 0;
+        creatorNameLen = 0;
     }
 
-    ~CAFF_CREDITS() {
-    }
+    ~CAFF_CREDITS() = default;
 
     void read(Reader& r) {
         r.readPrimitive(year);
@@ -41,11 +46,11 @@ public:
             throw ParsingException();
         }
         r.readPrimitive(hour);
-        if (hour < 0 || hour >= 24) {
+        if (hour >= 24) {
             throw ParsingException();
         }
         r.readPrimitive(minute);
-        if (minute < 0 || minute >= 60) {
+        if (minute >= 60) {
             throw ParsingException();
         }
         if (!isDateValid()) {
@@ -62,7 +67,7 @@ public:
         creatorName = r.readStringOfLength(creatorNameLen);
     }
 
-    bool isDateValid() {
+    bool isDateValid() const {
         struct tm date;
         date.tm_year = year - 1900;
         date.tm_mon = month - 1;
