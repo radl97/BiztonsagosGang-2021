@@ -40,8 +40,7 @@ public:
     }
 
     std::string readStringOfLength(uint64_t length) {
-        static std::string buffer;
-        buffer.resize(4096);
+        static char buffer[4096];
 
         // read in chunks so that a too big a read does not waste memory
         std::string result;
@@ -52,8 +51,8 @@ public:
             }
             // No need for null-termination
             // Based on https://stackoverflow.com/a/8438709
-            buffer = readStringOfLength(length);
-            result.append(buffer, length);
+            readArray(buffer, to_read);
+            result.append(buffer, to_read);
         }
 #ifdef READER_DEBUG
         std::cerr << "String (of length " << length << ") read, result [" << result << "]" << std::endl;
