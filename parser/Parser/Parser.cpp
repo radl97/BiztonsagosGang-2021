@@ -19,12 +19,12 @@ int main(int argc, char** argv)
         }
     }
     FILE* f = fopen(input_file, "rb");
-    if (f == 0) {
+    if (f == nullptr) {
         std::cerr << "Failed to open file [" << input_file << "] for reading" << std::endl;
         return 1;
     }
     CAFF caff;
-    Reader r = Reader(f);
+    Reader r(f);
     try {
         caff.read(r);
     } catch (ParsingException&) {

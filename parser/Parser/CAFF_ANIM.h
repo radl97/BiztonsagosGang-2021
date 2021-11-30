@@ -12,10 +12,11 @@ public:
     uint64_t duration;
     CIFF image;
 
-    CAFF_ANIM(Block& block) : Block(block) {
+    explicit CAFF_ANIM(const Block& block) : Block(block) {
         if(block.ID != BLOCK_ANIM_ID) {
             throw ParsingException();
         }
+        duration = 0;
     }
 
     void read(Reader& r) {

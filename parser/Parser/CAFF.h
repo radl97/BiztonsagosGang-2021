@@ -8,9 +8,8 @@
 #include <vector>
 class CAFF
 {
-    bool isCreditPresent = false;
-	
 public:
+    bool isCreditPresent = false;
 	std::vector<CAFF_HEADER> headers;
     std::vector<CAFF_CREDITS> credits;
     std::vector<CAFF_ANIM> animations;

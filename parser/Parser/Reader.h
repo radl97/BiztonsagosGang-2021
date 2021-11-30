@@ -22,8 +22,15 @@ class Reader {
     FILE* f;
     uint64_t bytes_read_counter=0;
 public:
+    //The Rule-Of-Five is followed
     /// takes ownership of FILE* resource(!)
-    Reader(FILE* f) : f(f) {}
+    explicit Reader(FILE* f) : f(f) {}
+    //Unused constructors are deleted so they are not misused at a later point
+    Reader(Reader& other) = delete;
+    Reader& operator=(const Reader& other) = delete;
+    Reader(Reader&& fp) noexcept = delete;
+    Reader const& operator=(Reader&& fp) = delete;
+    //The handling of the file is ensured here
     ~Reader() {
         fclose(f);
     }
@@ -33,7 +40,8 @@ public:
     }
 
     std::string readStringOfLength(uint64_t length) {
-        static char buffer[4096];
+        static std::string buffer;
+        buffer.resize(4096);
 
         // read in chunks so that a too big a read does not waste memory
         std::string result;
@@ -44,7 +52,7 @@ public:
             }
             // No need for null-termination
             // Based on https://stackoverflow.com/a/8438709
-            readArray(buffer, length);
+            buffer = readStringOfLength(length);
             result.append(buffer, length);
         }
 #ifdef READER_DEBUG
