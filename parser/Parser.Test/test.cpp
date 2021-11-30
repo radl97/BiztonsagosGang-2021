@@ -23,6 +23,46 @@ TEST(ParserTest, TestNegSize) {
     ASSERT_TRUE(failed);
 }
 
+// checks for incorrect CAFF creator name length 
+TEST(ParserTest, TestNameLen) {
+    const char* input_file = "../caff_files/incorrectCreatorNameLen.caff";
+    bool failed = false;
+    FILE* f = fopen(input_file, "rb");
+    if (f == nullptr) {
+        std::cerr << "Failed to open file [" << input_file << "] for reading" << std::endl;
+        return;
+    }
+    CAFF caff;
+    Reader r(f);
+    try {
+        caff.read(r);
+    }
+    catch (ParsingException&) {
+        failed = true;
+    }
+    ASSERT_TRUE(failed);
+}
+
+// checks for incorrect CAFF magic 
+TEST(ParserTest, TestMagic) {
+    const char* input_file = "../caff_files/incorrectMagic.caff";
+    bool failed = false;
+    FILE* f = fopen(input_file, "rb");
+    if (f == nullptr) {
+        std::cerr << "Failed to open file [" << input_file << "] for reading" << std::endl;
+        return;
+    }
+    CAFF caff;
+    Reader r(f);
+    try {
+        caff.read(r);
+    }
+    catch (ParsingException&) {
+        failed = true;
+    }
+    ASSERT_TRUE(failed);
+}
+
 
 // Poc64 contains very large width and height. Because of overflow (truncation) in multiplication, 
 // width*height*3 would still equal to content_size. Must fail.
@@ -71,6 +111,7 @@ TEST(ParserTest, TestCaff1) {
     ASSERT_EQ(caff.animations[0].image.caption, "Beautiful scenery");
     ASSERT_EQ(caff.animations[0].image.tags.size(), 3);
     ASSERT_EQ(caff.animations[0].image.tags[2], "mountains");
+    ASSERT_EQ(caff.animations[0].image.pixels.size(), caff.animations[0].image.width * caff.animations[0].image.height);
 
     ASSERT_EQ(caff.credits[0].creatorName, "Test Creator");
     ASSERT_EQ(caff.credits[0].year,2020);
