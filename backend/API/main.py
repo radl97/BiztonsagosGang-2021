@@ -116,6 +116,19 @@ def addComment(caff_id):
     db.session.commit()
     return Response(status=200)
 
+@main.route('/caffs/<int:caff_id>/comments/<int:comment_id>', methods=['PUT'])
+@login_required
+@authorize.has_role('admin')
+def modifyComment(caff_id, comment_id):
+    comment_text = request.json["text"]
+    caff = db.session.query(CAFF).get(caff_id)
+    if caff is None:
+        return Response("CAFF file not found", status=404)
+    comment = db.session.query(Comment).get(comment_id)
+    comment.text = new_comment_text
+    db.session.commit()
+    return Response(status=200)
+
 @main.route('/caffs/<int:caff_id>/comments/<int:comment_id>', methods=['DELETE'])
 @login_required
 @authorize.has_role('admin')
