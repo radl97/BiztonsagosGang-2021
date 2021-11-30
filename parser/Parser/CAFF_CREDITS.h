@@ -1,6 +1,7 @@
 #pragma once
 #include <time.h>
 #include "Block.h"
+#include <cstring>
 
 const uint8_t BLOCK_CREDITS_ID = 0x2;
 
@@ -69,10 +70,12 @@ public:
 
     bool isDateValid() const {
         struct tm date;
+        memset(&date, 0, sizeof(date));
         date.tm_year = year - 1900;
         date.tm_mon = month - 1;
         date.tm_mday = day;
         struct tm date2;
+        memset(&date2, 0, sizeof(date2));
         date2.tm_year = year - 1900;
         date2.tm_mon = month - 1;
         date2.tm_mday = day;
