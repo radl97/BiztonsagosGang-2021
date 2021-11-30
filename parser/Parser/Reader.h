@@ -16,8 +16,8 @@ class ParsingException : public std::exception {
 };
 
 /// C++ wrapper for reading files
-/// TODO This is only working well with little-endian machines!
-//    Although they did not say that it is little-endian...
+/// This is only working well with little-endian machines!
+//  Although they did not say that it is little-endian...
 class Reader {
     FILE* f;
     uint64_t bytes_read_counter=0;
@@ -40,6 +40,7 @@ public:
     }
 
     std::string readStringOfLength(uint64_t length) {
+        //used as array for readArray function
         static char buffer[4096];
 
         // read in chunks so that a too big a read does not waste memory
