@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_cors import CORS
 
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
@@ -17,12 +18,17 @@ def create_app():
     app.config['SECRET_KEY'] = 'secret-key-goes-here'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
     app.config['UPLOAD_FOLDER'] = upload_folder
+    app.config['CORS_HEADERS'] = 'Content-Type'
     #max size?
 
     db.init_app(app)
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
+
+    # for testing with editor.swagger.io
+    if app.debug:
+        CORS(app, resources = {r"/*": {"origins": "https://editor.swagger.io", "supports_credentials": True}})
 
     from .models import User
 
