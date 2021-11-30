@@ -9,7 +9,6 @@
 class CAFF
 {
 public:
-    bool isCreditPresent = false;
 	std::vector<CAFF_HEADER> headers;
     std::vector<CAFF_CREDITS> credits;
     std::vector<CAFF_ANIM> animations;
@@ -17,6 +16,7 @@ public:
 	uint64_t blockNum;
 
     void read(Reader& r) { 
+        bool isCreditPresent = false;
         CAFF_HEADER h;
         h.read(r);
         headers.push_back(h);
