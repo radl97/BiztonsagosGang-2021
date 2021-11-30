@@ -1,10 +1,11 @@
 import os
 from typing import Any
+import subprocess
 from flask import Blueprint, render_template, Response
 from flask.globals import request, session
 from flask.helpers import flash, send_file
 from flask_login import login_required, current_user
-from . import db, upload_folder
+from . import db, upload_folder, authorize
 from .models import User, CAFF, Comment
 
 main = Blueprint('main', __name__)
@@ -52,7 +53,8 @@ def CAFFdetail(caff_id):
                 "author" : db.session.query(User).get(comment.user_id).name
             }
             comments_list.append(tmp.copy())
-    uploader = db.session.query(User).get(caff_id) 
+    uploader = db.session.query(User).get(caff_id)
+    subprocess.run(['Parser.exe'])
     json_data = {
         "id" : caff.id,
         "preview_url" : caff.url, #wtf?
@@ -64,6 +66,7 @@ def CAFFdetail(caff_id):
 
 @main.route('/caffs/<int:caff_id>', methods=['DELETE'])
 @login_required
+@authorize.has_role('admin')
 def deleteCAFF(caff_id):
     #TODO admin role
     caff = db.session.query(CAFF).get(caff_id)
@@ -88,6 +91,7 @@ def addComment(caff_id):
 
 @main.route('/caffs/<int:caff_id>/comments/<int:comment_id>', methods=['DELETE'])
 @login_required
+@authorize.has_role('admin')
 def deleteComment(caff_id, comment_id):
     caff = db.session.query(CAFF).get(caff_id)
     comment = db.session.query(Comment).get(comment_id)

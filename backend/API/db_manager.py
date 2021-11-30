@@ -1,5 +1,5 @@
 from flask.blueprints import Blueprint
-from .models import User, Role
+from .models import User, Role, UserRole
 from . import db
 from werkzeug.security import generate_password_hash
 from getpass import getpass
@@ -19,11 +19,8 @@ def seed():
     user.name = "laci"
     user.email = "laci@test.com"
 
-    password = getpass("Please input a password for admin role {name} ({email})".format(name = user.name, email = user.email))
+    password = input("Please input a password for admin role {name} ({email})".format(name = user.name, email = user.email))
     user.password = generate_password_hash(password, method='sha256')
-
-    user.roles.add(role) # TODO how2?
-
     db.session.add(user)
-
+    db.insert(UserRole).values(user_id=user.id, role_id=role.id)
     db.session.commit()

@@ -1,10 +1,13 @@
 import os
 from flask import Flask
+from werkzeug.datastructures import Authorization
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_authorize import Authorize
 
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
+authorize = Authorize()
 upload_folder ="uploads\\"
 
 
@@ -23,8 +26,9 @@ def create_app():
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
+    authorize.init_app(app)
 
-    from .models import User
+    from .models import User, Role
 
     @login_manager.user_loader
     def load_user(user_id):
