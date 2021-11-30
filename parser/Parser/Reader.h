@@ -16,7 +16,7 @@ class ParsingException : public std::exception {
 };
 
 /// C++ wrapper for reading files
-/// TODO This is only working well with little-endian machines!
+/// This is only working well with little-endian machines!
 //    Although they did not say that it is little-endian...
 class Reader {
     FILE* f;
