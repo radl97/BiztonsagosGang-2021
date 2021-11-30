@@ -3,9 +3,8 @@ from typing import Any
 import subprocess
 from flask import Blueprint, render_template, Response, app
 from flask.globals import request, session
-from flask.helpers import flash, send_file
+from flask.helpers import flash, send_file, send_from_directory
 from flask_login import login_required, current_user
-from werkzeug.utils import send_from_directory
 from . import db, upload_folder, authorize, parser_wrapper
 from .models import User, CAFF, Comment
 import uuid
@@ -38,22 +37,25 @@ def upload():
     if file.filename.split('.')[-1] != "caff":
         return Response(response='Not a CAFF file', status=400)
 
-    # Uses slash, as this is an URL
     filename = str(uuid.uuid4()) + '.png'
-    preview_url = '/previews/{filename}'.format(filename = filename)
+    # Uses slash, as this is an URL
+    preview_url = '/download/{filename}'.format(filename = filename)
     # Uses native separator (/ or \)
     preview_filename = os.path.join('previews', filename)
-
-    new_caff = CAFF(url=preview_url, name=file.filename, comments =0, uploader=current_user.id)
-    db.session.add(new_caff)
-    db.session.commit()
 
     caff_place = os.path.join(upload_folder, file.filename)
     file.save(caff_place)
 
-    preview_filename = os.path.join('previews', str(uuid.uuid4())+'.png')
+    # try parse
+    try:
+        parser_wrapper.save_preview(caff_place, preview_filename)
+    except parser_wrapper.ParsingException:
+        return Response("Invalid CAFF file", status=400)
 
-    parser_wrapper.save_preview(caff_place, preview_filename)
+    # only access DB after parsing succeeds
+    new_caff = CAFF(url=preview_url, name=file.filename, comments =0, uploader=current_user.id)
+    db.session.add(new_caff)
+    db.session.commit()
 
     return Response(response="Upload succesful", status=200)
 
@@ -73,7 +75,7 @@ def CAFFdetail(caff_id):
                 "author" : db.session.query(User).get(comment.user_id).name
             }
             comments_list.append(tmp.copy())
-    uploader = db.session.query(User).get(caff_id)
+    uploader = db.session.query(User).get(caff.uploader)
     json_data = {
         "id" : caff.id,
         "preview_url" : caff.url, #wtf?
@@ -136,9 +138,9 @@ def download():
 
 @main.route('/download/<path:path>')
 @login_required
-def downloadpreview():
+def downloadpreview(path):
     caff = CAFF.query.filter_by().first()
     if caff is None:
         return Response("CAFF file not found", status=404)
-    send_from_directory('previews/', request.args.get("path"))
-    return
+    print(path)
+    return send_from_directory('../previews', path)

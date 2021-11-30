@@ -3,9 +3,14 @@ import struct
 import subprocess
 import tempfile
 
+class ParsingException(Exception):
+    pass
+
 def save_preview(caff_place, output_filename):
     raw_output_filename = tempfile.mktemp()
-    subprocess.run(['Parser.exe', caff_place, raw_output_filename])
+    res = subprocess.run(['Parser.exe', caff_place, raw_output_filename])
+    if res.returncode != 0:
+        raise ParsingException()
 
     with open(raw_output_filename, 'rb') as f:
         data=f.read()
