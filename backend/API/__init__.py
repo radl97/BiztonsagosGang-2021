@@ -4,6 +4,7 @@ from werkzeug.datastructures import Authorization
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_authorize import Authorize
+from flask_cors import CORS
 
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
@@ -20,6 +21,7 @@ def create_app():
     app.config['SECRET_KEY'] = 'secret-key-goes-here'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
     app.config['UPLOAD_FOLDER'] = upload_folder
+    app.config['CORS_HEADERS'] = 'Content-Type'
     #max size?
 
     db.init_app(app)
@@ -28,7 +30,11 @@ def create_app():
     login_manager.init_app(app)
     authorize.init_app(app)
 
-    from .models import User, Role
+    # for testing with editor.swagger.io
+    if app.debug:
+        CORS(app, resources = {r"/*": {"origins": "https://editor.swagger.io", "supports_credentials": True}})
+
+    from .models import User
 
     @login_manager.user_loader
     def load_user(user_id):
