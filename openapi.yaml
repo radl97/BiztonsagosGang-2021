@@ -246,12 +246,12 @@ components:
     LoginRequest:
       type: object
       properties:
-        name:
+        email:
           type: string
         password:
           type: string
       required:
-        - name
+        - email
         - password
       example:
         {
