@@ -255,7 +255,7 @@ components:
         - password
       example:
         {
-          "username": "idooori@gmail.com",
+          "email": "reka@test.com",
           "password": "1234",
         }
     LoginResponse:
