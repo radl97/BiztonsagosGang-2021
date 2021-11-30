@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "../Parser/CAFF.h"
 
+
+// neg.caff checks for negative width or height. They contain very large integers 
+// (negative -1 if interpreted as signed integers) for width and height. Must fail.
 TEST(ParserTest, TestNegSize) {
     const char* input_file = "../caff_files/neg.caff";
     bool failed = false;
@@ -20,6 +23,9 @@ TEST(ParserTest, TestNegSize) {
     ASSERT_TRUE(failed);
 }
 
+
+// Poc64 contains very large width and height. Because of overflow (truncation) in multiplication, 
+// width*height*3 would still equal to content_size. Must fail.
 TEST(ParserTest, TestPoc64) {
     const char* input_file = "../caff_files/poc64.caff";
     bool failed = false;
@@ -39,6 +45,7 @@ TEST(ParserTest, TestPoc64) {
     ASSERT_TRUE(failed);
 }
 
+//test correct read of correct caff file
 TEST(ParserTest, TestCaff1) {
     const char* input_file = "../caff_files/1.caff";
     bool failed = false;
