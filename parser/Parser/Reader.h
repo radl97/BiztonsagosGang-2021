@@ -44,8 +44,8 @@ public:
             }
             // No need for null-termination
             // Based on https://stackoverflow.com/a/8438709
-            readArray(buffer, length);
-            result.append(buffer, length);
+            readArray(buffer, to_read);
+            result.append(buffer, to_read);
         }
 #ifdef READER_DEBUG
         std::cerr << "String (of length " << length << ") read, result [" << result << "]" << std::endl;
