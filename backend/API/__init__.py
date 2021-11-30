@@ -36,4 +36,7 @@ def create_app():
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
+    from .db_manager import bp as db_manager_blueprint
+    app.register_blueprint(db_manager_blueprint)
+
     return app
