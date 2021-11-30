@@ -11,7 +11,7 @@ auth = Blueprint('auth', __name__)
 def login_post():
     email = request.json.get('email')
     password = request.json.get('password')
-    if email==None or password==None:    
+    if email==None or password==None:
         return Response(status=400)
     user = User.query.filter_by(email=email).first()
     if not user or not check_password_hash(user.password, password):
@@ -19,7 +19,7 @@ def login_post():
     login_user(user, remember=False)
     if authorize.has_role('admin'):
         return {"role" : "admin"}
-    return {"role" : ""}
+    return {"role" : "user"}
 
 
 @auth.route('/signup', methods=['POST'])

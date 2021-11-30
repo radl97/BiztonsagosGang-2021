@@ -1,12 +1,6 @@
 from . import db
 from flask_login import UserMixin
-from flask_authorize import RestrictionsMixin, AllowancesMixin
-
-UserRole = db.Table(
-    'user_role', db.Model.metadata,
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
-    db.Column('role_id', db.Integer, db.ForeignKey('roles.id'))
-)
+from flask_authorize import AllowancesMixin
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -14,7 +8,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
-    roles = db.relationship('Role', secondary = UserRole)
+    roles = db.relationship('Role', secondary = 'user_role')
 
 class CAFF(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -34,3 +28,8 @@ class Role(db.Model, AllowancesMixin):
     __tablename__ = 'roles'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False, unique=True)
+
+class UserRole(db.Model):
+    __tablename__ = 'user_role'
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id), primary_key=True)
+    role_id = db.Column(db.Integer, db.ForeignKey(Role.id), primary_key=True)
