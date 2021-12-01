@@ -52,10 +52,10 @@ class CaffDetailsFragment : Fragment(
 
     private fun subscribeToCaffData(){
         lifecycleScope.launch {
-            viewModel.caff.observe(viewLifecycleOwner){
-                caff_title.text = it.name
-                caff_image.loadUrl(it.imageUrl, this@CaffDetailsFragment)
-                caff_author.text = it.author?.name
+            viewModel.caff.observe(viewLifecycleOwner){ caffItem ->
+                caff_title.text = caffItem.name
+                caff_image.loadUrl(caffItem.imageUrl, this@CaffDetailsFragment)
+                caff_author.text = caffItem.author?.name
             }
         }
     }

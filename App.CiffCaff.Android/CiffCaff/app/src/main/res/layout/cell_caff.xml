@@ -53,6 +53,7 @@
                 android:layout_margin="@dimen/spacing_tightest"
                 android:ellipsize="end"
                 android:maxLines="3"
+                android:visibility="invisible"
                 android:textColor="@color/caff_text"
                 app:layout_constraintTop_toBottomOf="@id/caff_title"
                 app:layout_constraintStart_toStartOf="parent"
