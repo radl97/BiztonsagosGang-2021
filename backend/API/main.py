@@ -120,7 +120,7 @@ def addComment(caff_id):
 @login_required
 @authorize.has_role('admin')
 def modifyComment(caff_id, comment_id):
-    comment_text = request.json["text"]
+    new_comment_text = request.json["text"]
     caff = db.session.query(CAFF).get(caff_id)
     if caff is None:
         return Response("CAFF file not found", status=404)
