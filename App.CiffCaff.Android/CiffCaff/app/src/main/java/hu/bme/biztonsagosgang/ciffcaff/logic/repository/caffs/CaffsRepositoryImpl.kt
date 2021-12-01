@@ -32,8 +32,8 @@ class CaffsRepositoryImpl(
     override fun fetchCaffDetails(id: Int) {
         launch(coroutineContext){
             try{
-                val newProject = networkSource.fetchCaffDetails(id)
-                localDataSource.saveData(updateSingleFeedItemInList(getData(), newProject))
+                val caffWithDetails = networkSource.fetchCaffDetails(id)
+                localDataSource.saveData(updateSingleFeedItemInList(getData(), caffWithDetails))
             }catch (e: Exception){
                 appSettingsRepository.networkError(e)
             }
@@ -44,7 +44,6 @@ class CaffsRepositoryImpl(
         launch(coroutineContext) {
             try{
                 networkSource.deleteCaff(id)
-                networkSource.fetchCaffsList()
             }catch (e: Exception){
                 appSettingsRepository.networkError(e)
             }
@@ -55,7 +54,8 @@ class CaffsRepositoryImpl(
         launch(coroutineContext) {
             try{
                 networkSource.deleteComment(caffId = caffId, commentId = commentId)
-                networkSource.fetchCaffDetails(caffId)
+                val caffWithDetails = networkSource.fetchCaffDetails(caffId)
+                localDataSource.saveData(updateSingleFeedItemInList(getData(), caffWithDetails))
             }catch (e: Exception){
                 appSettingsRepository.networkError(e)
             }
@@ -66,7 +66,8 @@ class CaffsRepositoryImpl(
         launch(coroutineContext) {
             try{
                 networkSource.updateComment(caffId = caffId, commentId = commentId, text = text)
-                networkSource.fetchCaffDetails(caffId)
+                val caffWithDetails = networkSource.fetchCaffDetails(caffId)
+                localDataSource.saveData(updateSingleFeedItemInList(getData(), caffWithDetails))
             }catch (e: Exception){
                 appSettingsRepository.networkError(e)
             }
@@ -77,7 +78,8 @@ class CaffsRepositoryImpl(
         launch(coroutineContext) {
             try{
                 networkSource.addComment(caffId = caffId, text = text)
-                networkSource.fetchCaffDetails(caffId)
+                val caffWithDetails = networkSource.fetchCaffDetails(caffId)
+                localDataSource.saveData(updateSingleFeedItemInList(getData(), caffWithDetails))
             }catch (e: Exception){
                 appSettingsRepository.networkError(e)
             }
