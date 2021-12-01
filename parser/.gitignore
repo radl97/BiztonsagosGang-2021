@@ -3,3 +3,4 @@ x64
 # Taken from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore#L36
 .vs
 build
+/packages
