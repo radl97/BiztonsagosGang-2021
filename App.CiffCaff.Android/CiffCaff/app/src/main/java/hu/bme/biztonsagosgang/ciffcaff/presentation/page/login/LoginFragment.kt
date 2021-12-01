@@ -13,6 +13,8 @@ import hu.bme.biztonsagosgang.ciffcaff.util.visible
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
+import kotlin.coroutines.coroutineContext
+
 
 class LoginFragment: Fragment(
     R.layout.fragment_login
@@ -27,7 +29,39 @@ class LoginFragment: Fragment(
         setUpRegister()
         setUpLogin()
         subscribeIsLoggedIn()
+        subscribeError()
         showButtons()
+    }
+
+
+    private fun subscribeError(){
+        lifecycleScope.launch {
+            viewModel.loginError.observe(viewLifecycleOwner){
+                password_container_login.error = it
+                email_container_login.error = it
+            }
+            viewModel.registerError.observe(viewLifecycleOwner){
+                password1_container_register.error = it
+                password2_container_register.error = it
+                name_container_register.error = it
+                email_container_register.error = it
+            }
+        }
+        password_login.onFocusChangeListener = View.OnFocusChangeListener { p0, p1 -> removeErrors() }
+        email_login.onFocusChangeListener = View.OnFocusChangeListener { p0, p1 -> removeErrors() }
+        password1_register.onFocusChangeListener = View.OnFocusChangeListener { p0, p1 -> removeErrors() }
+        password1_register.onFocusChangeListener = View.OnFocusChangeListener { p0, p1 -> removeErrors() }
+        name_register.onFocusChangeListener = View.OnFocusChangeListener { p0, p1 -> removeErrors() }
+        email_register.onFocusChangeListener = View.OnFocusChangeListener { p0, p1 -> removeErrors() }
+    }
+
+    private fun removeErrors(){
+        password_container_login.error = null
+        email_container_login.error = null
+        password1_container_register.error = null
+        password2_container_register.error = null
+        name_container_register.error = null
+        email_container_register.error = null
     }
 
 
@@ -73,6 +107,9 @@ class LoginFragment: Fragment(
         buttons_register_button.setOnClickListener {
             showRegister()
         }
+        back_button.setOnClickListener {
+            showButtons()
+        }
     }
 
     private fun subscribeIsLoggedIn(){
@@ -89,18 +126,21 @@ class LoginFragment: Fragment(
         buttons.visible()
         login.gone()
         register.gone()
+        back_button.gone()
     }
 
     private fun showLogin(){
         buttons.gone()
         login.visible()
         register.gone()
+        back_button.visible()
     }
 
     private fun showRegister(){
         buttons.gone()
         login.gone()
         register.visible()
+        back_button.visible()
     }
 
     private fun setUpTexts(){

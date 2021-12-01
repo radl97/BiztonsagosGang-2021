@@ -20,6 +20,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/back_button"
+            android:layout_height="60dp"
+            android:layout_width="60dp"
+            app:layout_constraintEnd_toStartOf="@id/caffka_logo"
+            app:layout_constraintTop_toTopOf="@id/caffka_logo"
+            app:layout_constraintBottom_toBottomOf="@id/caffka_logo"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="@dimen/spacing_tight"
+            android:tint="@color/negative_icon"
+            android:src="@drawable/ic_chevron"
+            android:rotation="90"
+            app:iconTint="@color/primary_icon"
+            />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -82,6 +96,7 @@
                     android:layout_marginVertical="@dimen/spacing_default"
                     android:backgroundTint="@color/negative_text"
                     tools:helperText="Email"
+                    app:endIconMode="custom"
                     app:errorEnabled="true"
                     app:layout_constraintBottom_toTopOf="@+id/password_container_login"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -155,6 +170,7 @@
                     android:layout_marginVertical="@dimen/spacing_default"
                     android:backgroundTint="@color/negative_text"
                     tools:helperText="Name"
+                    app:endIconMode="custom"
                     app:errorEnabled="true"
                     app:layout_constraintBottom_toTopOf="@+id/email_container_register"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -177,6 +193,7 @@
                     android:backgroundTint="@color/negative_text"
                     tools:helperText="Email"
                     app:errorEnabled="true"
+                    app:endIconMode="custom"
                     app:layout_constraintBottom_toTopOf="@+id/password1_container_register"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

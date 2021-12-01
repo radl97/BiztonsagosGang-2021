@@ -16,7 +16,8 @@ class LoginRepositoryImpl (
     private val networkSource: NetworkDatasource,
     private val appSettingsRepository: AppSettingsRepository
 ): LoginRepository, CoroutineScope{
-    override val loginError = MutableSharedFlow<Boolean>(1)
+    override val loginError = MutableSharedFlow<String>(1)
+    override val registerError = MutableSharedFlow<String>(1)
 
     override fun register(name: String, email: String, password1: String, password2: String) {
         launch(coroutineContext) {
@@ -29,6 +30,7 @@ class LoginRepositoryImpl (
                 )
             }catch (e: Exception){
                 appSettingsRepository.networkError(e)
+                registerError.tryEmit("Could not register. Try again")
             }
         }
     }
@@ -44,6 +46,7 @@ class LoginRepositoryImpl (
                 appSettingsRepository.changeIsAdmin(loginResponse.isAdmin())
             }catch (e: Exception){
                 appSettingsRepository.networkError(e)
+                loginError.tryEmit("Incorrect username or password")
             }
         }
     }
