@@ -6,6 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.map
+import java.lang.Exception
 import kotlin.coroutines.CoroutineContext
 
 
@@ -44,6 +45,11 @@ class AppSettingsRepositoryImpl(
 
     override fun emitNetworkErrorMessage(message: String) {
         networkErrorMessage.tryEmit(message)
+    }
+
+    override fun networkError(e: Exception) {
+        emitNetworkErrorMessage("Network Error")
+        throw e
     }
 
     private fun getData(): AppSettingsModel{

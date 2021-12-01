@@ -1,6 +1,7 @@
 package hu.bme.biztonsagosgang.ciffcaff.logic.repository.appsettings
 
 import kotlinx.coroutines.flow.Flow
+import java.lang.Exception
 
 //DO NOT PUT NETWORK DATASOURCE IN THIS, CIRCULAR DEPENDENCY
 interface AppSettingsRepository {
@@ -17,5 +18,6 @@ interface AppSettingsRepository {
 
     val networkErrorMessage: Flow<String>
     fun emitNetworkErrorMessage(message: String)
+    fun networkError(e: Exception)
 
 }

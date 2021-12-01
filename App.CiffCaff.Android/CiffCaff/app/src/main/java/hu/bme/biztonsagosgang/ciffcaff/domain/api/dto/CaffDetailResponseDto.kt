@@ -6,7 +6,7 @@ import hu.bme.biztonsagosgang.ciffcaff.logic.models.CaffItem
 data class CaffDetailResponseDto (
     val id : Int,
     val preview_url : String,
-    val name: String,
+    val name: String?,
     val comments: List<CommentDto>,
     val number_of_comments: Int,
     val uploader: AuthorDto

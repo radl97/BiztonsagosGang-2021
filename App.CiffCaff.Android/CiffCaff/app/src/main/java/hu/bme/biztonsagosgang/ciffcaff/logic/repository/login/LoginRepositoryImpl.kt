@@ -28,7 +28,7 @@ class LoginRepositoryImpl (
                     password2 = password2
                 )
             }catch (e: Exception){
-                //todo
+                appSettingsRepository.networkError(e)
             }
         }
     }
@@ -40,9 +40,10 @@ class LoginRepositoryImpl (
                     password = password,
                     email = email,
                 )
+                println(loginResponse.isAdmin())
                 appSettingsRepository.changeIsAdmin(loginResponse.isAdmin())
             }catch (e: Exception){
-                throw e
+                appSettingsRepository.networkError(e)
             }
         }
     }

@@ -7,6 +7,8 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import hu.bme.biztonsagosgang.ciffcaff.R
+import hu.bme.biztonsagosgang.ciffcaff.android.baseUrl
+import hu.bme.biztonsagosgang.ciffcaff.android.hostname
 
 
 fun View.visible(){
@@ -40,7 +42,7 @@ fun ImageView.loadUrl(url: String?, fragment: Fragment){
     url?.let{
         Glide
             .with(fragment)
-            .load(url)
+            .load(hostname+url)
             .centerCrop()
             .placeholder(R.drawable.nothing_pic)
             .into(this)

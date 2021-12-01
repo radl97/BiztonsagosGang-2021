@@ -34,7 +34,7 @@ class CommentCell(
                 block = {
                     bind {
                         binding.commentText.setText(item.model.text)
-                        binding.author.text = item.model.author.name
+                        binding.author.text = item.model.author
                         if(item.isAdmin){
                             binding.deleteButton.apply {
                                 visible()
@@ -56,7 +56,7 @@ class CommentCell(
                                     invisible()
                                     binding.editButton.visible()
                                     binding.commentText.isEnabled = false
-                                    callback.tryEmit(ModifyComment(caffId = item.caffId, commentId = item.model.id, text = binding.commentText.toString()))
+                                    callback.tryEmit(ModifyComment(caffId = item.caffId, commentId = item.model.id, text = binding.commentText.text.toString()))
                                 }
                             }
                         }else{

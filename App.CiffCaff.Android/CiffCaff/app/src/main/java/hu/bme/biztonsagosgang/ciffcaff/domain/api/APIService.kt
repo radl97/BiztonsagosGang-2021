@@ -26,7 +26,7 @@ interface APIService {
     ////////////////////
 
     @POST("/login")
-    suspend fun login(@Body body: LoginRequestDto) //: LoginResponseDto todo
+    suspend fun login(@Body body: LoginRequestDto) : LoginResponseDto
 
     @POST("/signup")
     suspend fun signup(@Body body: SignupRequestDto)
@@ -37,19 +37,25 @@ interface APIService {
     @GET("/caffs")
     suspend fun fetchCaffList(@Query("filter") filer: String): CaffListResponseDto
 
-    @GET("/caffs{caff_id}")
+    @GET("/caffs/{caff_id}")
     suspend fun fetchCaffDetails(@Path("caff_id") caffId: Int): CaffDetailResponseDto
 
     @DELETE("/caffs/{caff_id}")
     suspend fun deleteCaff(@Path("caff_id") caffId: Int): CaffDetailResponseDto
 
-    @POST("/caffs/{caff_id}/comment")
+    @POST("/caffs/{caff_id}/comments")
     suspend fun addComment(@Path("caff_id") caffId: Int, @Body body: CaffNewCommentRequestDto)
 
-    @DELETE("/caffs/{caff_id}/comment/{comment_id}")
+    @DELETE("/caffs/{caff_id}/comments/{comment_id}")
     suspend fun deleteComment(
         @Path("caff_id") caffId: Int,
         @Path("comment_id") commentId: Int)
+
+    @PUT("/caffs/{caff_id}/comments/{comment_id}")
+    suspend fun updateComment(
+        @Path("caff_id") caffId: Int,
+        @Path("comment_id") commentId: Int,
+    @Body body: CaffNewCommentRequestDto)
 
 
 }

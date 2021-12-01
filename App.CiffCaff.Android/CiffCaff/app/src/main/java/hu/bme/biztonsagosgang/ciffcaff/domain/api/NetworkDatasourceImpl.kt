@@ -8,8 +8,7 @@ class NetworkDatasourceImpl (
     val api : APIService
     ): NetworkDatasource {
     override suspend fun login(email: String, password: String): LoginResponse {
-        api.login(LoginRequestDto(password = password, username = email))//.toLoginResponse() todo
-        return LoginResponse("todo")
+        return api.login(LoginRequestDto(password = password, username = email)).toLoginResponse()
     }
 
     override suspend fun register(
@@ -40,7 +39,7 @@ class NetworkDatasourceImpl (
     }
 
     override suspend fun updateComment(caffId: Int, commentId: Int, text: String) {
-        //todo
+        api.updateComment(caffId = caffId, commentId = commentId, body = text.toCaffNewCommentRequest())
     }
 
     override suspend fun addComment(caffId: Int, text: String) {

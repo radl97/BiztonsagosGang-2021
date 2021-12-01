@@ -24,7 +24,7 @@ class CaffsRepositoryImpl(
             try{
                 localDataSource.saveData(networkSource.fetchCaffsList(filter))
             }catch (e: Exception){
-                //todo
+                appSettingsRepository.networkError(e)
             }
         }
     }
@@ -35,7 +35,7 @@ class CaffsRepositoryImpl(
                 val newProject = networkSource.fetchCaffDetails(id)
                 localDataSource.saveData(updateSingleFeedItemInList(getData(), newProject))
             }catch (e: Exception){
-                //todo
+                appSettingsRepository.networkError(e)
             }
         }
     }
@@ -46,7 +46,7 @@ class CaffsRepositoryImpl(
                 networkSource.deleteCaff(id)
                 networkSource.fetchCaffsList()
             }catch (e: Exception){
-                //todo
+                appSettingsRepository.networkError(e)
             }
         }
     }
@@ -57,7 +57,7 @@ class CaffsRepositoryImpl(
                 networkSource.deleteComment(caffId = caffId, commentId = commentId)
                 networkSource.fetchCaffDetails(caffId)
             }catch (e: Exception){
-                //todo
+                appSettingsRepository.networkError(e)
             }
         }
     }
@@ -68,7 +68,7 @@ class CaffsRepositoryImpl(
                 networkSource.updateComment(caffId = caffId, commentId = commentId, text = text)
                 networkSource.fetchCaffDetails(caffId)
             }catch (e: Exception){
-                //todo
+                appSettingsRepository.networkError(e)
             }
         }
     }
@@ -79,7 +79,7 @@ class CaffsRepositoryImpl(
                 networkSource.addComment(caffId = caffId, text = text)
                 networkSource.fetchCaffDetails(caffId)
             }catch (e: Exception){
-                //todo
+                appSettingsRepository.networkError(e)
             }
         }
     }
