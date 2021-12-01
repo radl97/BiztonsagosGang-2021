@@ -8,18 +8,14 @@ from flask_login import login_user, login_required, logout_user
 auth = Blueprint('auth', __name__)
 
 def pwd_stregth_check(pwd):
-    if len(pwd)<8:
+    if len(pwd)<8 or (not re.search("[a-z]", pwd)) or (not re.search("[A-Z]", pwd)) or not(re.search("[0-9]", pwd)) or not pwd.isascii():
         return False
-    elif len(pwd)<16:
-        if (re.search("[a-z]", pwd)) and (re.search("[A-Z]", pwd)) and (re.search("[0-9]", pwd)):
-            return True
-        else:
-            return False
+    elif len(pwd)<16 and re.search("[~!@#$%^&*()_+=-]"):
+        return True
+    elif len(pwd)>=16:
+        return True
     else:
-        if (re.search("[~!@#$%^&*()_+=-]")):
-            return True
-        else:
-            return False
+        return False
 
 @auth.route('/login', methods=['POST'])
 def login_post():
