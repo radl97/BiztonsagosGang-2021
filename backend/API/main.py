@@ -83,6 +83,7 @@ def CAFFdetail(caff_id):
         "preview_url" : caff.url, #wtf?
         "comments" : comments_list,
         "number_of_comments" : caff.comments,
+        "name": caff.name,
         "uploader" : {"id" : uploader.id ,"name" : uploader.name}
     }
     return json_data
