@@ -10,7 +10,7 @@ auth = Blueprint('auth', __name__)
 def pwd_stregth_check(pwd):
     if len(pwd)<8 or (not re.search("[a-z]", pwd)) or (not re.search("[A-Z]", pwd)) or not(re.search("[0-9]", pwd)) or not pwd.isascii():
         return False
-    elif len(pwd)<16 and re.search("[~!@#$%^&*()_+=-]"):
+    elif len(pwd)<16 and re.search("[~!@#$%^&*()_+=-]", pwd):
         return True
     elif len(pwd)>=16:
         return True
