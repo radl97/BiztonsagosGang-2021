@@ -39,16 +39,27 @@ def signup_post():
     password2 = request.json.get('password2')
     name = request.json.get('name')
     user = User.query.filter_by(email=email).first()
-    if user:
-        return Response(response='Email address already exists', status=400)
-    if not pwd_stregth_check(password1):
-        return Response(response='Password needs to be at least 8 characters long and contain small and large captial and a number, or 16 letters long and contain a special character', status=400)
     if not(password1==password2):
-        return Response(response='Passwords don\'t match', status=400)
+        return {
+          "success" : False,
+          "reason": "Passwords don't match"
+        }
+    if user:
+        return {
+          "success" : False,
+          "reason": "Email address already exists"
+        }
+    if not pwd_stregth_check(password1):
+        return {
+          "success" : False,
+          "reason": "Password needs to be at least 8 characters long and contain small and large captial and a number, or 16 letters long and contain a special character"
+        }
     new_user = User(email=email, name=name, password=generate_password_hash(password1, method='sha256'))
     db.session.add(new_user)
     db.session.commit()
-    return Response(status=200)
+    return {
+        "success" : True
+    }
 
 @auth.route('/logout')
 @login_required
