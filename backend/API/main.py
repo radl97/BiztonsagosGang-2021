@@ -145,8 +145,7 @@ def deleteComment(caff_id, comment_id):
 
 @main.route('/caffs/<int:caff_id>/download', methods=['GET'])
 @login_required
-def download():
-    caff_id = request.args.get("caff_id")
+def download(caff_id):
     caff = CAFF.query.filter_by(id=caff_id).first()
     if caff is None:
         return Response("CAFF file not found", status=404)
