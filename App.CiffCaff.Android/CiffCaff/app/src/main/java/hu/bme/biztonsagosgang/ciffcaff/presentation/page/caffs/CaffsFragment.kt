@@ -26,6 +26,7 @@ class CaffsFragment: Fragment(
         setText()
         setUpSearch()
         setUpLogout()
+        setUpUpload()
         subscribeLogout()
     }
 
@@ -78,6 +79,12 @@ class CaffsFragment: Fragment(
                     is NavigateToCaffDetails -> findNavController().navigate(CaffsFragmentDirections.toCaffDetailsFragment(it.caffId))
                 }
             }
+        }
+    }
+
+    private fun setUpUpload(){
+        upload_button.setOnClickListener {
+            findNavController().navigate(CaffsFragmentDirections.toCaffUploadFragment())
         }
     }
 }

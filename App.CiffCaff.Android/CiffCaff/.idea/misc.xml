@@ -45,6 +45,7 @@
         <entry key="app/src/main/res/layout/cell_test.xml" value="0.286231884057971" />
         <entry key="app/src/main/res/layout/cell_time_interval.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_caff_details.xml" value="0.28489583333333335" />
+        <entry key="app/src/main/res/layout/fragment_caff_upload.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/layout/fragment_caffs.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1911231884057971" />

@@ -17,7 +17,7 @@ interface AppSettingsRepository {
     fun logout()
 
     val networkErrorMessage: Flow<String>
-    fun emitNetworkErrorMessage(message: String)
+    fun emitNetworkMessage(message: String)
     fun networkError(e: Exception)
 
 }

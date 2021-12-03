@@ -17,4 +17,13 @@
     <string name="cafff_details_comment">Comments</string>
     <string name="new_comment_header_text">Add comment</string>
     <string name="logout">Logout</string>
+    <string name="upload_caff_title">Upload caff</string>
+    <string name="choose_caff_text">Choose your caff</string>
+    <string name="uploadcaff_title_of_caff">What is the title of your caff?</string>
+    <string name="caff_upload_upload">Upload</string>
+    <string name="upload_caff_rationale_title">Permissions needed to upload caff</string>
+    <string name="upload_caff_rationale">We need acces to your files to upload caffs</string>
+    <string name="open_settings">Open settings</string>
+    <string name="button_ok">Ok</string>
+    <string name="button_cancel">Cancel</string>
 </resources>

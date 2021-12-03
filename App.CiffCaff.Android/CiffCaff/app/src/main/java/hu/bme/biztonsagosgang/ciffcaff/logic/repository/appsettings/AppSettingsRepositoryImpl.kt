@@ -43,12 +43,12 @@ class AppSettingsRepositoryImpl(
         localDataSource.saveData(getData().copy(credentials = null, isAdmin = false))
     }
 
-    override fun emitNetworkErrorMessage(message: String) {
+    override fun emitNetworkMessage(message: String) {
         networkErrorMessage.tryEmit(message)
     }
 
     override fun networkError(e: Exception) {
-        emitNetworkErrorMessage("Network Error")
+        emitNetworkMessage("Network Error")
         //throw e //todo
     }
 

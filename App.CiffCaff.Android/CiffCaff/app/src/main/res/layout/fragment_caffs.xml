@@ -63,6 +63,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/search_text"
         android:layout_width="wrap_content"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +81,7 @@
         android:backgroundTint="@color/negative_text"
         app:endIconTint="@color/negative_icon"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="@dimen/spacing_tightest"
+        android:layout_marginTop="@dimen/spacing_default"
         android:layout_marginBottom="@dimen/spacing_default"
         app:layout_constraintTop_toBottomOf="@id/search_text"
         app:layout_constraintEnd_toStartOf= "@id/search_button"

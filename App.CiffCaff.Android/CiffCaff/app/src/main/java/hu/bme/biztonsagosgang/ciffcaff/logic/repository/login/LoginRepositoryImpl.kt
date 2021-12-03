@@ -1,7 +1,6 @@
 package hu.bme.biztonsagosgang.ciffcaff.logic.repository.login
 
-import hu.bme.biztonsagosgang.ciffcaff.android.admin
-import hu.bme.biztonsagosgang.ciffcaff.domain.api.NetworkDatasource
+import hu.bme.biztonsagosgang.ciffcaff.domain.networkdatasource.NetworkDatasource
 import hu.bme.biztonsagosgang.ciffcaff.logic.models.isAdmin
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.appsettings.AppSettingsRepository
 import kotlinx.coroutines.CoroutineScope
@@ -22,12 +21,18 @@ class LoginRepositoryImpl (
     override fun register(name: String, email: String, password1: String, password2: String) {
         launch(coroutineContext) {
             try{
-                networkSource.register(
+                val registerResponse = networkSource.register(
                     name = name,
                     email = email,
                     password1 = password1,
                     password2 = password2
                 )
+                if(registerResponse.registerFailed && registerResponse.reason != null){
+                    registerError.tryEmit(registerResponse.reason)
+                }
+                if(registerResponse.registerFailed.not()){
+                    appSettingsRepository.emitNetworkMessage("Succesful registration!")
+                }
             }catch (e: Exception){
                 appSettingsRepository.networkError(e)
                 registerError.tryEmit("Could not register. Try again")

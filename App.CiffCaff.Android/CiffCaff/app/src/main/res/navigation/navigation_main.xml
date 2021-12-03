@@ -35,6 +35,18 @@
             app:destination="@id/loginFragment"
             app:popUpToInclusive="true"/>
 
+        <action
+            android:id="@+id/to_caffUploadFragment"
+            app:destination="@id/caffUploadFragment"
+            app:popUpToInclusive="true"/>
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/caffUploadFragment"
+        android:name="hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.CaffUploadFragment"
+        app:popUpTo = "@id/caffsFragment">
     </fragment>
 
     <fragment

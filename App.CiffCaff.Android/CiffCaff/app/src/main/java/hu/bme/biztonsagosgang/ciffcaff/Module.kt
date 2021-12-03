@@ -7,10 +7,10 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import hu.bme.biztonsagosgang.ciffcaff.android.baseUrl
 import hu.bme.biztonsagosgang.ciffcaff.android.sharedData
 import hu.bme.biztonsagosgang.ciffcaff.domain.api.APIService
-import hu.bme.biztonsagosgang.ciffcaff.domain.api.NetworkDatasource
-import hu.bme.biztonsagosgang.ciffcaff.domain.api.NetworkDatasourceImpl
-import hu.bme.biztonsagosgang.ciffcaff.domain.filedownloadupload.FileLoader
-import hu.bme.biztonsagosgang.ciffcaff.domain.filedownloadupload.FileLoaderImpl
+import hu.bme.biztonsagosgang.ciffcaff.domain.networkdatasource.NetworkDatasource
+import hu.bme.biztonsagosgang.ciffcaff.domain.networkdatasource.NetworkDatasourceImpl
+import hu.bme.biztonsagosgang.ciffcaff.logic.filedownloadupload.FileLoader
+import hu.bme.biztonsagosgang.ciffcaff.logic.filedownloadupload.FileLoaderImpl
 import hu.bme.biztonsagosgang.ciffcaff.logic.login.CallInterceptor
 import hu.bme.biztonsagosgang.ciffcaff.logic.login.LogoutHandler
 import hu.bme.biztonsagosgang.ciffcaff.logic.login.LogoutHandlerImpl

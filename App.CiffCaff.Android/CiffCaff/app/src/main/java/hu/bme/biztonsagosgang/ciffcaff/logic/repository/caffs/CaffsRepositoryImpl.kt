@@ -1,6 +1,6 @@
 package hu.bme.biztonsagosgang.ciffcaff.logic.repository.caffs
 
-import hu.bme.biztonsagosgang.ciffcaff.domain.api.NetworkDatasource
+import hu.bme.biztonsagosgang.ciffcaff.domain.networkdatasource.NetworkDatasource
 import hu.bme.biztonsagosgang.ciffcaff.logic.models.CaffItem
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.appsettings.AppSettingsRepository
 import hu.uni.corvinus.my.app.data.datasources.base.DataSource

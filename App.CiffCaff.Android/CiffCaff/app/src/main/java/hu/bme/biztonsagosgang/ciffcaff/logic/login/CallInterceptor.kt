@@ -14,6 +14,7 @@ class CallInterceptor (
             val credentials = appSettingsRepository.getCredentials()
             if (credentials != null) {
                 newRequest.header("Cookie", credentials)
+                println("credentials: $credentials") //todo
             }
 
             try {
@@ -37,13 +38,13 @@ class CallInterceptor (
             try {
                 when (response.code) {
                     500 -> {
-                        appSettingsRepository.emitNetworkErrorMessage("There seems to be an error in the server")
+                        appSettingsRepository.emitNetworkMessage("There seems to be an error in the server")
                     }
                     408 -> {
-                        appSettingsRepository.emitNetworkErrorMessage("You are not connected to the internet.")
+                        appSettingsRepository.emitNetworkMessage("You are not connected to the internet.")
                     }
                     403 -> {
-                        appSettingsRepository.emitNetworkErrorMessage("Login Error")
+                        appSettingsRepository.emitNetworkMessage("Login Error")
                     }
                 }
             } catch (e: Exception) {

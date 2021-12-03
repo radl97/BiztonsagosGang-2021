@@ -12,24 +12,21 @@ import retrofit2.http.*
 
 interface APIService {
 
-    //BULLSHIT
     @Multipart
     @POST("/caffs")
     suspend fun uploadCaff(
-        @Part("name") name: RequestBody?, //requestBody
+        @Part("name") name: RequestBody?,
         @Part file: MultipartBody.Part?
     ): CaffDetailResponseDto
 
     @GET("caffs/{caffId}/download")
     suspend fun downloadCaff(@Path("caffId") caffId: Int) : Call<ResponseBody>
 
-    ////////////////////
-
     @POST("/login")
     suspend fun login(@Body body: LoginRequestDto) : LoginResponseDto
 
     @POST("/signup")
-    suspend fun signup(@Body body: SignupRequestDto)
+    suspend fun signup(@Body body: SignupRequestDto) : RegisterResponseDto
 
     @GET("/logout")
     suspend fun logout()
