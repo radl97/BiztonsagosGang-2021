@@ -16,6 +16,7 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import java.lang.Exception
 
 
 class FileLoaderImpl (
@@ -28,18 +29,22 @@ private val appSettingsRepository: AppSettingsRepository
         launch(coroutineContext) {
 
             uri.path?.let { path ->
+                try{
+                    val filePath = path.substringAfter(':').substringBefore(':')
+                    val file = File(filePath)
 
-                val filePath = path.substringAfter(':').substringBefore(':')
-                val file = File(filePath)
+                    // create RequestBody instance from file
+                    val requestFile = file.asRequestBody(CAFF_TYPE_FILE.toMediaType())
 
-                // create RequestBody instance from file
-                val requestFile = file.asRequestBody(CAFF_TYPE_FILE.toMediaType())
+                    // MultipartBody.Part is used to send also the actual file name
+                    val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
+                    val description = name.toRequestBody(MultipartBody.FORM)
 
-                // MultipartBody.Part is used to send also the actual file name
-                val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
-                val description = name.toRequestBody(MultipartBody.FORM)
+                    api.uploadCaff(description, body)
+                }catch(e: Exception){
+                    appSettingsRepository.networkError(e)
+                }
 
-                api.uploadCaff(description, body)
             }
         }
     }
