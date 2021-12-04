@@ -14,6 +14,7 @@ import hu.bme.biztonsagosgang.ciffcaff.logic.filedownloadupload.FileLoaderImpl
 import hu.bme.biztonsagosgang.ciffcaff.logic.login.CallInterceptor
 import hu.bme.biztonsagosgang.ciffcaff.logic.login.LogoutHandler
 import hu.bme.biztonsagosgang.ciffcaff.logic.login.LogoutHandlerImpl
+import hu.bme.biztonsagosgang.ciffcaff.logic.manager.CaffDownloadProvider
 import hu.bme.biztonsagosgang.ciffcaff.logic.models.CaffItem
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.appsettings.AppSettingsModel
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.appsettings.AppSettingsRepository

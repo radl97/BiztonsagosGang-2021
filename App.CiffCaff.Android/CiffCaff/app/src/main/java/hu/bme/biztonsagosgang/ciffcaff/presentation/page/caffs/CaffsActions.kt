@@ -20,11 +20,12 @@ data class DeleteCaff(val caffId: Int): UIAction
 data class Comment(val caffId: Int, val text: String): UIAction
 data class ModifyComment(val caffId: Int, val commentId: Int, val text: String): UIAction
 data class DeleteComment(val caffId: Int, val commentId: Int): UIAction
-
+data class DownloadCaff(val caffId: Int): UIAction
 
 
 data class IntentCallback(val data: Intent?): UIAction
 data class UploadCaff(val caffTitle: String, val uri: Uri): UIAction
+class Browse(): UIAction
 
 data class AskForPermission(val permissions: List<String>): FragmentAction
 data class ShowPermissionDialog(val isNeverAskAgain: Boolean, val permissions: List<String>): FragmentAction

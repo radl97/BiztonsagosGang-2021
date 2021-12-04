@@ -26,4 +26,6 @@
     <string name="open_settings">Open settings</string>
     <string name="button_ok">Ok</string>
     <string name="button_cancel">Cancel</string>
+    <string name="download_caff_rationale_title">We need acces to your files</string>
+    <string name="dowload_caff_rationale">To download caffs to this phone we need acces to your files</string>
 </resources>

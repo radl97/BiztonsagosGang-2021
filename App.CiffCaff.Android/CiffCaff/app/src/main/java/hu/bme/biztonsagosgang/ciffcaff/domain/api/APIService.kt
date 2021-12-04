@@ -19,8 +19,9 @@ interface APIService {
         @Part file: MultipartBody.Part?
     ): CaffDetailResponseDto
 
+    @Streaming
     @GET("caffs/{caffId}/download")
-    suspend fun downloadCaff(@Path("caffId") caffId: Int) : Call<ResponseBody>
+    suspend fun downloadCaff(@Path("caffId") caffId: Int) : Response<ResponseBody>
 
     @POST("/login")
     suspend fun login(@Body body: LoginRequestDto) : LoginResponseDto

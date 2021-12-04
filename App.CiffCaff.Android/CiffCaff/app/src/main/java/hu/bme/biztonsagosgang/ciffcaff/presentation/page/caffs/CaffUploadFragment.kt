@@ -44,7 +44,7 @@ class CaffUploadFragment: BaseFragment(R.layout.fragment_caff_upload) {
 
     private fun setOnClickBrowse(){
         browse_button.setOnClickListener {
-            CaffUriBrowserProvider.click()
+           viewModel.UIActionFlow.tryEmit(Browse())
         }
     }
 

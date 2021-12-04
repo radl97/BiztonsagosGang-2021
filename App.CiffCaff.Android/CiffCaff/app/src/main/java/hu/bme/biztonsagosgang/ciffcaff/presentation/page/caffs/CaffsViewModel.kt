@@ -8,6 +8,7 @@ import hu.bitraptors.recyclerview.genericlist.GenericListItem
 import hu.bme.biztonsagosgang.ciffcaff.logic.filedownloadupload.FileLoader
 import hu.bme.biztonsagosgang.ciffcaff.logic.login.LogoutHandler
 import hu.bme.biztonsagosgang.ciffcaff.logic.manager.CaffUriBrowserProvider
+import hu.bme.biztonsagosgang.ciffcaff.logic.manager.PermissionBasedProvider
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.appsettings.AppSettingsRepository
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.caffs.CaffsRepository
 import hu.bme.biztonsagosgang.ciffcaff.presentation.baseclasses.viewmodels.BaseViewModel
@@ -44,8 +45,12 @@ class CaffsViewModel(
                     is IntentCallback -> {
                         _chosenCaffUri.tryEmit(CaffUriBrowserProvider.callback(it.data))
                     }
+                    is Browse -> {
+                        CaffUriBrowserProvider.tryDoing()
+                    }
                     is UploadCaff -> {
                         fileLoader.uploadCaff(name = it.caffTitle, uri = it.uri)
+                        fragmentActionFlow.tryEmit(MakeToast("Uploading..."))
                     }
                 }
             }
@@ -67,13 +72,13 @@ class CaffsViewModel(
         viewModelScope.launch{
             CaffUriBrowserProvider.errorChannel.collect{
                 when(it){
-                    CaffUriBrowserProvider.PermissionDeniedError -> {
+                    PermissionBasedProvider.PermissionDeniedError -> {
                         fragmentActionFlow.tryEmit(AskForPermission(CaffUriBrowserProvider.permissions.toList()))
                     }
-                    CaffUriBrowserProvider.RationalNeededError -> {
+                    PermissionBasedProvider.RationalNeededError -> {
                         fragmentActionFlow.tryEmit(ShowPermissionDialog(isNeverAskAgain = false, CaffUriBrowserProvider.permissions.toList()))
                     }
-                    CaffUriBrowserProvider.PermanentlyDeniedError ->{
+                    PermissionBasedProvider.PermanentlyDeniedError ->{
                         fragmentActionFlow.tryEmit(ShowPermissionDialog(isNeverAskAgain = true, CaffUriBrowserProvider.permissions.toList()))
                     }
                 }

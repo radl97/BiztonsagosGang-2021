@@ -48,7 +48,7 @@ class AppSettingsRepositoryImpl(
     }
 
     override fun networkError(e: Exception) {
-        emitNetworkMessage("Network Error")
+        emitNetworkMessage("Network Error catch")
         //throw e //todo
     }
 

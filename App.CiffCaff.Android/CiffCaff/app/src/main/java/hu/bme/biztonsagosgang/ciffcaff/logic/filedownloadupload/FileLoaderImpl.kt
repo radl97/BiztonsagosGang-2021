@@ -12,10 +12,12 @@ import java.io.File
 
 import android.net.Uri
 import hu.bme.biztonsagosgang.ciffcaff.logic.manager.CAFF_TYPE_FILE
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.ResponseBody
 import java.lang.Exception
 
 
@@ -25,11 +27,14 @@ private val api: APIService,
 private val appSettingsRepository: AppSettingsRepository
 ): FileLoader, CoroutineScope {
 
+    override val download = MutableSharedFlow<ResponseBody>(1)
+
     override fun uploadCaff(name: String, uri: Uri) {
         launch(coroutineContext) {
 
             uri.path?.let { path ->
                 try{
+
                     val filePath = path.substringAfter(':').substringBefore(':')
                     val file = File(filePath)
 
@@ -41,10 +46,10 @@ private val appSettingsRepository: AppSettingsRepository
                     val description = name.toRequestBody(MultipartBody.FORM)
 
                     api.uploadCaff(description, body)
+
                 }catch(e: Exception){
                     appSettingsRepository.networkError(e)
                 }
-
             }
         }
     }
@@ -52,7 +57,20 @@ private val appSettingsRepository: AppSettingsRepository
 
     override fun downloadCaff(caffId: Int) {
         launch(coroutineContext) {
-            api.downloadCaff(caffId)
+            try{
+
+                val response = api.downloadCaff(caffId)
+                val body = response.body()
+                if(response.isSuccessful && body != null){
+                    download.tryEmit(body)
+                }else{
+                    appSettingsRepository.emitNetworkMessage("Error while downloading file.")
+                }
+
+            }catch(e: Exception){
+                appSettingsRepository.networkError(e)
+            }
+
         }
     }
 

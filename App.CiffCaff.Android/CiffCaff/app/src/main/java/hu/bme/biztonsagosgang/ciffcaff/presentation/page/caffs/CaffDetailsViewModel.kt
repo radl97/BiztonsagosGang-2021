@@ -6,12 +6,14 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import hu.bitraptors.recyclerview.genericlist.GenericListItem
 import hu.bme.biztonsagosgang.ciffcaff.logic.filedownloadupload.FileLoader
+import hu.bme.biztonsagosgang.ciffcaff.logic.manager.CaffDownloadProvider
 import hu.bme.biztonsagosgang.ciffcaff.logic.models.CaffItem
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.appsettings.AppSettingsRepository
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.caffs.CaffsRepository
 import hu.bme.biztonsagosgang.ciffcaff.presentation.baseclasses.viewmodels.BaseViewModel
 import hu.bme.biztonsagosgang.ciffcaff.presentation.cell.CommentCell
 import hu.bme.biztonsagosgang.ciffcaff.presentation.cell.NewCommentCell
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -44,7 +46,19 @@ class CaffDetailsViewModel(
                     is DeleteComment -> {
                         caffsRepository.deleteComment(caffId = it.caffId, commentId = it.commentId)
                     }
+                    is DownloadCaff -> {
+                        fileLoader.downloadCaff(caffId = it.caffId)
+                        fragmentActionFlow.tryEmit(MakeToast("Downloading..."))
+                    }
                 }
+            }
+        }
+    }
+
+    init{
+        viewModelScope.launch {
+            CaffDownloadProvider.canStartDownloading.collect{
+                fileLoader.downloadCaff(caffId)
             }
         }
     }
