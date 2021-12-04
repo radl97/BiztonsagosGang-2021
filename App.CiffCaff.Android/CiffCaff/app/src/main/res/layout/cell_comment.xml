@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/spacing_default"
+    android:background="@drawable/bg_quare_outlined"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearanceBody3.Bold"
+                tools:text="Mr.smith"
+                android:textColor="@color/color_green"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+
+            <EditText
+                android:textColor="@color/primary_text60"
+                android:textAppearance="@style/TextAppearanceBody1"
+                android:id="@+id/comment_text"
+                android:layout_width="0dp"
+                android:background="@null"
+                android:enabled="false"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/author"
+                app:layout_constraintEnd_toStartOf="@id/delete_button"
+                tools:text= "Coca-Cola, or Coke, is a carbonated soft drink manufactured by The Coca-Cola Company. "
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/delete_button"
+                android:layout_height="48dp"
+                android:layout_width="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/edit_button"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="@dimen/spacing_tight"
+                android:tint="@color/color_burgundy"
+                android:src="@drawable/ic_delete"
+                android:visibility="gone"
+                tools:visibility="visible"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/edit_button"
+                android:layout_height="48dp"
+                android:layout_width="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/delete_button"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="@dimen/spacing_tight"
+                android:tint="@color/primary_icon"
+                android:src="@drawable/ic_edit"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:iconTint="@color/primary_icon"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/save_button"
+                android:layout_height="48dp"
+                android:layout_width="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/delete_button"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="@dimen/spacing_tight"
+                android:tint="@color/primary_icon"
+                android:src="@drawable/ic_save"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:iconTint="@color/primary_icon"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>

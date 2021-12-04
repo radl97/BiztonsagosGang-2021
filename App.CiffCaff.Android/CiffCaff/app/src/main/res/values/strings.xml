@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">CiffCaff</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="login_login_button">Log In</string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="caffka_logo_text">CAFFka</string>
+    <string name="login_login">Log in</string>
+    <string name="login_register">Register</string>
+    <string name="login_email">Email</string>
+    <string name="login_name">Name</string>
+    <string name="login_confirm_password">Confirm password</string>
+    <string name="login_field_is_empty">A field is empty</string>
+    <string name="caff_search_text">Browse the best CAFFs of your life!</string>
+    <string name="caff_num_of_comments">%s comments</string>
+    <string name="cafff_details_comment">Comments</string>
+    <string name="new_comment_header_text">Add comment</string>
+    <string name="logout">Logout</string>
+    <string name="upload_caff_title">Upload caff</string>
+    <string name="choose_caff_text">Choose your caff</string>
+    <string name="uploadcaff_title_of_caff">What is the title of your caff?</string>
+    <string name="caff_upload_upload">Upload</string>
+    <string name="upload_caff_rationale_title">Permissions needed to upload caff</string>
+    <string name="upload_caff_rationale">We need acces to your files to upload caffs</string>
+    <string name="open_settings">Open settings</string>
+    <string name="button_ok">Ok</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="download_caff_rationale_title">We need acces to your files</string>
+    <string name="dowload_caff_rationale">To download caffs to this phone we need acces to your files</string>
+</resources>

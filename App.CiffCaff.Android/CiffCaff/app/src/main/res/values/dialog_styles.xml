@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<style name="AlertDialog" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
+<item name="android:theme">@style/AlertDialog</item>
+<item name="materialThemeOverlay">@style/AlertDialog.ThemeOverlay</item>
+<item name="colorPrimary">@color/secondary_text</item>
+</style>
+
+    <style name="AlertDialog.ThemeOverlay">
+        <item name="colorPrimary">@color/secondary_text</item>
+    </style>
+
+</resources>

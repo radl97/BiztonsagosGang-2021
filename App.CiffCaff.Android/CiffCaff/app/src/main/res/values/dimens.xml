@@ -1,0 +1,54 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+
+
+    <!--SPECIFIC -->
+    <dimen name="header_height">70dp</dimen>
+    <dimen name="bigger_header_heigt">90dp</dimen>
+    <dimen name="default_corner_size">20dp</dimen>
+    <dimen name="fragment_bottom_padding">80dp</dimen>
+    <dimen name="default_icon">40dp</dimen>
+
+
+
+    <!-- STANDARD SPACING SIZES -->
+    <dimen name="spacing_tightest_more_more">1dp</dimen>
+    <dimen name="spacing_tightest_more">2dp</dimen>
+    <dimen name="spacing_tightest">4dp</dimen>
+    <dimen name="spacing_tighter_more">6dp</dimen>
+    <dimen name="spacing_tighter">8dp</dimen>
+    <dimen name="spacing_tight_more">10dp</dimen>
+    <dimen name="spacing_tight">12dp</dimen>
+    <dimen name="spacing_default">16dp</dimen>
+    <dimen name="spacing_default_more">20dp</dimen>
+    <dimen name="spacing_loose">24dp</dimen>
+    <dimen name="spacing_looser">32dp</dimen>
+    <dimen name="spacing_loosest">48dp</dimen>
+    <dimen name="spacing_loosest_more">64dp</dimen>
+    <dimen name="spacing_loosest_more_more">80dp</dimen>
+    <dimen name="spacing_peek">100dp</dimen>
+    <dimen name="spacing_peek_more">140dp</dimen>
+    <dimen name="spacing_loosest_more_more_more">200dp</dimen>
+
+
+    <!-- TEXT SIZES-->
+    <dimen name="TextSize_Headline1">96sp</dimen>
+    <dimen name="TextSize_Headline2">60sp</dimen>
+    <dimen name="TextSize_Headline3">48sp</dimen>
+    <dimen name="TextSize_Headline4">34sp</dimen>
+    <dimen name="TextSize_Headline5">24sp</dimen>
+    <dimen name="TextSize_Headline6">20sp</dimen>
+    <dimen name="TextSize_Subtitle1">16sp</dimen>
+    <dimen name="TextSize_Subtitle2">14sp</dimen>
+    <dimen name="TextSize_Body1">16sp</dimen>
+    <dimen name="TextSize_Body2">14sp</dimen>
+    <dimen name="TextSize_Body3">18sp</dimen>
+    <dimen name="TextSize_Caption">12sp</dimen>
+    <dimen name="TextSize_Button">14sp</dimen>
+    <dimen name="TextSize_Overline">12sp</dimen>
+    <dimen name="button_bg_padding">6dp</dimen>
+    <dimen name="elevation_default">5dp</dimen>
+    <dimen name="new_time_intervall_card_item_height">60dp</dimen>
+    <dimen name="time_interval_button_height">45dp</dimen>
+    <dimen name="cardCornerRadius">20dp</dimen>
+</resources>
