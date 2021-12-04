@@ -14,7 +14,6 @@ class CallInterceptor (
             val credentials = appSettingsRepository.getCredentials()
             if (credentials != null) {
                 newRequest.header("Cookie", credentials)
-                println("credentials: $credentials") //todo
             }
 
             try {

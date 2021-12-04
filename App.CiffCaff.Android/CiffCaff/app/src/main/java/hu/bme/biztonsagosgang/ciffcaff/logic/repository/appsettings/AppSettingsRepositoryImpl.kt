@@ -51,8 +51,6 @@ class AppSettingsRepositoryImpl(
     }
 
     override fun networkError(e: Exception) {
-        //emitNetworkMessage("Network Error catch")
-        //throw e //todo
     }
 
     private fun getData(): AppSettingsModel{
