@@ -111,7 +111,11 @@ class CaffDetailsFragment : Fragment(
                     }
                     is ShowPermissionDialog -> {
                         context?.let { ctx ->
-                            showPermissionDialog(ctx, fragmentAction.isNeverAskAgain, *fragmentAction.permissions.toTypedArray())
+                            if(PermissionManager.isPermissionsGranted(ctx, *fragmentAction.permissions.toTypedArray()).all { it.granted}){
+                                PermissionManager.askForPermission(ctx, *fragmentAction.permissions.toTypedArray())
+                            }else{
+                                showPermissionDialog(ctx, fragmentAction.isNeverAskAgain, *fragmentAction.permissions.toTypedArray())
+                            }
                         }
                     }
                 }
