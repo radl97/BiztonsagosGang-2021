@@ -64,7 +64,9 @@ class CaffUploadFragment: BaseFragment(R.layout.fragment_caff_upload) {
         lifecycleScope.launch {
             viewModel.fragmentActionLiveData.observe(viewLifecycleOwner){fragmentAction ->
                 when(fragmentAction){
-                    is MakeToast -> Toast.makeText(context, fragmentAction.text, Toast.LENGTH_SHORT).show()
+                    is MakeToast -> {
+                        Toast.makeText(context, fragmentAction.text, Toast.LENGTH_SHORT).show()
+                    }
                     is AskForPermission -> {
                         context?.let { ctx ->
                             PermissionManager.askForPermission(ctx, *fragmentAction.permissions.toTypedArray())

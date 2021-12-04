@@ -30,8 +30,6 @@ import java.io.File
 
 object CaffDownloadProvider : PermissionBasedProvider(){
 
-    const val FOLDER_CAFFS = "images"
-
     override val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
     val canStartDownloading = MutableSharedFlow<Boolean>(1)
 

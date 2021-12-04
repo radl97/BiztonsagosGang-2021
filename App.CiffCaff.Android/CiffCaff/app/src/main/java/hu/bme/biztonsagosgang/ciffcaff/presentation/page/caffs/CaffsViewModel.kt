@@ -16,6 +16,7 @@ import hu.bme.biztonsagosgang.ciffcaff.presentation.cell.CaffCell
 import hu.bme.biztonsagosgang.ciffcaff.presentation.cell.CaffClickedAction
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 

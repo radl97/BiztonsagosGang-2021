@@ -14,7 +14,6 @@ import hu.bme.biztonsagosgang.ciffcaff.logic.filedownloadupload.FileLoaderImpl
 import hu.bme.biztonsagosgang.ciffcaff.logic.login.CallInterceptor
 import hu.bme.biztonsagosgang.ciffcaff.logic.login.LogoutHandler
 import hu.bme.biztonsagosgang.ciffcaff.logic.login.LogoutHandlerImpl
-import hu.bme.biztonsagosgang.ciffcaff.logic.manager.CaffDownloadProvider
 import hu.bme.biztonsagosgang.ciffcaff.logic.models.CaffItem
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.appsettings.AppSettingsModel
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.appsettings.AppSettingsRepository
@@ -24,7 +23,7 @@ import hu.bme.biztonsagosgang.ciffcaff.logic.repository.login.LoginRepositoryImp
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.caffs.CaffsRepository
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.caffs.CaffsRepositoryImpl
 import hu.bme.biztonsagosgang.ciffcaff.presentation.page.login.LoginViewModel
-import hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.CaffDetailsViewModel
+import hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.detail.CaffDetailsViewModel
 import hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.CaffsViewModel
 import hu.bme.biztonsagosgang.ciffcaff.util.CustomDateAdapter
 import hu.uni.corvinus.my.app.data.datasources.base.DataSource

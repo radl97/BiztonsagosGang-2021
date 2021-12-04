@@ -1,4 +1,4 @@
-package hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs
+package hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.detail
 
 import android.content.Context
 import android.os.Bundle
@@ -14,6 +14,7 @@ import hu.bme.biztonsagosgang.ciffcaff.presentation.cell.CommentCell
 import hu.bme.biztonsagosgang.ciffcaff.presentation.cell.NewCommentCell
 import hu.bme.biztonsagosgang.ciffcaff.R
 import hu.bme.biztonsagosgang.ciffcaff.logic.manager.CaffDownloadProvider
+import hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.*
 import hu.bme.biztonsagosgang.ciffcaff.util.*
 import kotlinx.android.synthetic.main.fragment_caff_details.*
 import kotlinx.coroutines.launch

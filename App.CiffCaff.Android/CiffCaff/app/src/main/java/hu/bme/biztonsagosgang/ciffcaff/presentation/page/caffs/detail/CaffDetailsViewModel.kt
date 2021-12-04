@@ -1,4 +1,4 @@
-package hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs
+package hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
@@ -13,11 +13,8 @@ import hu.bme.biztonsagosgang.ciffcaff.logic.repository.caffs.CaffsRepository
 import hu.bme.biztonsagosgang.ciffcaff.presentation.baseclasses.viewmodels.BaseViewModel
 import hu.bme.biztonsagosgang.ciffcaff.presentation.cell.CommentCell
 import hu.bme.biztonsagosgang.ciffcaff.presentation.cell.NewCommentCell
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.mapNotNull
+import hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.*
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class CaffDetailsViewModel(
@@ -57,11 +54,13 @@ class CaffDetailsViewModel(
 
     init{
         viewModelScope.launch {
-            CaffDownloadProvider.canStartDownloading.collect{
+            CaffDownloadProvider.canStartDownloading.drop(1).collect{
                 fileLoader.downloadCaff(caffId)
             }
         }
     }
+
+    val caffToSave = fileLoader.download.asLiveData()
 
     val caff : LiveData<CaffItem> = liveData{
         caffsRepository.fetchCaffDetails(caffId)

@@ -51,7 +51,7 @@
 
     <fragment
         android:id="@+id/caffDetailsFragment"
-        android:name="hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.CaffDetailsFragment"
+        android:name="hu.bme.biztonsagosgang.ciffcaff.presentation.page.caffs.detail.CaffDetailsFragment"
         tools:layout="@layout/fragment_caff_details"
         app:popUpTo = "@id/caffsFragment">
         <argument
