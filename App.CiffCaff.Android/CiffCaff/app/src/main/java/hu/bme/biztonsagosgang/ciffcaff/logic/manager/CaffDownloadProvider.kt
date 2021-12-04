@@ -37,6 +37,12 @@ object CaffDownloadProvider : PermissionBasedProvider(){
     init {
         completionMessage.tryEmit("inital value")
     }
+    init {
+        errorChannel.tryEmit(Error())
+    }
+    init{
+        canStartDownloading.tryEmit(false)
+    }
 
 
     override fun doing() {

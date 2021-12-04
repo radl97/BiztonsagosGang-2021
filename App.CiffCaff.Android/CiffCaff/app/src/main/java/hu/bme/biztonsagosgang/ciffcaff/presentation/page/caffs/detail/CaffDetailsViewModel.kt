@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import hu.bitraptors.recyclerview.genericlist.GenericListItem
 import hu.bme.biztonsagosgang.ciffcaff.logic.filedownloadupload.FileLoader
 import hu.bme.biztonsagosgang.ciffcaff.logic.manager.CaffDownloadProvider
+import hu.bme.biztonsagosgang.ciffcaff.logic.manager.CaffUriBrowserProvider
+import hu.bme.biztonsagosgang.ciffcaff.logic.manager.PermissionBasedProvider
 import hu.bme.biztonsagosgang.ciffcaff.logic.models.CaffItem
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.appsettings.AppSettingsRepository
 import hu.bme.biztonsagosgang.ciffcaff.logic.repository.caffs.CaffsRepository
@@ -45,8 +47,7 @@ class CaffDetailsViewModel(
                         caffsRepository.deleteComment(caffId = it.caffId, commentId = it.commentId)
                     }
                     is DownloadCaff -> {
-                        fileLoader.downloadCaff(caffId = it.caffId)
-                        fragmentActionFlow.tryEmit(MakeToast("Downloading..."))
+                        CaffDownloadProvider.tryDoing()
                     }
                 }
             }
@@ -88,9 +89,30 @@ class CaffDetailsViewModel(
 
     //caff download
     init{
+        viewModelScope.launch{
+            CaffDownloadProvider.errorChannel.drop(1).collect{
+                when(it){
+                    PermissionBasedProvider.PermissionDeniedError -> {
+                        fragmentActionFlow.tryEmit(AskForPermission(CaffDownloadProvider.permissions.toList()))
+                    }
+                    PermissionBasedProvider.RationalNeededError -> {
+                        fragmentActionFlow.tryEmit(ShowPermissionDialog(isNeverAskAgain = false, CaffDownloadProvider.permissions.toList()))
+                    }
+                    PermissionBasedProvider.PermanentlyDeniedError ->{
+                        fragmentActionFlow.tryEmit(ShowPermissionDialog(isNeverAskAgain = true, CaffDownloadProvider.permissions.toList()))
+                    }
+                }
+            }
+        }
+    }
+
+    init{
         viewModelScope.launch {
             CaffDownloadProvider.canStartDownloading.drop(1).collect{
-                fileLoader.downloadCaff(caffId)
+                if(it){
+                    fileLoader.downloadCaff(caffId)
+                    fragmentActionFlow.tryEmit(MakeToast("Downloading..."))
+                }
             }
         }
     }

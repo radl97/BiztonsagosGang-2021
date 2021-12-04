@@ -101,7 +101,9 @@ class CaffDetailsFragment : Fragment(
         lifecycleScope.launch {
             viewModel.fragmentActionLiveData.observe(viewLifecycleOwner){ fragmentAction ->
                 when(fragmentAction){
-                    is MakeToast -> Toast.makeText(context, fragmentAction.text, Toast.LENGTH_LONG).show()
+                    is MakeToast -> {
+                        Toast.makeText(context, fragmentAction.text, Toast.LENGTH_LONG).show()
+                    }
                     is AskForPermission -> {
                         context?.let { ctx ->
                             PermissionManager.askForPermission(ctx, *fragmentAction.permissions.toTypedArray())

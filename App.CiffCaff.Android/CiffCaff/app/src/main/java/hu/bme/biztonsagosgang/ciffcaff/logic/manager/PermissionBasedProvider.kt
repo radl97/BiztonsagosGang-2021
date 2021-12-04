@@ -1,14 +1,10 @@
 package hu.bme.biztonsagosgang.ciffcaff.logic.manager
 
-import android.Manifest
-import android.content.Intent
-import android.net.Uri
 import com.heartbit.heartbit.presentation.manager.PermissionManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
 import java.lang.Error
 import kotlin.coroutines.CoroutineContext
@@ -37,9 +33,9 @@ abstract class PermissionBasedProvider() : CoroutineScope {
                             grantedPermissions.any { it.isPermanentlyDenied }
 
                         if (providerPermissionState.allGranted) doing()
-                        else if (providerPermissionState.containsPermanentlyDenied) errorChannel.tryEmit(
+/*                        else if (providerPermissionState.containsPermanentlyDenied) errorChannel.tryEmit(
                             PermanentlyDeniedError
-                        )
+                        )*/
                     }
                 }
             }
