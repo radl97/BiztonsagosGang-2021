@@ -60,8 +60,7 @@
             app:argType="integer" />
         <action
             android:id="@+id/to_caffsFragment"
-            app:destination="@id/caffsFragment"
-            app:popUpToInclusive="false"/>
+            app:destination="@id/caffsFragment"/>
     </fragment>
 
 

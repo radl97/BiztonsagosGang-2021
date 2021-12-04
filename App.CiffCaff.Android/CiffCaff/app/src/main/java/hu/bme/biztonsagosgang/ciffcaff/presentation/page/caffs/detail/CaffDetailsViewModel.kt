@@ -24,6 +24,7 @@ class CaffDetailsViewModel(
     appSettingsRepository: AppSettingsRepository,
 ) : BaseViewModel(appSettingsRepository) {
 
+    //actions
     init{
         viewModelScope.launch {
             UIActionFlow.collect{
@@ -52,16 +53,7 @@ class CaffDetailsViewModel(
         }
     }
 
-    init{
-        viewModelScope.launch {
-            CaffDownloadProvider.canStartDownloading.drop(1).collect{
-                fileLoader.downloadCaff(caffId)
-            }
-        }
-    }
-
-    val caffToSave = fileLoader.download.asLiveData()
-
+    //data
     val caff : LiveData<CaffItem> = liveData{
         caffsRepository.fetchCaffDetails(caffId)
         emitSource(
@@ -93,4 +85,23 @@ class CaffDetailsViewModel(
     fun isAdmin(): Boolean {
         return appSettingsRepository.isAdmin()
     }
+
+    //caff download
+    init{
+        viewModelScope.launch {
+            CaffDownloadProvider.canStartDownloading.drop(1).collect{
+                fileLoader.downloadCaff(caffId)
+            }
+        }
+    }
+
+    init{
+        viewModelScope.launch {
+            CaffDownloadProvider.completionMessage.drop(1).collect{
+                fragmentActionFlow.tryEmit(MakeToast(it))
+            }
+        }
+    }
+
+    val caffToSave = fileLoader.download.drop(1).mapNotNull{it}.asLiveData()
 }

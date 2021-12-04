@@ -5,10 +5,15 @@ import java.time.temporal.ChronoUnit
 import java.util.*
 
 const val ONLY_DATE_FORMAT = "yyyy.MM.dd."
+const val FILE_NAME_DATE_FORMAT = "yyyyMMddHHmmss"
 const val HOUR_AND_MIN_FORMAT = "HH:mm"
 
 fun Date.toDate() : String{
     return SimpleDateFormat(ONLY_DATE_FORMAT).format(this)
+}
+
+fun Date.toFileName() : String{
+    return SimpleDateFormat(FILE_NAME_DATE_FORMAT).format(this)
 }
 
 fun Date.toHourMin() : String{

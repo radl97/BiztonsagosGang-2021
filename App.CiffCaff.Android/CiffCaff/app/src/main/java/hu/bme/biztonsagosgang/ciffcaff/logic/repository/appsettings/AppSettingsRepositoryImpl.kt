@@ -18,6 +18,9 @@ class AppSettingsRepositoryImpl(
     override val isLoggedIn: Flow<Boolean> = localDataSource.output.map { it.credentials != null }
     override val isAdmin: Flow<Boolean> = localDataSource.output.map{it.isAdmin}
     override val networkErrorMessage = MutableSharedFlow<String>(1)
+    init{
+        networkErrorMessage.tryEmit("Default")
+    }
 
     override fun getCredentials(): String? {
         return localDataSource.getData()?.credentials
@@ -48,7 +51,7 @@ class AppSettingsRepositoryImpl(
     }
 
     override fun networkError(e: Exception) {
-        emitNetworkMessage("Network Error catch")
+        //emitNetworkMessage("Network Error catch")
         //throw e //todo
     }
 

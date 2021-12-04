@@ -35,6 +35,7 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.TimeUnit
 
 enum class DatasourceTypes{
     CAFF,
@@ -63,6 +64,7 @@ val ciffCaffModule = module{
     factory {
         val interceptorFactory: CallInterceptor= get()
         OkHttpClient.Builder()
+            .connectTimeout(20, TimeUnit.SECONDS)
             .addInterceptor(interceptorFactory.createHeaderChangingInterceptor())
             .addInterceptor(interceptorFactory.createHeaderCatcherInterceptor())
             .build()

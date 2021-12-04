@@ -11,6 +11,7 @@ import okhttp3.MultipartBody
 import java.io.File
 
 import android.net.Uri
+import com.squareup.moshi.JsonEncodingException
 import hu.bme.biztonsagosgang.ciffcaff.logic.manager.CAFF_TYPE_FILE
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
@@ -27,7 +28,10 @@ private val api: APIService,
 private val appSettingsRepository: AppSettingsRepository
 ): FileLoader, CoroutineScope {
 
-    override val download = MutableSharedFlow<ResponseBody>(1)
+    override val download = MutableSharedFlow<ResponseBody?>(1)
+    init {
+        download.tryEmit(null)
+    }
 
     override fun uploadCaff(name: String, uri: Uri) {
         launch(coroutineContext) {
@@ -46,9 +50,15 @@ private val appSettingsRepository: AppSettingsRepository
                     val description = name.toRequestBody(MultipartBody.FORM)
 
                     api.uploadCaff(description, body)
-
-                }catch(e: Exception){
-                    appSettingsRepository.networkError(e)
+                    appSettingsRepository.emitNetworkMessage("Upload successful")
+                }catch(e: Exception) {
+                    if (e is java.net.SocketTimeoutException) {
+                        appSettingsRepository.emitNetworkMessage("Connection timed out. Try again!")
+                    } else if (e is JsonEncodingException){
+                        appSettingsRepository.emitNetworkMessage("Upload successful")
+                    } else {
+                        appSettingsRepository.emitNetworkMessage("This caff has already been uploaded.")
+                    }
                 }
             }
         }

@@ -63,6 +63,7 @@ class CaffDetailsFragment : Fragment(
         }
         delete_button.setOnClickListener {
             viewModel.UIActionFlow.tryEmit(DeleteCaff(args.caffId))
+            findNavController().popBackStack()
             findNavController().navigate(CaffDetailsFragmentDirections.toCaffsFragment())
         }
     }

@@ -36,6 +36,7 @@ class LoginViewModel(
         }
     }
 
+    //Data
     val isLoggedIn = appSettingsRepository.isLoggedIn.distinctUntilChanged().asLiveData()
     val loginError = loginRepository.loginError.asLiveData()
     val registerError = loginRepository.registerError.asLiveData()

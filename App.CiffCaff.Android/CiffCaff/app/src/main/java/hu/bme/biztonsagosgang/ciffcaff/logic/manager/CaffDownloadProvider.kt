@@ -13,6 +13,8 @@ import java.io.IOException
 
 import android.util.Log
 import androidx.core.content.FileProvider
+import hu.bme.biztonsagosgang.ciffcaff.util.toDate
+import hu.bme.biztonsagosgang.ciffcaff.util.toFileName
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.withContext
@@ -24,14 +26,18 @@ import java.io.OutputStream
 import java.io.InputStream
 
 import java.io.File
-
-
+import java.util.*
 
 
 object CaffDownloadProvider : PermissionBasedProvider(){
 
     override val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
     val canStartDownloading = MutableSharedFlow<Boolean>(1)
+    val completionMessage = MutableSharedFlow<String>(1)
+    init {
+        completionMessage.tryEmit("inital value")
+    }
+
 
     override fun doing() {
         canStartDownloading.tryEmit(true)
@@ -43,7 +49,11 @@ object CaffDownloadProvider : PermissionBasedProvider(){
                 var input: InputStream? = null
                 var output: FileOutputStream? = null
                 try {
-                    val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/" + "caff34.caff")
+                    val file = File(
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()
+                                + "/"
+                                + Calendar.getInstance().time.toFileName()
+                                +".caff")
                     val fileReader = ByteArray(4096)
 
                     output = FileOutputStream(file)
@@ -57,8 +67,9 @@ object CaffDownloadProvider : PermissionBasedProvider(){
                         read.let { output.write(fileReader, 0, read) }
                     }
                     output.flush()
+                    completionMessage.tryEmit("Download complete")
                 } catch (e: IOException) {
-                    //throw e //todo
+                    completionMessage.tryEmit("Error while saving file")
                 } finally {
                     output?.close()
                     input?.close()

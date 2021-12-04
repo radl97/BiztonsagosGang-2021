@@ -9,7 +9,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import com.heartbit.heartbit.presentation.manager.PermissionManager
 import hu.bme.biztonsagosgang.ciffcaff.R
-import hu.bme.biztonsagosgang.ciffcaff.logic.manager.CaffUriBrowserProvider
 import hu.bme.biztonsagosgang.ciffcaff.presentation.baseclasses.fragments.BaseFragment
 import hu.bme.biztonsagosgang.ciffcaff.util.openSetting
 import hu.bme.biztonsagosgang.ciffcaff.util.showDialog
