@@ -1,5 +1,6 @@
 package hu.bme.biztonsagosgang.ciffcaff.util
 
+import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
 import java.time.temporal.ChronoUnit
 import java.util.*
@@ -8,14 +9,17 @@ const val ONLY_DATE_FORMAT = "yyyy.MM.dd."
 const val FILE_NAME_DATE_FORMAT = "yyyyMMddHHmmss"
 const val HOUR_AND_MIN_FORMAT = "HH:mm"
 
+@SuppressLint("SimpleDateFormat")
 fun Date.toDate() : String{
     return SimpleDateFormat(ONLY_DATE_FORMAT).format(this)
 }
 
+@SuppressLint("SimpleDateFormat")
 fun Date.toFileName() : String{
     return SimpleDateFormat(FILE_NAME_DATE_FORMAT).format(this)
 }
 
+@SuppressLint("SimpleDateFormat")
 fun Date.toHourMin() : String{
     return SimpleDateFormat(HOUR_AND_MIN_FORMAT).format(this)
 }
