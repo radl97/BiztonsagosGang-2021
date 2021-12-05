@@ -33,9 +33,9 @@ abstract class PermissionBasedProvider() : CoroutineScope {
                             grantedPermissions.any { it.isPermanentlyDenied }
 
                         if (providerPermissionState.allGranted) doing()
-/*                        else if (providerPermissionState.containsPermanentlyDenied) errorChannel.tryEmit(
+                        else if (providerPermissionState.containsPermanentlyDenied) errorChannel.tryEmit(
                             PermanentlyDeniedError
-                        )*/
+                        )
                     }
                 }
             }
